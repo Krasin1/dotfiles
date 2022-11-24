@@ -1,0 +1,23 @@
+require ("settings")
+require ("mappings")
+require ("plugins")
+
+vim.cmd[[colorscheme tokyonight-night]]
+
+require('leap').add_default_mappings()
+require ("plugin.lualine")
+require ("plugin.telescope")
+require ("plugin.sneak")
+require ("plugin.quickscope")
+require ("plugin.rnvimr")
+require ("plugin.floaterm")
+require ("plugin.indentline")
+require ("plugin.colorizer")
+require ("plugin.web-devicons")
+require ("plugin.comment")
+require ("plugin.mason_lsp")
+require ("plugin.lsp_saga")
+require ("plugin.cmp")
+require ("plugin.treesitter")
+-- require ("leap.nvim")
+-- require ("nvim.navic")

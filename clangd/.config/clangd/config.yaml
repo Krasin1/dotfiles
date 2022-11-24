@@ -1,0 +1,11 @@
+If:
+  PathMatch: [.*\.cpp, .*\.hpp]
+
+CompileFlags:
+  Add: [-std=c++2b, -Wall, -Wextra, -Wpedantic, -Wconversion]
+#
+# If:
+#   PathMatch: [.*\.c, .*\.h]
+#
+# CompileFlags:
+#   Add: [-std=c89, -Wall, -Wextra, -Wpedantic, -Wconversion]
