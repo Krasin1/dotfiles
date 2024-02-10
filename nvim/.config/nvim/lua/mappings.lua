@@ -28,3 +28,7 @@ map('n', '<C-h>', '<C-w>h', { silent = true, noremap = true })
 map('n', '<C-j>', '<C-w>j', { silent = true, noremap = true })
 map('n', '<C-k>', '<C-w>k', { silent = true, noremap = true })
 map('n', '<C-l>', '<C-w>l', { silent = true, noremap = true })
+
+
+-- Navbuddy
+map('n', '<leader>n', ':Navbuddy<CR>', { silent = true, noremap = true })
