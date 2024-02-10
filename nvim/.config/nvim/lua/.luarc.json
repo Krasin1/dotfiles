@@ -1,6 +1,7 @@
 {
     "diagnostics.disable": [
         "undefined-field",
-        "undefined-global"
+        "undefined-global",
+        "missing-fields"
     ]
 }

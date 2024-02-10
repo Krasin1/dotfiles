@@ -83,7 +83,7 @@ return {
 		},
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "clangd", "pyright", "lua_ls", "rust_analyzer", "tsserver", "hls" },
+				ensure_installed = { "clangd", "pyright", "lua_ls", "rust_analyzer", "tsserver", "hls", "jdtls" },
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = { "clang-format", "stylua", "prettier", "black", "isort" },
@@ -146,6 +146,10 @@ return {
 				capabilities = capabilities,
 			})
 			require("lspconfig").tsserver.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			require("lspconfig").jdtls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})

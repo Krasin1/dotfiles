@@ -1,7 +1,7 @@
 return {
 	{
 		"Exafunction/codeium.nvim",
-        event = "InsertEnter",
+		event = "InsertEnter",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
@@ -26,6 +26,7 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"onsails/lspkind.nvim",
+			"hrsh7th/cmp-cmdline",
 		},
 		config = function()
 			local lspkind = require("lspkind")
@@ -62,7 +63,7 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 				sources = {
-                    { name = "codeium" },
+					{ name = "codeium" },
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
@@ -76,18 +77,49 @@ return {
 				formatting = {
 					format = lspkind.cmp_format({
 						menu = {
-                            codeium = "[AI]",
+							codeium = "[AI]",
 							luasnip = "[Snip]",
 							nvim_lsp = "[LSP]",
 							buffer = "[Buf]",
 							path = "[Path]",
 						},
-                        symbol_map = { Codeium = "", },
+						symbol_map = { Codeium = "" },
 					}),
 				},
 				experimental = {
 					native_menu = false,
 					ghost_text = true,
+				},
+			})
+			-- `/` cmdline setup.
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+				formatting = {
+					format = lspkind.cmp_format({
+						menu = {
+							buffer = "[Buf]",
+						},
+					}),
+				},
+			})
+			-- `:` cmdline setup.
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
+				}),
+				formatting = {
+					format = lspkind.cmp_format({
+						menu = {
+							path = "[Path]",
+							cmdline = "[Cmd]",
+						},
+					}),
 				},
 			})
 		end,
