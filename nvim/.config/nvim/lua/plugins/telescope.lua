@@ -5,10 +5,10 @@ return {
         config = function()
             local map = vim.api.nvim_set_keymap
 
-            map('n', '<Leader>ff', ":lua require('telescope.builtin').find_files()<cr>", { silent = true, noremap = true })
-            map('n', '<Leader>fg', ":lua require('telescope.builtin').live_grep()<cr>", { silent = true, noremap = true })
-            map('n', '<Leader>fb', ":lua require('telescope.builtin').buffers()<cr>", { silent = true, noremap = true })
-            map('n', '<Leader>fh', ":lua require('telescope.builtin').help_tags()<cr>", { silent = true, noremap = true })
+            map('n', '<Leader>ff', ":lua require('telescope.builtin').find_files()<cr>", { desc = "Find files", silent = true, noremap = true })
+            map('n', '<Leader>fg', ":lua require('telescope.builtin').live_grep()<cr>", { desc = "Find Grep", silent = true, noremap = true })
+            map('n', '<Leader>fb', ":lua require('telescope.builtin').buffers()<cr>", { desc = "Find Buffers", silent = true, noremap = true })
+            map('n', '<Leader>fh', ":lua require('telescope.builtin').help_tags()<cr>", { desc = "Find Help", silent = true, noremap = true })
 
             require('telescope').setup{
                 defaults = {
