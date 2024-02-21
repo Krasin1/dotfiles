@@ -19,14 +19,13 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 
 	buf_set_keymap("n", "\\wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "\\wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "\\wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 
 	buf_set_keymap("n", "\\D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-
 
 	buf_set_keymap("n", "\\q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
@@ -48,7 +47,7 @@ return {
 		"nvimdev/lspsaga.nvim",
 		config = function()
 			require("lspsaga").setup({
-                -- code_action = { num_shortcut = false },
+				-- code_action = { num_shortcut = false },
 				symbol_in_winbar = { enable = false },
 				outline = { enable = false },
 				implement = { enable = false },
@@ -158,5 +157,10 @@ return {
 				capabilities = capabilities,
 			})
 		end,
+	},
+    -- signature help
+	{
+		"folke/neodev.nvim",
+		opts = {},
 	},
 }
