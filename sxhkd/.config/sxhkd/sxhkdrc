@@ -120,29 +120,33 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-#mute toogle
-XF86AudioMute 
+Print
+    screengrab 
+
+XF86AudioPlay
+    playerctl play-pause
+
+XF86AudioStop
+    playerctl stop 
+
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioNext
+    playerctl next 
+
+XF86AudioMute
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 
-#volume up
 XF86AudioRaiseVolume
     amixer set Master 5%+
 
-#volume down
 XF86AudioLowerVolume
     amixer set Master 5%-
 
-# XF86AudioNext
-# XF86AudioPrev
+# XF86MonBrightnessUp
+#     br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable+15)); echo $new_value > $br_file;
 #
-
-# XF86AudioStop
-#     amixeer set Master stop
-
-XF86MonBrightnessUp
-    br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable+15)); echo $new_value > $br_file;
-
-
-XF86MonBrightnessDown
-    br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable-15)); echo $new_value > $br_file;
-    
+#
+# XF86MonBrightnessDown
+#     br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable-15)); echo $new_value > $br_file;

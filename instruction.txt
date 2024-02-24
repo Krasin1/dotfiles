@@ -1,0 +1,11 @@
+dkms xrdp ??xrdp-debug
+?? nvidia-utils 
+gwe(GreenWithEnvy)
+
+alsa-utils
+
+dunst rofi
+
+arcolinux-logout betterlockscreen
+
+xclip

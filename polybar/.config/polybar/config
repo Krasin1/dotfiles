@@ -20,10 +20,53 @@
 background = #282A2E
 background-alt = #373B41
 foreground = #C5C8C6
-primary = #FFA500
+; primary = #FFA500
+primary = #F0C674
 secondary = #8ABEB7
 alert = #A54242
 disabled = #707880
+gold = #FABD2F
+pink-violet = #ec3aa6
+
+nvidia-green = #76b900
+intel-blue = #00C7FD
+some = #a09cf3
+white = #FFFFFF
+
+[bar/second]
+width = 100%
+height = 18pt
+monitor = HDMI-1
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2pt
+
+; border-size = 4pt
+; border-color = #00000000
+
+; padding-right = 1
+
+module-margin = 0
+
+; separator = |
+; separator-foreground = ${colors.disabled}
+
+font-0 = CaskaydiaCove NFM:size=11;2
+font-1 = CaskaydiaCove NFM:size=18;4
+font-2 = CaskaydiaCove NFM:size=22;4
+
+modules-left = xworkspaces xwindow 
+modules-center = date 
+modules-right = tray pulseaudio memory cpu cputemperature gpu-temp xkeyboard wifi wired wireless not-connected logout
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
 
 [bar/example]
 width = 100%
@@ -37,21 +80,22 @@ foreground = ${colors.foreground}
 line-size = 2pt
 
 ; border-size = 4pt
-border-color = #00000000
+; border-color = #00000000
 
-padding-right = 1
+; padding-right = 1
 
-module-margin = 1
+module-margin = 0
 
-separator = |
-separator-foreground = ${colors.disabled}
+; separator = |
+; separator-foreground = ${colors.disabled}
 
-font-0 = monospace:size=11;1
-font-1 = Font Awesome 6 Free Solid:size=11;2
-font-2 = Cascadia Code PL:size=11;2
+font-0 = CaskaydiaCove NFM:size=11;2
+font-1 = CaskaydiaCove NFM:size=18;4
+font-2 = CaskaydiaCove NFM:size=22;4
 
-modules-left = xworkspaces xwindow wlan eth
-modules-right = filesystem tray pulseaudio backlight xkeyboard memory cpu temperature battery date
+modules-left = xworkspaces xwindow 
+modules-center = date 
+modules-right = tray filesystem pulseaudio backlight memory cpu cputemperature gpu-temp xkeyboard battery wifi wired wireless not-connected logout
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -85,7 +129,8 @@ label-empty-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:80:...%
+label = %title:0:100:...%
+label-padding-left = 2
 
 [module/filesystem]
 type = internal/fs
@@ -93,84 +138,89 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
+label-mounted = %{F#00ffab}%mountpoint%%{F-} %percentage_used%%
 
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.disabled}
 
+label-mounted-underline = #00ffab
+label-unmounted-underline = #00ffab
+
+label-mounted-padding = 1
+label-unmounted-padding = 1
+
 [module/pulseaudio]
-format-prefix = " "
-format-prefix-foreground = ${colors.primary}
+format-prefix = %{T3}%{T-}%{T1} %{T-}
+format-prefix-foreground = ${colors.some}
 type = internal/pulseaudio
 use-ui-max = true
 
-format-volume-prefix = " "
-format-volume-prefix-foreground = ${colors.primary}
+format-volume-prefix = %{T3}%{T-}%{T1} %{T-}
+format-volume-prefix-foreground = ${colors.some}
 format-volume = <label-volume>
 
 label-volume = %percentage%%
 
-label-muted = 
-label-muted-foreground = ${colors.primary}
+label-muted = %{T3}󰝟%{T-}
+label-muted-foreground = ${colors.some}
+format-muted-underline = ${colors.some}
+format-volume-underline = ${colors.some}
+
+format-volume-padding = 1
+format-muted-padding = 3
 
 [module/xkeyboard]
+format-underline = ${colors.pink-violet}
+format-padding = 1
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format =  <label-layout> 
-format-foreground = ${colors.primary}
+format = %{T3}%{T-} <label-layout> 
+format-foreground = ${colors.pink-violet}
 
 label-layout = %layout%
 label-layout-foreground = ${colors.foreground}
 
 [module/memory]
+format-underline = ${colors.gold}
 type = internal/memory
 interval = 3
 
-format-prefix = " "
-format-prefix-foreground = ${colors.primary}
+format-prefix = %{T2}%{T-}%{T1} %{T-}
+format-prefix-foreground = ${colors.gold}
 
 format = <label>
 label = %used%
+format-padding = 1
 
 [module/cpu]
+format-underline = ${colors.intel-blue}
 type = internal/cpu
 interval = 2
-format-prefix = ""
-format-prefix-foreground = ${colors.primary}
+format-prefix = CPU %{T2}%{T-}%{T1} %{T-}
+format-prefix-foreground = ${colors.intel-blue}
 label = %percentage:2%%
-
-[network-base]
-type = internal/network
-interval = 5
-format-connected =   <label-connected>
-format-disconnected = <label-disconnected>
-label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
-
-[module/wlan]
-inherit = network-base
-interface-type = wireless
-label-connected = %{F#F0C674}%ifname%%{F-} %essid% %local_ip%
-
-[module/eth]
-inherit = network-base
-interface-type = wired
-label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
+format-padding = 1
+label-padding-right = 1
 
 [module/date]
+format-underline = ${colors.primary}
 type = internal/date
 interval = 1
 
-date = %d %B %Y %H:%M:%S
+date = %a %d-%b-%Y %H:%M
 
 label = %date% 
 label-foreground = ${colors.primary}
+
+label-padding = 1
 
 [settings]
 screenchange-reload = true
 pseudo-transparency = true
 
 [module/battery]
+format-underline = #269bd2
 type = internal/battery
 
 full-at = 99
@@ -214,6 +264,7 @@ animation-low-1 =
 animation-low-framerate = 200
 
 [module/backlight]
+format-underline = #269bd2
 type = internal/backlight
 format-prefix = "☀ "
 format-prefix-foreground = ${colors.primary}
@@ -227,27 +278,91 @@ poll-interval = 0
 enable-scroll = true
 scroll-interval = 5
 
-[module/temperature]
+[module/cputemperature]
 type = internal/temperature
 interval = 1
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/hwmon/hwmon5/temp1_input
+; hwmon-path = /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/hwmon/hwmon5/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
 
 base-temperature = 20
-warn-temperature = 75
+warn-temperature = 76
 
-format =  <label>
-format-foreground = ${colors.primary}
+format =  <label>
+format-foreground = ${colors.intel-blue}
 
 label = %temperature-c%
 label-foreground = ${colors.foreground}
 
-format-warn =  <label-warn>
-format-warn-foreground = ${colors.primary}
+format-warn =  <label-warn>
+format-warn-foreground = ${colors.intel-blue}
 
 label-warn = %temperature-c%
 label-warn-foreground = #f00
 
+label-padding-right = 1
 
+format-underline = ${colors.intel-blue}
+format-warn-underline = ${colors.intel-blue}
+
+[module/gpu-temp]
+type = custom/script
+exec = ~/.config/polybar/gpu-temp.sh
+interval = 2
+format-underline = ${colors.nvidia-green}
+format-prefix = %{T1}GPU  %{T-}
+format-prefix-foreground = ${colors.nvidia-green}
+format-prefix-font = 2
+click-left = nvidia-settings
+format-padding = 1
+
+[module/wireless]
+type = internal/network
+interface-type = wireless
+
+interval = 3.0
+
+unknown-as-up = false
+
+format-connected = %{A1:kitty -e nmtui:}%{T2}%{T-}%{A}
+format-connected-foreground = #eefafa
+format-connected-padding = 1
+format-connected-underline = ${colors.white}
+
+[module/wired]
+type = internal/network
+interface-type = wired
+
+interval = 3.0
+
+unknown-as-up = false
+
+format-connected = %{A1:kitty -e nmtui:}%{T2}󰞉%{T-}%{A}
+format-connected-foreground = #eefafa
+format-connected-padding = 1
+format-connected-underline = ${colors.white}
+
+[module/not-connected]
+type = custom/script
+exec = ~/.config/polybar/internet.sh
+interval = 0.5
+format-foreground = ${colors.white}
+format-padding = 1
+format-underline = ${colors.white}
+
+[module/tray]
+type = internal/tray
+
+format-margin = 8px
+tray-spacing = 8px
+
+[module/logout]
+type = custom/text
+
+click-left = archlinux-logout
+format = %{T2}%{T-}
+format-padding = 1
+format-foreground = ${colors.white}
+format-underline = ${colors.white}
 
 ; vim:ft=dosini
