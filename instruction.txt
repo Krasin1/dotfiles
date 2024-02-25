@@ -9,3 +9,5 @@ dunst rofi
 arcolinux-logout betterlockscreen
 
 xclip
+
+zsh antigen
