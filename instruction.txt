@@ -1,6 +1,7 @@
 dkms xrdp ??xrdp-debug
 ?? nvidia-utils 
 gwe(GreenWithEnvy)
+nvidia-smi nvidia-settings
 
 alsa-utils
 

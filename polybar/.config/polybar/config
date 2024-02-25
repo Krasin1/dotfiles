@@ -208,7 +208,7 @@ format-underline = ${colors.primary}
 type = internal/date
 interval = 1
 
-date = %a %d-%b-%Y %H:%M
+date = %a %d-%b-%y %H:%M
 
 label = %date% 
 label-foreground = ${colors.primary}
