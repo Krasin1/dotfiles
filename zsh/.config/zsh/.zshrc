@@ -23,6 +23,8 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "MichaelAquilina/zsh-you-should-use"
 zsh_add_plugin "none9632/zsh-sudo"
+zsh_add_plugin "Tarrasch/zsh-bd"
+source "$ZDOTDIR/plugins/zsh-bd/bd.zsh"
 # Theme install
 zsh_add_plugin "sindresorhus/pure"
 
