@@ -12,3 +12,5 @@ arcolinux-logout betterlockscreen
 xclip
 
 zsh antigen
+
+libc++
