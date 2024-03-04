@@ -1,0 +1,14 @@
+[nvim]
+alpha-nvim
+markdown-preview.nvim
+что-нибудь с гитом
+which-key
+возможно harpoon
+
+[arch]
+dunst - уведомления
+rofi - замена dmenu
+разобраться с pipewire
+ranger - либо разобраться с файлами по умолчанию либо перейти на lf
+когда-нибудь undervolt видюхи
+

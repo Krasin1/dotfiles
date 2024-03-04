@@ -1,7 +1,6 @@
 dkms xrdp ??xrdp-debug
-?? nvidia-utils 
 gwe(GreenWithEnvy)
-nvidia-smi nvidia-settings
+nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
 alsa-utils
 
@@ -12,3 +11,5 @@ arcolinux-logout betterlockscreen
 xclip
 
 zsh antigen
+
+vesktop-bin
