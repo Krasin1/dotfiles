@@ -66,6 +66,12 @@ super + {p,b,comma,period}
 super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
+# Focus a floating window / Cycle floating windows.
+super + {_,shift + }g
+	bspc node 'focused.floating#{next,prev}.local.!hidden.floating' -f \
+	    || bspc node 'last.local.!focused.!hidden.floating' -f \
+	    || bspc node  'any.local.!focused.!hidden.floating' -f
+
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
@@ -144,9 +150,9 @@ XF86AudioRaiseVolume
 XF86AudioLowerVolume
     amixer set Master 5%-
 
-# XF86MonBrightnessUp
-#     br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable+15)); echo $new_value > $br_file;
-#
-#
-# XF86MonBrightnessDown
-#     br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable-15)); echo $new_value > $br_file;
+XF86MonBrightnessUp
+    br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable+15)); echo $new_value > $br_file;
+
+
+XF86MonBrightnessDown
+    br_file=/sys/class/backlight/amdgpu_bl0/brightness; variable=$(<$br_file); new_value=$(($variable-15)); echo $new_value > $br_file;
