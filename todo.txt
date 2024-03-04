@@ -7,6 +7,7 @@ which-key
 
 [arch]
 dunst - уведомления
+kitty 
 rofi - замена dmenu
 разобраться с pipewire
 ranger - либо разобраться с файлами по умолчанию либо перейти на lf
