@@ -23,22 +23,10 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "MichaelAquilina/zsh-you-should-use"
 zsh_add_plugin "none9632/zsh-sudo"
+zsh_add_plugin "Tarrasch/zsh-bd"
+source "$ZDOTDIR/plugins/zsh-bd/bd.zsh"
 # Theme install
 zsh_add_plugin "sindresorhus/pure"
-
-# zgen - plugin manager for plugins from oh-my-zsh
-# Must be before configs and aliases
-ZGEN_DIR=$ZDOTDIR/plugins/zgen/.zgen
-zsh_add_plugin "tarjoilija/zgen"
-source "$ZDOTDIR/plugins/zgen/zgen.zsh"
-
-if ! zgen saved; then
-  zgen oh-my-zsh
-  zgen oh-my-zsh plugins/colorize
-  zgen oh-my-zsh plugins/web-search
-  zgen oh-my-zsh plugins/colored-man-pages
-  zgen save
-fi
 
 # что это ? 
 zstyle :compinstall filename '$HOME/.zshrc'

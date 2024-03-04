@@ -12,4 +12,8 @@ xclip
 
 zsh antigen
 
+<<<<<<< HEAD
 vesktop-bin
+=======
+libc++
+>>>>>>> b9c0f3454c6265db0feb35cab814b3747fb45fc1
