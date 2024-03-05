@@ -12,7 +12,7 @@ for i in /sys/class/hwmon/hwmon*/temp*_input; do
         export HWMON_PATH="$i"
     fi
 
-    if [ "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*}))" = "amdgpu:" ]; then
+    if [ "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*}))" = "amdgpu: edge" ]; then
         export HWMON_PATH="$i"
     fi
 done
