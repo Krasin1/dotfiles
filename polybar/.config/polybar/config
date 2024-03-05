@@ -274,8 +274,7 @@ scroll-interval = 5
 type = internal/temperature
 interval = 1
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/hwmon/hwmon5/temp1_input
-; hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
+hwmon-path = ${env:HWMON_PATH}
 
 base-temperature = 20
 warn-temperature = 76
