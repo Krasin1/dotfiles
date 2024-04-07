@@ -15,3 +15,5 @@ zsh antigen
 vesktop-bin
 
 libc++
+
+flameshot
