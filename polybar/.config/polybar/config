@@ -37,7 +37,7 @@ white = #FFFFFF
 [bar/second]
 width = 100%
 height = 18pt
-monitor = HDMI-1
+monitor = DP-0
 
 ; dpi = 96
 

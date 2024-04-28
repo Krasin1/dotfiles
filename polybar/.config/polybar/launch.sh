@@ -20,7 +20,7 @@ done
 # Launch bar
 polybar example -r &
 
-if [[ $(xrandr | grep "HDMI-1 connected") ]]; then
+if [[ $(xrandr | grep "DP-0 connected") ]]; then
     polybar second -r &
 fi
 
