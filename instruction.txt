@@ -2,13 +2,13 @@ dkms xrdp(xorgxrdp??) ??xrdp-debug
 gwe(GreenWithEnvy)
 nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
-alsa-utils
+alsa-utils pipewire
 
 dunst rofi
 
 arcolinux-logout betterlockscreen
 
-xclip
+xclip openrazer nitrogen
 
 zsh antigen
 
