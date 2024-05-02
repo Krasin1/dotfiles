@@ -5,8 +5,8 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-xset r rate 300 50
-xsetroot -cursor_name left_ptr
+# xset r rate 300 50
+# xsetroot -cursor_name left_ptr
 # [ -f ~/.xprofile ] && . ~/.xprofile
 
 # merge in defaults and keymaps
@@ -53,8 +53,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 nvidia-settings --load-config-only &
-# xsetroot -cursor_name left_ptr
-# xset r rate 300 50
+xsetroot -cursor_name left_ptr
+xset r rate 300 50
 picom &
 gwe --hide-window &
 nitrogen --restore
