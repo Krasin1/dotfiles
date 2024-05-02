@@ -56,5 +56,6 @@ nvidia-settings --load-config-only &
 # xsetroot -cursor_name left_ptr
 # xset r rate 300 50
 picom &
+gwe --hide-window &
 nitrogen --restore
 exec bspwm
