@@ -70,6 +70,12 @@ alias gc='git commit'
 alias gp='tk; git push'
 alias gu='git pull'
 
+alias p='paru -Syyuu'
+alias f='paru -Ss --bottomup'
+alias i='paru -S'
+alias d='paru -Rns'
+alias q='paru -Qs'
+
 export VISUAL=nvim
 export EDITOR=nvim
 
