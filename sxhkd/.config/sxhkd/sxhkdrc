@@ -131,7 +131,7 @@ alt + shift + x
     # betterlockscreen -l dim
 
 Print
-    screengrab 
+    flameshot gui
 
 XF86AudioPlay
     playerctl play-pause
