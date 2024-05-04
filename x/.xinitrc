@@ -13,12 +13,6 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 
 if [ -f $sysresources ]; then
 
-
-
-
-
-
-
     xrdb -merge $sysresources
 
 fi
@@ -28,12 +22,6 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
 
     xrdb -merge "$userresources"
 
@@ -56,6 +44,7 @@ nvidia-settings --load-config-only &
 xsetroot -cursor_name left_ptr
 xset r rate 300 50
 picom &
-gwe --hide-window &
-nitrogen --restore
-exec bspwm
+gwe --hide-window &     # регулировка вентиляторов видеокарты
+udiskie &               # автоподключение флешек
+nitrogen --restore      # обои
+exec bspwm              # оконный менеджер

@@ -1,4 +1,4 @@
-dkms xrdp(xorgxrdp??) ??xrdp-debug
+// dkms xrdp(xorgxrdp??) ??xrdp-debug
 gwe(GreenWithEnvy)
 nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
@@ -16,4 +16,4 @@ vesktop-bin
 
 libc++
 
-flameshot
+flameshot udiskie
