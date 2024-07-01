@@ -1,19 +1,32 @@
 // dkms xrdp(xorgxrdp??) ??xrdp-debug
+
+@@ amd-ucode xf86-video-amdgpu vulkan-radeon acpilight @@ ноут
+
+packstrap base base-devel linux linux-firmware linux-headers neovim
+
+grub dosfstools efibootmgr os-prober mtools networkmanager rustup git
+
+xf86-video-intel vulkan-intel intel-ucode clang gdb ttf-cascadia-code python-pynvim ueberzug
+
 gwe(GreenWithEnvy)
 nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
-alsa-utils pipewire
+pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerctl
 
-dunst rofi
+bspwm sxhkd polybar picom  // dmenu
 
-arcolinux-logout betterlockscreen
+dunst rofi flameshot udiskie
 
 xclip openrazer nitrogen
 
-zsh antigen
+zsh kitty neovim lsd lolcat ranger btop neofetch thunar stow engrampa(rar archive)
 
-vesktop-bin
+zathura zathura-pdf-poppler chromium
+
+arcolinux-logout betterlockscreen screengrab
+
+// vesktop-bin
 
 libc++
 
-flameshot udiskie
+// lxappearance-gtk3
