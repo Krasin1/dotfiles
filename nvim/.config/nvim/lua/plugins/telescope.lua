@@ -24,7 +24,6 @@ return {
                 pickers = {},
                 extensions = {},
             }
-            require("telescope").load_extension("noice")
         end
     },
 	{
