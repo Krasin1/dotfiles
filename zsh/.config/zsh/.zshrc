@@ -3,6 +3,7 @@
 # Ты че долбаеб?
 
 export ZDOTDIR=$HOME/.config/zsh
+export PATH=$PATH:/home/$USER/.local/bin
 
 # Theme setup
 # Must be before sourcing zsh-functions
@@ -16,6 +17,10 @@ fi
 # Useful Functions
 source "$ZDOTDIR/zsh-functions"
 
+# что это ? 
+zstyle :compinstall filename '$HOME/.zshrc'
+autoload -Uz compinit
+compinit
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-completions"
@@ -28,10 +33,7 @@ source "$ZDOTDIR/plugins/zsh-bd/bd.zsh"
 # Theme install
 zsh_add_plugin "sindresorhus/pure"
 
-# что это ? 
-zstyle :compinstall filename '$HOME/.zshrc'
-autoload -Uz compinit
-compinit
+#----- было здесь
 
 # Config
 HISTFILE=~/.histfile
