@@ -17,7 +17,7 @@ bspwm sxhkd polybar picom  // dmenu
 
 dunst rofi flameshot udiskie
 
-xclip openrazer nitrogen
+xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
 zsh kitty neovim lsd lolcat ranger btop neofetch thunar stow engrampa(rar archive)
 
@@ -30,3 +30,26 @@ arcolinux-logout betterlockscreen screengrab
 libc++
 
 // lxappearance-gtk3
+
+
+add to /etc/fstab windows partition 
+    UUID=<use from lsblk -f> /windows ntfs defaults 0 0
+
+
+-- hibernation laptop
+/etc/systemd/logind.conf -> uncomment and change to hibernate: HandleLidSwitch=hibernate
+    then sudo systemctl restart systemd.service 
+/etc/default/grub add to GRUB_CMDLINE_LINUX_DEFAULT resume=/dev/nvme0n1p2 (swap partition)
+    then grub-mkconfig -o /boot/grub/grub.cfg
+/etc/mkinitcpio.conf -> add to HOOKS (resume)
+    then mkinitcpio -p linux
+
+-- touchpad gestures on laptop
+    install libinput libinput-gestures gestures 
+/etc/mkinitcpio.conf add to MODULES (i2c_hid) - после гибернации чтоб не пропадали жесты
+
+
+--exaile media player
+    Что-то из этого поможет запустить alac/m4a:
+    paru -S gst-plugins-base-libs gst-libav gst-plugins-base gst-plugins-good
+
