@@ -12,7 +12,7 @@ for i in /sys/class/hwmon/hwmon*/temp*_input; do
         export HWMON_PATH="$i"
     fi
 
-    if [ "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*}))" = "amdgpu: edge" ]; then
+    if [ "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*}))" = "k10temp: Tctl" ]; then
         export HWMON_PATH="$i"
     fi
 done
@@ -20,7 +20,7 @@ done
 # Launch bar
 polybar example -r &
 
-if [[ $(xrandr | grep "DP-0 connected") ]]; then
+if [[ $(xrandr | grep "DP-2 connected") ]]; then
     polybar second -r &
 fi
 
