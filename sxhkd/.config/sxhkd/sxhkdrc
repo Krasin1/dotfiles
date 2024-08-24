@@ -127,9 +127,20 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-alt + shift + x
+
+alt + x
     archlinux-logout
     # betterlockscreen -l dim
+    
+alt + f 
+    thunar
+
+alt + c 
+    google-chrome-stable
+
+alt + m 
+    exaile
+
 
 Print
     flameshot gui
