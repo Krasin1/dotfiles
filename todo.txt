@@ -13,3 +13,4 @@ rofi - замена dmenu
 ranger - либо разобраться с файлами по умолчанию либо перейти на lf
 когда-нибудь undervolt видюхи
 xdotool
+mtp - подключить android 
