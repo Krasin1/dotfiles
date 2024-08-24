@@ -22,6 +22,8 @@ source "$ZDOTDIR/zsh-functions"
 zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit
 compinit
+_comp_options+=(globdots)		# Include hidden files.
+
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-completions"
