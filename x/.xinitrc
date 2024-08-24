@@ -12,9 +12,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -22,9 +20,7 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -40,11 +36,16 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-nvidia-settings --load-config-only &
-xsetroot -cursor_name left_ptr
 xset r rate 300 50
+xsetroot -cursor_name left_ptr
 picom &
-gwe --hide-window &     # регулировка вентиляторов видеокарты
+
+if [ -x "$(command -v nvidia-settings)" ]; then
+    nvidia-settings --load-config-only &
+    gwe --hide-window &     # регулировка вентиляторов видеокарты
+fi
+
 udiskie &               # автоподключение флешек
 nitrogen --restore      # обои
+dex --autostart &
 exec bspwm              # оконный менеджер
