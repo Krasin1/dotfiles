@@ -23,3 +23,5 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a Chromium desktop='^4'
+bspc rule -a Google-chrome desktop='^1'
+bspc rule -a Exaile desktop='^2'
