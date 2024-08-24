@@ -1,6 +1,6 @@
-! remove mod1 = Alt_R
-! keysym Alt_R = Alt_L
-clear mod1
-clear mod4
-keycode 108 = Super_R NoSymbol Super_R
-add mod4 = Super_L Super_R
+! ! remove mod1 = Alt_R
+! ! keysym Alt_R = Alt_L
+! clear mod1
+! clear mod4
+! keycode 108 = Super_R NoSymbol Super_R
+! add mod4 = Super_L Super_R
