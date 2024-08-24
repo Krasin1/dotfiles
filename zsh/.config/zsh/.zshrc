@@ -4,6 +4,7 @@
 
 export ZDOTDIR=$HOME/.config/zsh
 export PATH=$PATH:/home/$USER/.local/bin
+export LESSHISTFILE=-
 
 # Theme setup
 # Must be before sourcing zsh-functions
@@ -37,9 +38,25 @@ zsh_add_plugin "sindresorhus/pure"
 
 # Config
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
 bindkey -v
+bindkey '^n' history-search-forward
+bindkey '^p' history-search-backward
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" 
+zstyle ':completion:*' list-colors "ow=01;34:di=01;34"
+
 unsetopt beep notify
 setopt magic_equal_subst
 unsetopt multios
