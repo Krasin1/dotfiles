@@ -1,5 +1,7 @@
 #!/bin/sh
 
+setxkbmap -model pc105 -layout us,ru -option grp:caps_toggle
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -48,4 +50,5 @@ fi
 udiskie &               # автоподключение флешек
 nitrogen --restore      # обои
 dex --autostart &
+spoof-dpi > /dev/null &
 exec bspwm              # оконный менеджер

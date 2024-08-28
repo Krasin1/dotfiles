@@ -1,0 +1,13 @@
+// Rofi colors for Pamela
+
+* {
+    // font: "Terminess Nerd Font Mono Bold 10";
+    font: "Cascadia Code 10";
+    background: #1D1F28;
+    background-alt: #1D1F28E0;
+    foreground: #FDFDFD;
+    selected: #556FFF;
+    active: #18E3C8;
+    urgent: #FF4971;
+
+}

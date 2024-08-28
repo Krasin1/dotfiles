@@ -1,22 +1,35 @@
 // dkms xrdp(xorgxrdp??) ??xrdp-debug
 
-@@ amd-ucode xf86-video-amdgpu vulkan-radeon acpilight @@ ноут
+// amd-ucode xf86-video-amdgpu vulkan-radeon brightnessctl // ноут
+// acpilight - maybe not needed
+
+bluez bluez-utils
+    sudo systemctl enable bluetooth.service
 
 packstrap base base-devel linux linux-firmware linux-headers neovim
 
 grub dosfstools efibootmgr os-prober mtools networkmanager rustup git
 
-xf86-video-intel vulkan-intel intel-ucode clang gdb ttf-cascadia-code python-pynvim ueberzug
+xf86-video-intel vulkan-intel intel-ucode clang gdb 
+
+python-pynvim ueberzug fzf ripgrep
+
+ttf-cascadia-code ttf-font-awesome ttf-material-design-icons-desktop-git papirus-icon-theme
+ttf-maple ttf-inconsolata ttf-joypixels ttf-terminux-nerd
 
 gwe(GreenWithEnvy)
 nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
 pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerctl
-//for lutris maybe lib32-libpulse
+//for lutris maybe lib32-pipewire (lib32-libpulse in does not work)
+
+mpd mpd-mpris-bin mpc ncmpcpp eww // maybe mpv 
+    systemctl --user --now enable mpd.service // wouldn't work without it
+    systemctl --user --now enable mpd-mpris.service
 
 bspwm sxhkd polybar picom  // dmenu
 
-dunst rofi flameshot udiskie
+dunst rofi flameshot udiskie fbreader simple-mtpfs
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
