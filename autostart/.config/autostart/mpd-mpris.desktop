@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+NoDisplay=true
+Exec=mpd-mpris -no-instance
+Name=mpd-mpris
+Comment=mpd-mpris: An implementation of the MPRIS protocol for MPD

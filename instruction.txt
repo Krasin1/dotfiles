@@ -25,7 +25,6 @@ pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerct
 
 mpd mpd-mpris-bin mpc ncmpcpp eww // maybe mpv 
     systemctl --user --now enable mpd.service // wouldn't work without it
-    systemctl --user --now enable mpd-mpris.service
 
 bspwm sxhkd polybar picom  // dmenu
 
