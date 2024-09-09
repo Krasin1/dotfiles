@@ -13,8 +13,8 @@ window {
     anchor:                      north;
     fullscreen:                  false;
     width:                       17%;
-    height:                      44%;
-    x-offset:                    41%;
+    max-height:                  44%;
+    x-offset:                    -41%;
     y-offset:                    7%;
 
     /* properties for all widgets */
