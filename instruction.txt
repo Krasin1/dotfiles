@@ -23,7 +23,7 @@ nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerctl
 //for lutris maybe lib32-pipewire (lib32-libpulse in does not work)
 
-mpd mpd-mpris-bin mpc ncmpcpp eww // maybe mpv 
+mpd mpdris2-git mpc ncmpcpp eww // maybe mpv // python-mutagen???
     systemctl --user --now enable mpd.service // wouldn't work without it
 
 bspwm sxhkd polybar picom  // dmenu
@@ -39,6 +39,8 @@ zathura zathura-pdf-poppler chromium
 arcolinux-logout betterlockscreen screengrab
 
 // vesktop-bin
+
+android-studio libbcd
 
 libc++
 
