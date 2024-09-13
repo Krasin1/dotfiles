@@ -15,7 +15,7 @@ xf86-video-intel vulkan-intel intel-ucode clang gdb
 python-pynvim ueberzug fzf ripgrep
 
 ttf-cascadia-code ttf-font-awesome ttf-material-design-icons-desktop-git papirus-icon-theme
-ttf-maple ttf-inconsolata ttf-joypixels ttf-terminux-nerd
+ttf-maple ttf-inconsolata ttf-joypixels ttf-terminus-nerd
 
 gwe(GreenWithEnvy)
 nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
