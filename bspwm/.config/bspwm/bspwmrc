@@ -55,6 +55,7 @@ bspc config presel_feedback_color "#FF4971"
 pgrep -x sxhkd > /dev/null || sxhkd &
 $HOME/.config/polybar/launch.sh
 
+dunstify -t 1 "Hello world!" &
 
 # # Set system vars for polybar
 # "$HOME"/.config/bspwm/src/SetSysVars
