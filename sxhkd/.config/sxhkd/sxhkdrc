@@ -147,7 +147,7 @@ alt + c
     google-chrome-stable --proxy-server="http://127.0.0.1:8080"
 
 alt + m 
-    exaile
+    kitty --detach ncmpcpp
 
 alt + n
     ~/dotfiles/scripts/NetManagerDM
@@ -172,18 +172,5 @@ XF86AudioNext
 XF86Audio{LowerVolume,RaiseVolume,Mute}
     ~/dotfiles/scripts/volume_dunst {down,up,mute}
 
-# XF86AudioMute
-#     pactl set-sink-mute @DEFAULT_SINK@ toggle
-#
-# XF86AudioRaiseVolume
-#     amixer set Master 5%+
-#
-# XF86AudioLowerVolume
-#     amixer set Master 5%-
-
 XF86MonBrightness{Down,Up}
     ~/dotfiles/scripts/Brightness {down,up}
-
-# XF86MonBrightnessDown
-    # brightnessctl set 7%-
-    # br_file=/sys/class/backlight/amdgpu_bl1/brightness; variable=$(<$br_file); new_value=$(($variable-15)); echo $new_value > $br_file;
