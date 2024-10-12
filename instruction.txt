@@ -47,7 +47,7 @@ libc++
 // lxappearance-gtk3
 
 
-add to /etc/fstab windows partition 
+-- add to /etc/fstab windows partition 
     UUID=<use from lsblk -f> /windows ntfs defaults 0 0
 
 
@@ -64,7 +64,9 @@ add to /etc/fstab windows partition
 /etc/mkinitcpio.conf add to MODULES (i2c_hid) - после гибернации чтоб не пропадали жесты
 
 
---exaile media player
+-- exaile media player
     Что-то из этого поможет запустить alac/m4a:
     paru -S gst-plugins-base-libs gst-libav gst-plugins-base gst-plugins-good
 
+-- nvidia fan control
+    nvim /etc/X11/Xwrapper.config изменить на needs_root_rights=yes
