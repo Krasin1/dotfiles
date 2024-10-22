@@ -80,3 +80,8 @@ libc++
 -- windows fonts
     ln -s /windows/Windows/Fonts /usr/local/share/fonts/WindowsFonts
     fc-cache --force
+
+-- wake on lan 
+    nmcli con show  --> check name
+    nmcli c show "wired1" | grep 802-3-ethernet.wake-on-lan --> check WOL status
+    nmcli c modify "wired1" 802-3-ethernet.wake-on-lan magic  --> enable
