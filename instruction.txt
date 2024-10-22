@@ -85,3 +85,11 @@ libc++
     nmcli con show  --> check name
     nmcli c show "wired1" | grep 802-3-ethernet.wake-on-lan --> check WOL status
     nmcli c modify "wired1" 802-3-ethernet.wake-on-lan magic  --> enable
+
+-- dynamic dns 
+    install ddclient
+    edit /etc/ddclient/ddclient.conf
+        protocol=duckdns,
+        password=<token>
+        naobumluboi.duckdns.org
+    sudo systemctl enable --now ddclient
