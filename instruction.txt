@@ -25,6 +25,7 @@ pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerct
 
 mpd mpdris2-git mpc ncmpcpp eww // maybe mpv // python-mutagen???
     systemctl --user --now enable mpd.service // wouldn't work without it
+    systemctl --user --now enable mpDris2 -- notifications
 
 xorg-xinit
 
