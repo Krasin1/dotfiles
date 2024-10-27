@@ -20,6 +20,8 @@ ttf-maple ttf-inconsolata ttf-joypixels ttf-terminus-nerd ttf-jetbrains-mono-ner
 gwe(GreenWithEnvy)
 nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
+huawei-wmi
+
 pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerctl
 //for lutris maybe lib32-pipewire (lib32-libpulse in does not work)
 
@@ -52,7 +54,6 @@ libc++
 -- add to /etc/fstab windows partition 
     UUID=<use from lsblk -f> /windows ntfs defaults 0 0
 
-
 -- hibernation laptop
 /etc/systemd/logind.conf -> uncomment and change to hibernate: HandleLidSwitch=hibernate
     then sudo systemctl restart systemd.service 
@@ -69,6 +70,10 @@ libc++
     install auto-cpufreq
     sudo auto-cpufreq --install
 
+-- honor battery threshold and fn_lock_state 
+    sudo -e /sys/devices/huawei-wmi/charge_control_thresholds
+    -- maybe sudo usermod -aG huawei-wmi $(whoami)
+    sudo -e /sys/devices/huawei-wmi/fn_lock_state 
 
 -- exaile media player
     Что-то из этого поможет запустить alac/m4a:
