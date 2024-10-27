@@ -50,5 +50,4 @@ fi
 udiskie &               # автоподключение флешек
 nitrogen --restore      # обои
 dex --autostart &
-spoofdpi > /dev/null &
 exec bspwm              # оконный менеджер
