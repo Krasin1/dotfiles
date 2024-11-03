@@ -1,7 +1,6 @@
 // dkms xrdp(xorgxrdp??) ??xrdp-debug
 
-// amd-ucode xf86-video-amdgpu vulkan-radeon brightnessctl // ноут
-// acpilight - maybe not needed
+-- amd-ucode xf86-video-amdgpu vulkan-radeon brightnessctl // ноут
 
 bluez bluez-utils
     sudo systemctl enable bluetooth.service
@@ -28,6 +27,8 @@ pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerct
 mpd mpdris2-git mpc ncmpcpp eww // maybe mpv // python-mutagen???
     systemctl --user --now enable mpd.service // wouldn't work without it
     systemctl --user --now enable mpDris2 -- notifications
+    .m3u format -----> ./song.flac
+    in ncmpcpp press "u" to update playlists
 
 xorg-xinit
 
@@ -58,8 +59,6 @@ libc++
 -- hibernation laptop
 /etc/systemd/logind.conf -> uncomment and change to hibernate: HandleLidSwitch=hibernate
     then sudo systemctl restart systemd.service 
-/etc/default/grub add to GRUB_CMDLINE_LINUX_DEFAULT resume=/dev/nvme0n1p2 (swap partition)
-    then grub-mkconfig -o /boot/grub/grub.cfg
 /etc/mkinitcpio.conf -> add to HOOKS (resume)
     then mkinitcpio -p linux
 
@@ -72,9 +71,13 @@ libc++
     sudo auto-cpufreq --install
 
 -- honor battery threshold and fn_lock_state 
-    sudo -e /sys/devices/huawei-wmi/charge_control_thresholds
+    (https://github.com/qu1x/huawei-wmi.git)
     -- maybe sudo usermod -aG huawei-wmi $(whoami)
+    sudo -e /usr/lib/huawei-wmi/reinstate
+        change      cp -- "$DEF$cct" "$WMI"
+        to          echo "20 80" > "$WMI$cct
     sudo -e /sys/devices/huawei-wmi/fn_lock_state 
+    sudo systemctl enable --now huawei-wmi-reinstate.service
 
 -- exaile media player
     Что-то из этого поможет запустить alac/m4a:
