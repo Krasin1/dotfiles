@@ -15,7 +15,7 @@ return {
 				{ "<leader>d", group = "Debugging" },
 				{ "<leader>f", group = "file" },
 				{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File", remap = true },
-				{ "<leader>l", desc = "Comment line" },
+				{ "<leader>'", desc = "Comment line" },
 				{ "<leader>t", group = "Open Terminal" },
 				{ "\\D", desc = "Type definition" },
 				{ "\\c", group = "Code action" },

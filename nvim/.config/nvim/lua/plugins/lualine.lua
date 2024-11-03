@@ -27,8 +27,6 @@ return {
                     } },
                 },
             }
-            -- jump to buffer
-            -- vim.api.nvim_set_keymap('n', (vim.v.count)'<TAB>', ':LualineBuffersJump! (vim.v.count)<CR>', { silent = true, noremap = true })
         end
     }
 }
