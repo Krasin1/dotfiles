@@ -52,6 +52,9 @@ libc++
 
 // lxappearance-gtk3
 
+-- git dotfiles repository
+    git update-index --assume-unchanged mpd/.config/mpd/mpdstate
+    git update-index --assume-unchanged mpd/.config/mpd/mpd.db
 
 -- add to /etc/fstab windows partition 
     UUID=<use from lsblk -f> /windows ntfs defaults 0 0
