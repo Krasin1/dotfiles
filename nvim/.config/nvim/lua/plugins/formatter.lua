@@ -14,6 +14,7 @@ return {
 					css = { "prettier" },
 					html = { "prettier" },
 					rust = { "rustfmt" },
+                    sh = { "beautysh" },
 				},
 				-- format_on_save = {
 				-- 	-- These options will be passed to conform.format()

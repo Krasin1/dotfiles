@@ -1,3 +1,11 @@
+local signature_opts = {
+    bind = true,
+    hint_enable = false,
+    handler_opts = {
+        border = "rounded",
+    },
+}
+
 local on_attach = function(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)
@@ -45,14 +53,6 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 end
 
-local signature_opts = {
-    bind = true,
-    hint_enable = false,
-    handler_opts = {
-        border = "rounded",
-    },
-}
-
 return {
 	{
 		"nvimdev/lspsaga.nvim",
@@ -93,10 +93,10 @@ return {
 		},
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "clangd", "pyright", "lua_ls", "rust_analyzer", "ts_ls", "jdtls" },
+				ensure_installed = { "clangd", "pyright", "lua_ls", "rust_analyzer", "ts_ls", "jdtls", "bashls" },
 			})
 			require("mason-tool-installer").setup({
-				ensure_installed = { "clang-format", "stylua", "prettier", "black", "isort" },
+				ensure_installed = { "clang-format", "stylua", "prettier", "black", "isort", "beautysh" },
 			})
 		end,
 	},
@@ -152,6 +152,10 @@ return {
 				capabilities = capabilities,
 			})
 			require("lspconfig").ts_ls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			require("lspconfig").bashls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
