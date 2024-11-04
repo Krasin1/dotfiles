@@ -2,16 +2,19 @@ local on_attach = function(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)
 	end
+	require("lsp_signature").on_attach(signature_opts, bufnr)
 
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
+
+	-- local function buf_set_option(...)
+	-- 	vim.api.nvim_buf_set_option(bufnr, ...)
+	-- end
 
 	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+	-- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 	-- Mappings.
 	local opts = { noremap = true, silent = true }
@@ -41,6 +44,14 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
 	buf_set_keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 end
+
+local signature_opts = {
+    bind = true,
+    hint_enable = false,
+    handler_opts = {
+        border = "rounded",
+    },
+}
 
 return {
 	{
@@ -82,7 +93,7 @@ return {
 		},
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "clangd", "pyright", "lua_ls", "rust_analyzer", "tsserver", "jdtls" },
+				ensure_installed = { "clangd", "pyright", "lua_ls", "rust_analyzer", "ts_ls", "jdtls" },
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = { "clang-format", "stylua", "prettier", "black", "isort" },
@@ -136,19 +147,22 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").tsserver.setup({
+			require("lspconfig").jdtls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").jdtls.setup({
+			require("lspconfig").ts_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 		end,
 	},
-    -- signature help
 	{
-		"folke/neodev.nvim",
-		opts = {},
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		opts = signature_opts,
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
 	},
 }
