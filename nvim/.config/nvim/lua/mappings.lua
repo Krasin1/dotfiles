@@ -1,5 +1,15 @@
 local map = vim.api.nvim_set_keymap
 
+-- Paste without overwriting the register
+map("v", "p", '"_dP', { silent = true, noremap = true })
+
+-- Keep cursor in place when joining lines
+map('n', 'J', 'mzJ`z', { silent = true, noremap = true })
+
+-- Center search results
+map('n', 'n', 'nzzzv', { silent = true, noremap = true })
+map('n', 'N', 'Nzzzv', { silent = true, noremap = true })
+
 -- Use alt + hjkl to resize windows
 map("n", "<M-j>", ":resize -2<cr>", { desc = "Decrease window height", silent = true, noremap = true })
 map("n", "<M-k>", ":resize +2<cr>", { desc = "Increase window height", silent = true, noremap = true })
@@ -13,12 +23,18 @@ map("n", "<TAB>q", ":bd!<CR>", { desc = "Close buffer", silent = true, noremap =
 
 -- Alternate way to save
 map("n", "<C-s>", ":w<CR>", { desc = "Save file", silent = true, noremap = true })
--- Use control-c instead of escape
+
+-- Better escape
 map("n", "<C-c>", "<Esc>", { silent = true, noremap = true })
+map("i", "jk", "<Esc>", { silent = true, noremap = true })
 
 -- Better tabbing
 map("v", "<", "<gv", { silent = true, noremap = true })
 map("v", ">", ">gv", { silent = true, noremap = true })
+
+-- Move selected line / block of text
+map("v", "J", ":m '>+1<CR>gv=gv", { silent = true, noremap = true })
+map("v", "K", ":m '<-2<CR>gv=gv", { silent = true, noremap = true })
 
 -- Better window navigation
 map("n", "<C-h>", "<C-w>h", { silent = true, noremap = true })
@@ -68,4 +84,3 @@ map('n', '<Leader>tp', ":FloatermNew python<cr>", { desc = "Terminal Python", si
 
 -- ranger
 map('n', '<Leader>r', ":RnvimrToggle<cr>", { desc = "Ranger", silent = true, noremap = true })
-
