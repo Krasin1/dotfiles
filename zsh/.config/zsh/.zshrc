@@ -89,7 +89,7 @@ alias gd='git diff'
 alias ga='git add'
 alias gc='git commit'
 alias gp='tk; git push'
-alias gu='git pull'
+alias gu='tk; git pull'
 
 alias p='paru -Syyuu'
 alias f='paru -Ss --bottomup'
