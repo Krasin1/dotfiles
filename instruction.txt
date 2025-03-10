@@ -109,3 +109,6 @@ libc++
         password=<token>
         naobumluboi.duckdns.org
     sudo systemctl enable --now ddclient
+
+-- change default terminal
+    sudo ln -s /usr/bin/kitty /usr/bin/gnome-terminal
