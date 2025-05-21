@@ -4,6 +4,7 @@ markdown-preview.nvim
 что-нибудь с гитом
 which-key
 возможно harpoon
+mini.ai 
 
 [arch]
 dunst - уведомления
