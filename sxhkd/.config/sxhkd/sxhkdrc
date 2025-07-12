@@ -55,9 +55,92 @@ super + ctrl + {m,x,y,z}
 # focus/swap
 #
 
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+super + h
+    bspc node -f west || { bspc monitor -f west; if [ -z "$(bspc query -N -m -n)" ]; then eval "$(bspc query -T -m | jq -r '"X=\(.rectangle.x) Y=\(.rectangle.y) WIDTH=\(.rectangle.width) HEIGHT=\(.rectangle.height)"')"; xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2)); fi; }
+
+# Переключение на южный монитор (или его центр, если нет окон)
+super + j
+    bspc node -f south || { bspc monitor -f south; if [ -z "$(bspc query -N -m -n)" ]; then eval "$(bspc query -T -m | jq -r '"X=\(.rectangle.x) Y=\(.rectangle.y) WIDTH=\(.rectangle.width) HEIGHT=\(.rectangle.height)"')"; xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2)); fi; }
+
+# Переключение на северный монитор (или его центр, если нет окон)
+super + k
+    bspc node -f north || { bspc monitor -f north; if [ -z "$(bspc query -N -m -n)" ]; then eval "$(bspc query -T -m | jq -r '"X=\(.rectangle.x) Y=\(.rectangle.y) WIDTH=\(.rectangle.width) HEIGHT=\(.rectangle.height)"')"; xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2)); fi; }
+
+# Переключение на восточный монитор (или его центр, если нет окон)
+super + l
+    bspc node -f east || { bspc monitor -f east; if [ -z "$(bspc query -N -m -n)" ]; then eval "$(bspc query -T -m | jq -r '"X=\(.rectangle.x) Y=\(.rectangle.y) WIDTH=\(.rectangle.width) HEIGHT=\(.rectangle.height)"')"; xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2)); fi; }
+
+# Перемещение окон и курсора между мониторами/внутри монитора
+super + shift + h
+    if bspc query -N -n west.local >/dev/null; then \
+        bspc node -s west --follow; \
+    else \
+        bspc node -m west --follow; \
+    fi; \
+    eval $(xdotool getactivewindow getwindowgeometry --shell); \
+    xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2))
+
+super + shift + j
+    if bspc query -N -n south.local >/dev/null; then \
+        bspc node -s south --follow; \
+    else \
+        bspc node -m south --follow; \
+    fi; \
+    eval $(xdotool getactivewindow getwindowgeometry --shell); \
+    xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2))
+
+super + shift + k
+    if bspc query -N -n north.local >/dev/null; then \
+        bspc node -s north --follow; \
+    else \
+        bspc node -m north --follow; \
+    fi; \
+    eval $(xdotool getactivewindow getwindowgeometry --shell); \
+    xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2))
+
+super + shift + l
+    if bspc query -N -n east.local >/dev/null; then \
+        bspc node -s east --follow; \
+    else \
+        bspc node -m east --follow; \
+    fi; \
+    eval $(xdotool getactivewindow getwindowgeometry --shell); \
+    xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2))
+
+
+# # Перемещение окон между мониторами/внутри монитора с проверкой соседей
+# super + shift + h
+#     if bspc query -N -n west.local >/dev/null; then \
+#         bspc node -s west --follow; \
+#     else \
+#         bspc node -m west --follow; \
+#     fi
+#     xdotool getactivewindow mousemove --window %1 --polar 00
+
+# super + shift + j
+#     if bspc query -N -n south.local >/dev/null; then \
+#         bspc node -s south --follow; \
+#     else \
+#         bspc node -m south --follow; \
+#     fi
+#     xdotool getactivewindow mousemove --window %1 --polar 00
+
+# super + shift + k
+#     if bspc query -N -n north.local >/dev/null; then \
+#         bspc node -s north --follow; \
+#     else \
+#         bspc node -m north --follow; \
+#     fi
+#     xdotool getactivewindow mousemove --window %1 --polar 00
+
+# super + shift + l
+#     if bspc query -N -n east.local >/dev/null; then \
+#         bspc node -s east --follow; \
+#     else \
+#         bspc node -m east --follow; \
+#     fi
+#     xdotool getactivewindow mousemove --window %1 --polar 00
+
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
@@ -89,7 +172,7 @@ super + {o,i}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	{bspc {desktop -f,node -d} '^{1-9,10}'; if [ -z "$(bspc query -N -m -n)" ]; then eval "$(bspc query -T -m | jq -r '"X=\(.rectangle.x) Y=\(.rectangle.y) WIDTH=\(.rectangle.width) HEIGHT=\(.rectangle.height)"')"; xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2)); fi; }
 
 #
 # preselect
@@ -174,3 +257,6 @@ XF86Audio{LowerVolume,RaiseVolume,Mute}
 
 XF86MonBrightness{Down,Up}
     ~/dotfiles/scripts/Brightness {down,up}
+
+super + u
+    bspc node @parent -R 90

@@ -34,7 +34,7 @@ xorg-xinit
 
 bspwm sxhkd polybar picom  // dmenu
 
-dunst rofi flameshot udiskie fbreader simple-mtpfs
+dunst rofi flameshot udiskie fbreader simple-mtpfs(можно без simple?: gvfs-mtp,jmtpfs??)
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
@@ -55,6 +55,7 @@ android-studio libbcd
 libc++
 
 // lxappearance-gtk3
+    qogir-gtk-theme qogir-icon-theme 
 
 -- git dotfiles repository
     git update-index --assume-unchanged mpd/.config/mpd/mpdstate
