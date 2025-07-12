@@ -4,7 +4,7 @@ local t = vim.opt
 
 t.clipboard = "unnamedplus"
 t.termguicolors = true
-t.signcolumn = 'yes'
+t.signcolumn = "yes"
 t.hlsearch = false
 t.errorbells = false
 t.incsearch = true
@@ -15,7 +15,7 @@ t.pumheight = 10
 t.fileencoding = "utf-8"
 t.ruler = true
 t.cmdheight = 2
-t.iskeyword:append({ '-' })
+t.iskeyword:append({ "-" })
 t.mouse = "a"
 t.splitbelow = true
 t.splitright = true
@@ -34,5 +34,7 @@ t.relativenumber = true
 t.cursorline = true
 t.updatetime = 50
 t.timeoutlen = 500
-t.formatoptions:remove({ 'c', 'r', 'o' })
+t.formatoptions:remove({ "c", "r", "o" })
 t.shortmess:append({ c = true })
+t.ignorecase = true
+t.smartcase = true

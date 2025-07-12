@@ -4,11 +4,11 @@ local map = vim.api.nvim_set_keymap
 map("v", "p", '"_dP', { silent = true, noremap = true })
 
 -- Keep cursor in place when joining lines
-map('n', 'J', 'mzJ`z', { silent = true, noremap = true })
+map("n", "J", "mzJ`z", { silent = true, noremap = true })
 
 -- Center search results
-map('n', 'n', 'nzzzv', { silent = true, noremap = true })
-map('n', 'N', 'Nzzzv', { silent = true, noremap = true })
+map("n", "n", "nzzzv", { silent = true, noremap = true })
+map("n", "N", "Nzzzv", { silent = true, noremap = true })
 
 -- Use alt + hjkl to resize windows
 map("n", "<M-j>", ":resize -2<cr>", { desc = "Decrease window height", silent = true, noremap = true })
@@ -44,8 +44,13 @@ map("n", "<C-l>", "<C-w>l", { silent = true, noremap = true })
 
 -- Harpoon
 local h = ":lua require('harpoon."
-map("n", "<leader>a",  h .. "mark').add_file()<cr>", { desc = "Add file to harpoon", silent = true, noremap = true })
-map("n", "<leader>d",  h .. "ui').toggle_quick_menu()<cr>", { desc = "Open harpoon mark", silent = true, noremap = true })
+map("n", "<leader>a", h .. "mark').add_file()<cr>", { desc = "Add file to harpoon", silent = true, noremap = true })
+map(
+	"n",
+	"<leader>d",
+	h .. "ui').toggle_quick_menu()<cr>",
+	{ desc = "Open harpoon mark", silent = true, noremap = true }
+)
 
 map("n", "<leader>hn", h .. "ui').nav_next()<cr>", { desc = "Next harpoon file", silent = true, noremap = true })
 map("n", "<leader>hp", h .. "ui').nav_prev()<cr>", { desc = "Prev harpoon file", silent = true, noremap = true })
@@ -66,21 +71,21 @@ map("n", "<Leader>fh", tel .. "help_tags()<cr>", { desc = "Find Help", silent = 
 map("n", "<leader>bt", "<cmd>DapToggleBreakpoint<cr>", {})
 map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
 
--- floaterm 
-map('n', '<F1>', ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
-map('t', '<F1>', "<C-\\><C-n>:FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
+-- floaterm
+map("n", "<F1>", ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
+map("t", "<F1>", "<C-\\><C-n>:FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
 
-map('n', '<F2>', ":FloatermPrev<cr>", { desc = "Terminal Previous", silent = true, noremap = true })
-map('t', '<F2>', "<C-\\><C-n>:FloatermPrev<cr>", { desc = "Terminal Previous", silent = true, noremap = true })
+map("n", "<F2>", ":FloatermPrev<cr>", { desc = "Terminal Previous", silent = true, noremap = true })
+map("t", "<F2>", "<C-\\><C-n>:FloatermPrev<cr>", { desc = "Terminal Previous", silent = true, noremap = true })
 
-map('n', '<F3>', ":FloatermNext<cr>", { desc = "Terminal Next", silent = true, noremap = true })
-map('t', '<F3>', "<C-\\><C-n>:FloatermNext<cr>", { desc = "Terminal Next", silent = true, noremap = true })
+map("n", "<F3>", ":FloatermNext<cr>", { desc = "Terminal Next", silent = true, noremap = true })
+map("t", "<F3>", "<C-\\><C-n>:FloatermNext<cr>", { desc = "Terminal Next", silent = true, noremap = true })
 
-map('n', '<F4>', ":FloatermNew<cr>", { desc = "Terminal New", silent = true, noremap = true })
-map('t', '<F4>', "<C-\\><C-n>:FloatermNew<cr>", { desc = "Terminal New", silent = true, noremap = true })
+map("n", "<F4>", ":FloatermNew<cr>", { desc = "Terminal New", silent = true, noremap = true })
+map("t", "<F4>", "<C-\\><C-n>:FloatermNew<cr>", { desc = "Terminal New", silent = true, noremap = true })
 
-map('n', '<Leader>tt', ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
-map('n', '<Leader>tp', ":FloatermNew python<cr>", { desc = "Terminal Python", silent = true, noremap = true })
+map("n", "<Leader>tt", ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
+map("n", "<Leader>tp", ":FloatermNew python<cr>", { desc = "Terminal Python", silent = true, noremap = true })
 
 -- ranger
-map('n', '<Leader>r', ":RnvimrToggle<cr>", { desc = "Ranger", silent = true, noremap = true })
+map("n", "<Leader>r", ":RnvimrToggle<cr>", { desc = "Ranger", silent = true, noremap = true })
