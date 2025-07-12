@@ -38,7 +38,7 @@ dunst rofi flameshot udiskie fbreader simple-mtpfs(можно без simple?: gv
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
-zsh kitty neovim lsd lolcat ranger btop neofetch thunar p7zip stow engrampa(rar archive)
+zsh kitty neovim lsd lolcat ranger btop neofetch nemo p7zip stow engrampa(rar archive)
 
 zathura zathura-pdf-poppler chromium
 
