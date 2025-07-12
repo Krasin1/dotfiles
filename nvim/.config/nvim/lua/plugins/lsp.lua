@@ -1,9 +1,11 @@
 local signature_opts = {
-    bind = true,
-    hint_enable = false,
-    handler_opts = {
-        border = "rounded",
-    },
+	bind = true,
+	hint_enable = false,
+	max_height = 8,
+	floating_window_off_y = -1,
+	handler_opts = {
+		border = "rounded",
+	},
 }
 
 local on_attach = function(client, bufnr)
