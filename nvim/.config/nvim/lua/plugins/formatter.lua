@@ -2,40 +2,34 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
-		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					c = { "clang_format" },
-					cpp = { "clang_format" },
-					lua = { "stylua" },
-					python = { "isort", "black" },
-					javascript = { "prettier" },
-					css = { "prettier" },
-					html = { "prettier" },
-					rust = { "rustfmt" },
-                    sh = { "beautysh" },
-				},
-				-- format_on_save = {
-				-- 	-- These options will be passed to conform.format()
-				-- 	timeout_ms = 500,
-				-- 	lsp_fallback = true,
-				-- },
-			})
-			-- vim.api.nvim_create_autocmd("BufWritePre", {
-			-- 	pattern = "*",
-			-- 	callback = function(args)
-			-- 		require("conform").format({ bufnr = args.buf })
-			-- 	end,
-			-- })
-
-			vim.keymap.set({ "n", "v" }, "\\f", function()
-				require("conform").format({
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 500,
-				})
-			end, { desc = "Format file or range" })
-		end,
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				"\\f",
+				function()
+					require("conform").format({ async = true })
+				end,
+				desc = "Format file",
+			},
+		},
+		---@module "conform"
+		---@type conform.setupOpts
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				c = { "clang_format" },
+				cpp = { "clang_format" },
+				python = { "isort", "black" },
+				javascript = { "prettier" },
+				css = { "prettier" },
+				html = { "prettier" },
+				rust = { "rustfmt" },
+				sh = { "beautysh" },
+			},
+			default_format_opts = {
+				lsp_fallback = true,
+			},
+			-- format_on_save = { timeout_ms = 500 },
+		},
 	},
 }
