@@ -12,6 +12,7 @@ kitty
 rofi - замена dmenu
 разобраться с pipewire
 ranger - либо разобраться с файлами по умолчанию либо перейти на lf
+также xdg desktop portal и xdg mime
 когда-нибудь undervolt видюхи
 xdotool
 mtp - подключить android 
