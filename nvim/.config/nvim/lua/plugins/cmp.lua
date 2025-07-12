@@ -11,9 +11,6 @@ return {
 		end,
 	},
 	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
@@ -23,8 +20,10 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"FelipeLema/cmp-async-path",
 			"onsails/lspkind.nvim",
 			"hrsh7th/cmp-cmdline",
 		},
@@ -37,8 +36,15 @@ return {
 				mapping = {
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.close(),
+					["<C-Space>"] = function()
+						if cmp.visible() then
+							cmp.close()
+						else
+							cmp.complete({})
+						end
+					end,
+					--[[ ["<C-Space>"] = cmp.mapping.complete(), ]]
+					--[[ ["<C-e>"] = cmp.mapping.close(), ]]
 					["<CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
@@ -64,10 +70,10 @@ return {
 				},
 				sources = {
 					{ name = "codeium" },
-					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
 					{ name = "buffer" },
-					{ name = "path" },
+					{ name = "async_path" },
 				},
 				snippet = {
 					expand = function(args)
@@ -81,7 +87,7 @@ return {
 							luasnip = "[Snip]",
 							nvim_lsp = "[LSP]",
 							buffer = "[Buf]",
-							path = "[Path]",
+							async_path = "[Path]",
 						},
 						symbol_map = { Codeium = "" },
 					}),
@@ -109,14 +115,14 @@ return {
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = "path" },
+					{ name = "async_path" },
 				}, {
 					{ name = "cmdline" },
 				}),
 				formatting = {
 					format = lspkind.cmp_format({
 						menu = {
-							path = "[Path]",
+							async_path = "[Path]",
 							cmdline = "[Cmd]",
 						},
 					}),
