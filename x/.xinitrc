@@ -50,4 +50,5 @@ fi
 udiskie &               # автоподключение флешек
 nitrogen --restore      # обои
 dex --autostart &
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec bspwm              # оконный менеджер
