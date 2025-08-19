@@ -36,7 +36,7 @@ dunst rofi flameshot udiskie fbreader simple-mtpfs(можно без simple?: gv
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
-zsh kitty neovim lsd lolcat btop neofetch thunar p7zip stow engrampa(rar archive)
+zsh kitty neovim lsd lolcat btop neofetch nemo p7zip stow engrampa(rar archive)
 
 paru -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick ueberzugpp -- ? python-pynvim  
 
@@ -48,7 +48,7 @@ polkit polkit-gnome
 -- add to autostart /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 -- for root winodw input
 
-// vesktop-bin
+// vesktop-bin qdirstat-bin
 
 android-studio libbcd
 
