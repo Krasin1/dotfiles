@@ -11,8 +11,6 @@ grub dosfstools efibootmgr os-prober mtools networkmanager rustup git
 
 xf86-video-intel vulkan-intel intel-ucode clang gdb 
 
-python-pynvim ueberzug fzf ripgrep
-
 ttf-cascadia-code ttf-font-awesome ttf-material-design-icons-desktop-git papirus-icon-theme
 ttf-maple ttf-inconsolata ttf-joypixels ttf-terminus-nerd ttf-jetbrains-mono-nerd
 
@@ -38,7 +36,9 @@ dunst rofi flameshot udiskie fbreader simple-mtpfs(можно без simple?: gv
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
-zsh kitty neovim lsd lolcat ranger btop neofetch thunar p7zip stow engrampa(rar archive)
+zsh kitty neovim lsd lolcat btop neofetch thunar p7zip stow engrampa(rar archive)
+
+paru -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick ueberzugpp -- ? python-pynvim  
 
 zathura zathura-pdf-poppler chromium
 

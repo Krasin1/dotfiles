@@ -73,7 +73,6 @@ alias cat='lolcat'
 alias la='lsd -A'
 alias l='lsd -lA'
 alias tree='tree -a'
-alias r='ranger'
 alias grep='grep --color=auto'
 alias v='nvim'
 
@@ -96,6 +95,15 @@ alias f='paru -Ss --bottomup'
 alias i='paru -S'
 alias d='paru -Rns'
 alias q='paru -Qs'
+
+# alias for yazi (file manager)
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
 export VISUAL=nvim
 export EDITOR=nvim
