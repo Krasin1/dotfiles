@@ -86,6 +86,3 @@ map("t", "<F4>", "<C-\\><C-n>:FloatermNew<cr>", { desc = "Terminal New", silent 
 
 map("n", "<Leader>tt", ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
 map("n", "<Leader>tp", ":FloatermNew python<cr>", { desc = "Terminal Python", silent = true, noremap = true })
-
--- ranger
-map("n", "<Leader>r", ":RnvimrToggle<cr>", { desc = "Ranger", silent = true, noremap = true })
