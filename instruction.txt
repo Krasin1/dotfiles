@@ -22,11 +22,14 @@ huawei-wmi
 pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerctl
 //for lutris maybe lib32-pipewire (lib32-libpulse in does not work)
 
-mpd mpdris2-git mpc ncmpcpp eww // maybe mpv // python-mutagen???
-    systemctl --user --now enable mpd.service // wouldn't work without it
-    systemctl --user --now enable mpDris2 -- notifications
-    .m3u format -----> ./song.flac
+mpd mpdris2-rs mpc ncmpcpp eww
+    ln -s /media/windows2/!MUSIC ~/Music
+    playlist : .m3u format -----> ./song.flac
+    systemctl --user enable --now mpd.service 
+    systemctl --user enable --now mpdris2-rs -- notifications + playerctl control
     in ncmpcpp press "u" to update playlists
+
+mpv mpv-mpris // для отображения в playerctl
 
 xorg-xinit
 
