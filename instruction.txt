@@ -1,6 +1,11 @@
 // dkms xrdp(xorgxrdp??) ??xrdp-debug
 
--- amd-ucode xf86-video-amdgpu vulkan-radeon brightnessctl // ноут
+-- amd-ucode xf86-video-amdgpu vulkan-radeon // ноут
+
+brillo ddcci-driver-linux-dkms
+    echo 'ddcci 0x37' | sudo tee /sys/bus/i2c/devices/i2c-*/new_device 
+    where * -> desktop display(ddcutil detect)
+    i2c-dev conflicting with ddcci-driver so disable it(sudo modprobe -r i2c-dev)
 
 bluez bluez-utils
     sudo systemctl enable bluetooth.service
@@ -19,10 +24,10 @@ nvidia nvidia-settings nvidia-utils ??? lib32-nvidia-utils
 
 huawei-wmi
 
-pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils qpwgraph playerctl
+pipewire pipewire-alsa pipewire-jack pipewire-pulse alsa-utils wireplumber qpwgraph  pavucontrol
 //for lutris maybe lib32-pipewire (lib32-libpulse in does not work)
 
-mpd mpdris2-rs mpc ncmpcpp eww
+mpd mpdris2-rs mpc ncmpcpp 
     ln -s /media/windows2/!MUSIC ~/Music
     playlist : .m3u format -----> ./song.flac
     systemctl --user enable --now mpd.service 
@@ -30,6 +35,8 @@ mpd mpdris2-rs mpc ncmpcpp eww
     in ncmpcpp press "u" to update playlists
 
 mpv mpv-mpris // для отображения в playerctl
+
+eww-git playerctl sysstat(disk usage)
 
 xorg-xinit
 
