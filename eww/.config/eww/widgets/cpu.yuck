@@ -14,7 +14,7 @@
             :text ""
         )
         (label 
-            :text "${EWW_TEMPS[CPU_SENSOR]}°C"
+            :text "${round(EWW_TEMPS[CPU_SENSOR],0)}°C"
         )
     )
 )
