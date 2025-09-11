@@ -1,0 +1,18 @@
+(defpoll brightness :interval "2s" "brillo -elq -G | jq -R -n 'reduce inputs as $line ({}; . + ($line | split(\"\\t\") | {(.[0]): (.[1] | tonumber | floor)}))'")
+
+(defwidget brightness [name]
+    (eventbox 
+        :cursor "row-resize"
+        :onscroll "if [ {} = \"up\" ]; then brillo -ql ${name == '' ? '' : "-s"} ${name} -A 5; else brillo -ql ${name == '' ? '' : "-s"} ${name} -U 5; fi;"
+        :halign "center"
+        (box :orientation "h" 
+            :space-evenly false
+            :class "my_scale"
+            (label 
+                :class "icons"
+                :text ""
+            )
+            (label :text "${name == "" ? jq(brightness, 'to_entries[0].value') : brightness[name]}%")
+        )
+    )
+)

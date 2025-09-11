@@ -1,0 +1,70 @@
+.music {
+  padding: 0 0.2em 0 0.3em;
+}
+
+.song {
+  font-size : 0.72em;
+}
+
+.artist {
+  font-size : 0.61em;
+}
+
+.album_art_content {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.66em;
+  border-radius: 0.3em;
+}
+
+.album_art {
+	min-height: 1.66em;
+	min-width: 1.66em;
+	margin: 0 0.5em 0 0em;
+}
+
+.music_content {
+  margin : -0.3em 0.4em -0.3em 0;
+  padding-top: 0.2em;
+}
+
+.music_buttons {
+  margin-right: 0.3em;
+}
+
+.play_button label { 
+  font-size: 2.3em;
+  margin: -0.7em 0;
+}
+
+.play_button:hover {
+  opacity: 0.5;
+}
+
+.track_button:hover {
+  opacity: 0.5;
+}
+
+.music_scale {
+  padding: 0.75em 0;
+}
+
+.music_scale label {
+  font-size: 0.8em;
+}
+
+.music_scale scale trough highlight {
+  all: unset;
+  background-color: #8897F4;
+  border-radius: 10px;
+}
+
+.music_scale scale trough {
+  all: unset;
+  background-color: #1c1e27;
+  border-radius: 10px;
+  min-height: 0.4em;
+  min-width: 5.3em;
+  margin-left: 0.5em;
+  /* margin-right: 20px; */
+}

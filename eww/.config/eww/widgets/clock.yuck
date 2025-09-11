@@ -1,0 +1,20 @@
+(defwidget clock []
+    (button :onclick "scripts/calendar.sh show"
+        :halign "start"
+        ;; :hexpand true
+        :space-evenly false
+        (box :orientation "v" 
+            :space-evenly false
+            :spacing 0
+            :valign "center" 
+            :class "clock"
+            (label  :class "clock-time" 
+                    :text "${formattime(EWW_TIME, "%H:%M")}"
+            )
+            (label  :class "clock-date" 
+                    :text "${formattime(EWW_TIME, "%b %d, %a")}"
+            )
+        )
+    )
+)
+

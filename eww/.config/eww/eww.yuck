@@ -1,2 +1,58 @@
-(include "calendar/calendar.yuck")
-(include "player/player.yuck")
+(include "widgets.yuck")
+
+(defwidget main_bar [MON_WIDTH BRIGHTNESS_NAME]
+    (centerbox :orientation "h" 
+        (box
+            :class "bar-section" 
+            :halign "fill"
+            :space-evenly false 
+            :width {ceil(MON_WIDTH * 0.24)}
+            (workspaces)
+            (music)
+        )
+            
+        (box 
+            :class "bar-section" 
+            :halign "center"
+            ;; :space-evenly false
+            :spacing 10
+            :width {ceil(MON_WIDTH * 0.51)}
+            (volume)
+            (brightness :name BRIGHTNESS_NAME)
+            (cpu_load)
+            (cpu_temp)
+            (disk_space)
+            (disk_usage)
+            (gpu_temp)
+            (gpu_fan)
+            (ram)
+            (batt)
+        )
+        
+        (box 
+            :class "bar-section" 
+            :halign "center"
+            :space-evenly false 
+            :width {ceil(MON_WIDTH * 0.24)}
+            :spacing 10
+            (power)
+            (clock)
+            (lang)
+            (systemtray)
+        )
+    )
+)
+
+(defwindow bar [MON_W BRIGHTNESS_NAME]
+    :windowtype "dock"
+    :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "99%"
+                      :height "0%"
+                      :anchor "top center")
+    :stacking "bt"
+    :exclusive true
+    :focusable false
+    (main_bar :MON_WIDTH MON_W :BRIGHTNESS_NAME BRIGHTNESS_NAME)
+)
+

@@ -1,0 +1,202 @@
+(defvar music_reveal false)
+(defvar song_time_reveal false)
+
+;; also in music.scss change min-width
+(defvar artist_length 20)
+(defvar song_length 17)
+(defvar auto_close_time 5)
+
+;; Music vars
+(deflisten STATUS "playerctl -p mpd status --follow")
+(deflisten SONG   "playerctl -p mpd --follow metadata xesam:title ")
+(deflisten ARTIST "playerctl -p mpd --follow metadata xesam:artist")
+(deflisten COVER "playerctl -p mpd --follow metadata mpris:artUrl ")
+
+(deflisten LOOP `playerctl -F -p mpd loop`)
+(deflisten SHUFFLE `playerctl -F -p mpd shuffle`)
+
+(defpoll CURRENT_SECS 
+    :interval "1s" 
+    :run-while music_reveal
+    "playerctl -p mpd position | awk '{print int($1)}'")
+(defpoll TOTAL_SECS 
+    :interval "1s" 
+    :run-while music_reveal
+    "playerctl -p mpd metadata mpris:length | awk '{print int($1/1000000)}'")
+
+(defwidget music []
+    (box 
+        :orientation "h" 
+        :space-evenly false 
+        :halign "end" 
+        :hexpand true
+
+        ;; Обложка
+        (box :class "album_art" 
+            :vexpand false 
+            :hexpand false 
+            :valign "center"
+            (eventbox 
+                :onclick "eww update music_reveal=\"${!music_reveal}\"; eww update song_time_reveal=\"false\"" 
+                :onrightclick "eww update song_time_reveal=\"false\";kitty ncmpcpp&"
+                :cursor "pointer"
+                (box :class "album_art_content" 
+                    :style "background-image: url('${COVER == "" ? "images/music.png" : COVER}');"
+                    :vexpand "false" 
+                    :hexpand "false" 
+                    )
+            )
+        )
+
+        (box :class "music_content" 
+            :orientation "v" 
+            :space-evenly false 
+            :hexpand true 
+            :valign "center"
+            (revealer :reveal "${!music_reveal}" 
+                :transition "slidedown" 
+                :duration "50ms"
+                (box :orientation "v" 
+                    :space-evenly false 
+                    :valign "center" 
+                    :spacing 0
+
+                    ;; Без названия - Неизвестен (Название и автор)
+                    (eventbox 
+                        ;; NOTE : Автозакрытие
+                        :onhover "eww update song_time_reveal=true ; \
+                            pgrep -f 'eww update song_time_reveal=false' | grep -v $$ | xargs kill ; \
+                            (sleep ${auto_close_time} ; eww update song_time_reveal=false) &"
+                        (revealer 
+                            :reveal "${!song_time_reveal}" 
+                            :transition "slideup" 
+                            :duration "50ms"
+                            (box :orientation "v" 
+                                :valign "center" 
+                                :halign "start" 
+                                :spacing 0
+                                :space-evenly false
+                                (label  
+                                    :class "song" 
+                                    :halign "start" 
+                                    :wrap false 
+                                    :text SONG
+                                    :limit-width song_length
+                                )
+                                (label 
+                                    :class "artist" 
+                                    :halign "start" 
+                                    :wrap false 
+                                    :text ARTIST
+                                    :limit-width artist_length
+                                )
+                            )
+                        )
+                    )
+
+                    ;; Строка со временем песни
+                    (eventbox 
+                        :onhoverlost "eww update song_time_reveal=false"
+                        (revealer 
+                            :reveal "${song_time_reveal}" 
+                            :transition "slidedown" 
+                            :duration "50ms"
+                            (box :orientation "h" 
+                                :space-evenly false
+                                :class "music_scale"
+                                (label
+                                    :text "${floor(CURRENT_SECS/60)}:${CURRENT_SECS%60}"
+                                )
+                                (eventbox :cursor "pointer"
+                                    (scale  :min 0 
+                                            :max TOTAL_SECS 
+                                            :value CURRENT_SECS
+                                            :onchange "playerctl -p mpd position {}")
+                                    )
+                            )
+                        )
+                    )
+                )
+            )
+
+            ;; Кнопки режимов воспроизведения
+            (revealer 
+                :reveal music_reveal 
+                :transition "slideup" 
+                :duration "50ms"
+                :hexpand true 
+                (box :class "music_mode_buttons" 
+                    :orientation "h" 
+                    :valign "center"
+                    
+                    ;; Loop: None / Track / Playlist
+                    (button 
+                        :class "mode_button"
+                        :onclick "playerctl -p mpd loop ${LOOP == 'None' ? 'track' : LOOP == 'Track' ? 'playlist' : 'none'}"
+                        (label 
+                            :style "font-size: 2em;" 
+                            :text "${LOOP == 'None' ? '󰑗' : LOOP == 'Track' ? '󰑘' : '󰑖'}"
+                        )
+                    )
+
+                    ;; Shuffle: On / Off
+                    (button 
+                        :class "mode_button"
+                        :onclick "playerctl -p mpd shuffle toggle"
+                        (label 
+                            :style "font-size: 2em;" 
+                            :text "${SHUFFLE == 'On' ? '' : '󰒞'}"
+                        )
+                    )
+                )
+            )
+        )        
+
+        ;; Кнопки управления воспроизведением
+        (box 
+            :class "music_buttons" 
+            :orientation "h" 
+            :spacing 10 
+            :valign "center" 
+            :halign "end" 
+            :space-evenly false 
+            :hexpand false
+            (eventbox :cursor "pointer" 
+                (button 
+                    :class "track_button" 
+                    :timeout "900ms"
+                    :onclick "playerctl -p mpd previous; eww update song_time_reveal=\"false\""
+                    (label 
+                        :style "font-size:1.5em;" 
+                        :text "󰼨"
+                    )
+                )
+            )
+
+            (eventbox :cursor "pointer" 
+                (button 
+                    :class "play_button" 
+                    :timeout "900ms"
+                    :onclick "playerctl -p mpd play-pause; eww update song_time_reveal=\"false\""
+                    :valign "fill"
+                    (label 
+                        :valign "center"
+                        :text "${STATUS == "Playing" ? '󰏦' : '󰐍'}"
+                    )
+                )
+            )
+
+            (eventbox :cursor "pointer" 
+                (button 
+                    :class "track_button" 
+                    :timeout "900ms"
+                    :onclick "playerctl -p mpd next; eww update song_time_reveal=\"false\""
+                    (label 
+                        :style "font-size:1.5em;" 
+                        :text "󰼧"
+                    )
+                )
+            )
+        )
+    )
+)

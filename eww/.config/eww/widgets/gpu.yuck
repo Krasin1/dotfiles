@@ -1,0 +1,36 @@
+(defpoll gpu_temp :interval "3s" "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits")
+(defpoll gpu_fan :interval "3s" "nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits")
+
+(defwidget gpu_temp []
+    (eventbox
+        :cursor "pointer"
+        :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland nvidia-settings"
+        :halign "center"
+        (box 
+            :space-evenly false
+            ;; gpu icon
+            (label 
+                :class "icons"
+                :text "󰢮"
+            )
+            (label 
+                :text "${gpu_temp}°C"
+            )
+        )
+    )
+)
+
+(defwidget gpu_fan []
+    (box 
+        :space-evenly false
+        :halign "center"
+        ;; gpu icon
+        (label 
+            :class "icons"
+            :text "󰈐"
+        )
+        (label 
+            :text "${gpu_fan}%"
+        )
+    )
+)

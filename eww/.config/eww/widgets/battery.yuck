@@ -1,0 +1,28 @@
+(defwidget batt []
+    (box :class "battery-container"
+        (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
+            (box :class "battery" :space-evenly false
+                (label 
+                    :text "Bat: ${EWW_BATTERY[battery].capacity}%"
+                )
+            ;; (progress :value {jq(EWW_BATTERY, ".[\"${battery}\"].capacity")})
+            )
+        )
+        (label :text "test")
+    )
+    ;; (box :orientation "h" :space-evenly false
+    ;;     (label :text "  CPU:")
+        ;; (label :text {jq(EWW_CPU, "[.cores[].freq] | add / length")})
+        ;; (for b in {jq {EWW_BATTERY}}
+        ;;     (label :text "{EWW_BATTERY[b].capacity%}")
+        ;; )
+    ;; )
+    ;; (box :orientation "h" 
+    ;;     :space-evenly false
+    ;;     :class "my_progress"
+    ;;     label(:text "test")
+    ;;     ;; label(:text jq("${EWW_BATTERY}" :jq_filter_string ".[] .capacity")))
+    ;;     ;; (progress :orientation "h" :value "${EWW_BATTERY.capacity}" :max 100)
+    ;; )
+)
+

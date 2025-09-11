@@ -1,0 +1,51 @@
+(defpoll disk_usage :interval "2s" "iostat -dx 1 2 | awk -v dev=$(df / | tail -1 | awk '{gsub(\"/dev/\",\"\",$1); sub(/p?[0-9]+$/,\"\",$1); print $1}') '$1==dev {util=$NF} END{print int(util)}'")
+
+(defwidget disk_space []
+    (eventbox 
+        :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland qdirstat &"
+        :cursor "pointer"
+        :tooltip "qdirstat"
+        :halign "center"
+        (box 
+            :space-evenly false
+            (label
+                :class "icons"
+                :text "󰉉"
+                ;; :text ""
+            )
+            (label 
+                :text "${round(EWW_DISK["/"]["used_perc"], 0)}%"
+            )
+        )
+    )
+)
+
+(defwidget disk_usage []
+    (box
+        :space-evenly false
+        :halign "center"
+        (label
+            :class "icons"
+            :text ""
+        )
+        (label 
+            :text "${disk_usage}%"
+        )
+    )
+)
+
+(defwidget ram []
+    (box
+        :space-evenly false
+        :halign "center"
+        (label 
+            :class "icons"
+            :style "font-size: 1.2em; margin-right: 0.3em;"
+            :text "")
+            ;; :text "")
+        (label
+          :text "${formatbytes(ceil(EWW_RAM["used_mem"]), true, "iec")}"
+        )
+    )
+)
+

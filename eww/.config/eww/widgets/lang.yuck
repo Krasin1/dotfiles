@@ -1,0 +1,28 @@
+(deflisten current_layout "scripts/get-lang.py")
+
+(defwidget lang []
+    (eventbox 
+        :onclick "hyprctl switchxkblayout main next"
+        :cursor "pointer"
+        :halign "start"
+        :valign "center"
+        (box :orientation "h"
+            :style "margin: -0.2em 0;"
+            (label 
+                :style "font-size: 1.5em;"
+                :text '|'
+            )
+            (box :orientation "v"
+                (label
+                    :style "font-size: 0.9em; color: ${current_layout == 'EN' ? 'white' : '#585b70'};"
+                    :text "EN"
+                )
+                (label 
+                    :style "font-size: 0.9em; color: ${current_layout == 'RU' ? 'white' : '#585b70;'};margin-top: -0.1em;"
+                    :text "RU"
+                )
+            )
+        )
+    )
+)
+

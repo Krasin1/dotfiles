@@ -1,0 +1,12 @@
+(defwidget workspaces []
+    (box 
+        :orientation "h"
+        ;; :halign "fill"
+        :hexpand true
+        (label :text "1")
+        (label :text "2")
+        (label :text "3")
+        (label :text "4")
+        (label :text "5")
+    )
+)

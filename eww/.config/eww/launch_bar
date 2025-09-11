@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# функция для поиска ddcci устройства по id монитора Hyprland
+find_ddcci_by_hypr_id() {
+    local mon_id="$1"
+
+    local model=$(hyprctl monitors -j | jq -r ".[] | select(.id == ${mon_id}) | .model")
+
+    for dev in /sys/bus/ddcci/devices/ddcci*; do
+        if [[ -f "$dev/idModel" ]]; then
+            local id_model
+            id_model=$(<"$dev/idModel")
+            if [[ "$model" == *"$id_model"* ]]; then
+                echo "$(basename $dev)"
+                return 0
+            fi
+        fi
+    done
+}
+
+killall -s SIGKILL eww
+
+for mon in $(hyprctl monitors -j | jq -r '.[] | .id'); do
+    width=$(hyprctl -j monitors | jq -r ".[] | select(.id == ${mon}).width")
+    eww open bar --id "$mon" --screen "$mon" --arg MON_W="$width" --arg BRIGHTNESS_NAME="$(find_ddcci_by_hypr_id $mon)"
+done

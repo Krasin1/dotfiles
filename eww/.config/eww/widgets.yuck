@@ -1,0 +1,13 @@
+(include "widgets/music.yuck")
+(include "widgets/brightness.yuck")
+(include "widgets/volume.yuck")
+(include "widgets/battery.yuck")
+(include "widgets/clock.yuck")
+(include "widgets/lang.yuck")
+(include "widgets/tray.yuck")
+(include "widgets/cpu.yuck")
+(include "widgets/gpu.yuck")
+(include "widgets/memory.yuck")
+(include "widgets/power.yuck")
+(include "widgets/hyprland_workspaces.yuck")
+

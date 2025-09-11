@@ -1,0 +1,34 @@
+(defpoll CPU_SENSOR :interval "24h"
+  "eww get EWW_TEMPS | jq -r '
+    to_entries
+    | map(select(.key | test(\"CORETEMP_PACKAGE|K10TEMP|TCTL|CPU\"; \"i\")))
+    | .[0].key'")
+
+;; еще будет температура и нагрузка на gpu
+(defwidget cpu_temp []
+    (box
+        :space-evenly false
+        :halign "center"
+        (label
+            :class "icons"
+            :text ""
+        )
+        (label 
+            :text "${EWW_TEMPS[CPU_SENSOR]}°C"
+        )
+    )
+)
+
+(defwidget cpu_load []
+    (box 
+        :space-evenly false
+        :halign "center"
+        (label 
+            :class "icons"
+            :text ""
+        )
+        (label 
+            :text "${round(EWW_CPU["avg"], 0)}%"
+        )
+    )
+)

@@ -1,15 +1,65 @@
+@import "widgets";
+
 * {
+  all: unset; 
+  color: #FDFDFD;
+  /* color: #000000; */
+  /* font-family: GoMono Nerd Font; */
+  font-family: Cascadia Code PL;
+  font-size: 17px;
+  /* border: 1px solid red; */
+}
+
+.battery {
+  color: #89b4fa; 
+  /* color: #000000; */
+  padding-right: 10px;
+}
+
+.bar-section {
+  /* background-color: #1e1e2e;  */
+  background-color: rgba(47, 53, 75, 0.75); 
+  /* green */
+  /* background-color: green; */
+  /* border-radius: 7px; */
+  border-radius: 2em;
+  /* border: 1px solid #2f354b; */
+  margin: 0.4em;
+  min-height: 2em;
+}
+
+.accent-blue   { color: #8897F4; }
+.accent-purple { color: #C574DD; }
+.accent-pink   { color: #EC407A; }
+.accent-green  { color: #5ADECD; }
+
+.my_scale scale trough highlight {
   all: unset;
+  background-color: #8897F4;
+  border-radius: 50px;
 }
 
-tooltip {
-  background-color: #14171c;
-  color: #b8bfe5;
-  font-family: Inconsolata SemiCondensed Medium;
-  font-weight: Bold;
-  font-size: 1rem;
+.my_scale scale trough {
+  all: unset;
+  background-color: #1c1e27;
+  border-radius: 50px;
+  min-height: 8px;
+  min-width: 100px;
+  margin-left: 10px;
+  margin-right: 20px;
 }
 
-@import "colors.scss";
-@import "calendar/calendar.scss";
-@import "player/player.scss";
+tooltip *{
+  background-color: rgba(47, 53, 75, 0.95);
+  font-size: 0.8em;
+  border-radius: 7px;
+  padding: 0;
+  margin: 0;
+}
+
+.icons {
+  font-size: 2em;
+  margin: -0.5em 0;
+  margin-right: 0.2em;
+  color: #C574DD;
+}

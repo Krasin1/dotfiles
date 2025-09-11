@@ -1,0 +1,13 @@
+(defwidget power []
+    (eventbox
+        :halign "start"
+        ;; :hexpand true
+        :onclick ""
+        :cursor "pointer"
+        (label 
+            :style "margin-left: 0.4em; padding-bottom: 0.03em;"
+            :class "icons"
+            :text "󰐥"
+        )
+    )
+)
