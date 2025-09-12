@@ -1,7 +1,10 @@
+(defpoll battery_status :interval "24h" "eww get EWW_BATTERY")
+
 (defvar low_batt 20)
 
 (defwidget batt []
     (box 
+        :visible {battery_status != "" ? true : false}
         :halign "center"
         (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
             (box :space-evenly false
