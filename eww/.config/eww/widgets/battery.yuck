@@ -2,6 +2,7 @@
 
 (defwidget batt []
     (box 
+        :halign "center"
         (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
             (box :space-evenly false
                 :tooltip {EWW_BATTERY[battery].status}
