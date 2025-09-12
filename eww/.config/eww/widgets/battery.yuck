@@ -1,28 +1,32 @@
+(defvar low_batt 20)
+
 (defwidget batt []
-    (box :class "battery-container"
+    (box 
         (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
-            (box :class "battery" :space-evenly false
+            (box :space-evenly false
+                :tooltip {EWW_BATTERY[battery].status}
+                ;; :text "󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰂄󰁹"
+                ;; :text "󰢜󰂆󰂇󰂈󰢝󰂉󰢞󰂊󰂋󰂅"
                 (label 
-                    :text "Bat: ${EWW_BATTERY[battery].capacity}%"
+                    :class "icons ${EWW_BATTERY[battery].capacity <= low_batt && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''}"
+                    :text {EWW_BATTERY[battery].status == "Charging" ? "󰂄" : 
+                        EWW_BATTERY[battery].capacity <= 10 ? "󰁺" : 
+                        EWW_BATTERY[battery].capacity <= 20 ? "󰁻" :
+                        EWW_BATTERY[battery].capacity <= 30 ? "󰁼" :
+                        EWW_BATTERY[battery].capacity <= 40 ? "󰁽" :
+                        EWW_BATTERY[battery].capacity <= 50 ? "󰁾" :
+                        EWW_BATTERY[battery].capacity <= 60 ? "󰁿" :
+                        EWW_BATTERY[battery].capacity <= 70 ? "󰂀" :
+                        EWW_BATTERY[battery].capacity <= 80 ? "󰂁" :
+                        EWW_BATTERY[battery].capacity <= 90 ? "󰂂" : "󰁹"
+                    }
                 )
-            ;; (progress :value {jq(EWW_BATTERY, ".[\"${battery}\"].capacity")})
+                (label 
+                    :class "${EWW_BATTERY[battery].capacity <= low_batt && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''}"
+                    :text "${EWW_BATTERY[battery].capacity}%"
+                )
             )
         )
-        (label :text "test")
     )
-    ;; (box :orientation "h" :space-evenly false
-    ;;     (label :text "  CPU:")
-        ;; (label :text {jq(EWW_CPU, "[.cores[].freq] | add / length")})
-        ;; (for b in {jq {EWW_BATTERY}}
-        ;;     (label :text "{EWW_BATTERY[b].capacity%}")
-        ;; )
-    ;; )
-    ;; (box :orientation "h" 
-    ;;     :space-evenly false
-    ;;     :class "my_progress"
-    ;;     label(:text "test")
-    ;;     ;; label(:text jq("${EWW_BATTERY}" :jq_filter_string ".[] .capacity")))
-    ;;     ;; (progress :orientation "h" :value "${EWW_BATTERY.capacity}" :max 100)
-    ;; )
 )
 
