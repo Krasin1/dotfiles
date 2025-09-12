@@ -2,13 +2,11 @@
 (deflisten volume
   "wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume: //g' | tr -d '.'; pactl subscribe | grep --line-buffered 'sink' | while read -r line; do wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume: //g' | tr -d '.'; done;")
 
-(defvar foo "[(update foo 'a'), (update foo 'b')]")
-
 (defwidget volume []
     (eventbox
         :cursor "pointer"
         :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
-        :onscroll "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%$([ '{}' = 'up' ] && echo + || echo -)"
+        :onscroll "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%$([ '{}' = 'up' ] && echo + || echo -) -l 1"
         :onrightclick "pavucontrol&"
         :tooltip "pavucontrol"
         :halign "center"
