@@ -1,5 +1,5 @@
 (defpoll CPU_SENSOR :interval "24h"
-  "eww get EWW_TEMPS | jq -r '
+  "sleep 1; eww get EWW_TEMPS | jq -r '
     to_entries
     | map(select(.key | test(\"CORETEMP_PACKAGE|K10TEMP|TCTL|CPU\"; \"i\")))
     | .[0].key'")
