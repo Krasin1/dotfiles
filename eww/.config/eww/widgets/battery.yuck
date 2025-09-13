@@ -1,4 +1,4 @@
-(defpoll battery_status :interval "24h" "eww get EWW_BATTERY")
+(defpoll battery_status :interval "24h" "sleep 1; eww get EWW_BATTERY")
 
 (defvar low_batt 20)
 
