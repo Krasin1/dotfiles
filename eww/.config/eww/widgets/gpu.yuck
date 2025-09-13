@@ -1,4 +1,4 @@
-(defvar nvidia_status false)
+(defvar nvidia_status true)
 
 (defpoll gpu_temp 
     :interval "3s" 
