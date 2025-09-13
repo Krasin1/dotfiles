@@ -15,6 +15,8 @@
 (deflisten LOOP `playerctl -F -p mpd loop`)
 (deflisten SHUFFLE `playerctl -F -p mpd shuffle`)
 
+(deflisten VOLUME `mpc volume | grep -o '[0-9]*' && mpc idleloop mixer | while read -r event; do [[ "$event" == "mixer" ]] && mpc volume | grep -o '[0-9]*'; done`)
+
 (defpoll CURRENT_SECS 
     :interval "1s" 
     :run-while music_reveal
@@ -125,10 +127,44 @@
                 :transition "slideup" 
                 :duration "50ms"
                 :hexpand true 
-                (box :class "music_mode_buttons" 
+                (box :class "music_mode_buttons volume_scale" 
                     :orientation "h" 
                     :valign "center"
+                    :space-evenly false
                     
+                    ;; громкость отдельно для mpd (через playerctl не работает)
+                    (eventbox :cursor "row-resize"
+                        :onscroll "if [ {} = \"up\" ]; then mpc volume +5; else mpc volume -5; fi;"
+                        (box 
+                            :orientation "v"
+                            :valign "center"
+                            :space-evenly false
+                            (scale
+                                :active false
+                                :style "margin-top: 0.14em;"
+                                :max 101 
+                                :value VOLUME
+                            )
+
+                            (box :orientation "h"
+                                :space-evenly false
+                                :halign "center"
+                                (label 
+                                    :halign "center"
+                                    :style "font-size: 0.5em;"
+                                    :text "mpd"
+                                )
+                                (label
+                                    :style "font-size: 0.5em; padding-left: 0.4em;"
+                                    :text VOLUME
+                                )
+                                (label 
+                                    :style "font-size: 0.7em; margin-left: 0.3em;"
+                                    :text "󰕾"
+                                )
+                            )
+                        )
+                    )
                     ;; Loop: None / Track / Playlist
                     (button 
                         :class "mode_button"

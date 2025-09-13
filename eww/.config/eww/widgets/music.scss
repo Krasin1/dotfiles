@@ -26,6 +26,7 @@
 .music_content {
   margin : -0.3em 0.4em -0.3em 0;
   padding-top: 0.2em;
+  min-width: 7.5em;
 }
 
 .music_buttons {
@@ -53,6 +54,10 @@
   font-size: 0.8em;
 }
 
+.mode_button {
+  margin: 0 0.4em;
+}
+
 .music_scale scale trough highlight {
   all: unset;
   background-color: #8897F4;
@@ -64,7 +69,21 @@
   background-color: #1c1e27;
   border-radius: 10px;
   min-height: 0.4em;
-  min-width: 5.3em;
+  min-width: 4.5em;
   margin-left: 0.5em;
   /* margin-right: 20px; */
+}
+
+.volume_scale scale trough {
+  all: unset;
+  background-color: #1c1e27;
+  border-radius: 10px;
+  min-height: 0.5em;
+  min-width: 3.3em;
+}
+
+.volume_scale scale trough highlight {
+  all: unset;
+  background-color: #8897F4;
+  border-radius: 10px;
 }
