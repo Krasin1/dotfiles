@@ -16,7 +16,8 @@
             :valign "fill"
             (label 
                 :class "icons"
-                :style "${matches(volume, "\\[MUTED\\]") ? "color: red;" : ""}"
+                ;; some color
+                :style "${matches(volume, "\\[MUTED\\]") ? "color: red;" : "color: #7ADAA5"}"
                 :text "${matches(volume, "\\[MUTED\\]") ? "󰖁" : "󰕾"}" 
             )
             (label

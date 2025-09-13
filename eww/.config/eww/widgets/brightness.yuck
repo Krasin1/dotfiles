@@ -10,6 +10,7 @@
             :class "my_scale"
             (label 
                 :class "icons"
+                :style "color: #FFB86C"
                 :text ""
             )
             (label :text "${name == "" ? jq(brightness, 'to_entries[0].value') : brightness[name]}%")

@@ -5,7 +5,7 @@
         :onclick ""
         :cursor "pointer"
         (label 
-            :style "margin-left: 0.4em; padding-bottom: 0.03em;"
+            :style "margin-left: 0.4em; padding-bottom: 0.03em; color: #E74C3C"
             :class "icons"
             :text "󰐥"
         )

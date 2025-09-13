@@ -18,9 +18,9 @@
         :halign "center"
         (box 
             :space-evenly false
-            ;; gpu icon
             (label 
                 :class "icons"
+                :style "color: #76B900"
                 :text "󰢮"
             )
             (label 
@@ -35,9 +35,9 @@
         :visible nvidia_status
         :space-evenly false
         :halign "center"
-        ;; gpu icon
         (label 
             :class "icons"
+            :style "color: #468A9A"
             :text "󰈐"
         )
         (label 

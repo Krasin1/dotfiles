@@ -11,6 +11,7 @@
         :halign "center"
         (label
             :class "icons"
+            :style "color: #3B82F6"
             :text ""
         )
         (label 
@@ -25,6 +26,7 @@
         :halign "center"
         (label 
             :class "icons"
+            :style "color: #F87171"
             :text ""
         )
         (label 
