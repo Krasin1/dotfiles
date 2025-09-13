@@ -1,7 +1,14 @@
-(defpoll nvidia_status :interval "24h" "sleep 1; command -v nvidia-smi >/dev/null 2>&1 && echo \"true\" || echo \"false\"")
+(defvar nvidia_status false)
 
-(defpoll gpu_temp :interval "3s" "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits")
-(defpoll gpu_fan :interval "3s" "nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits")
+(defpoll gpu_temp 
+    :interval "3s" 
+    :run-while nvidia_status
+    "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits")
+
+(defpoll gpu_fan 
+    :interval "3s" 
+    :run-while nvidia_status
+    "nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits")
 
 (defwidget gpu_temp []
     (eventbox
