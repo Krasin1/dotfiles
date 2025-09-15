@@ -1,20 +1,8 @@
-;; (defwidget systemtray []
-;;     (box :orientation "h" 
-;;         :halign "center"
-;;         (systray :class "tray" 
-;;             :orientation "h" 
-;;             :icon-size 24 
-;;             :spacing 5
-;;         )
-;;     )
-;; )
-
 (defwidget systemtray []
     (systray :class "tray" 
-        :halign "end"
+        :halign "fill"
         :valign "center"
         :hexpand true
-        :active true
         :orientation "h" 
         :icon-size 24 
         ;; :spacing 5

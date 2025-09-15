@@ -1,7 +1,7 @@
 // System Tray
 .tray {
   /* margin:0 1em; */
-  padding: 0 1em;
+  padding: 0 0.5em;
   color: #FDFDFD;
   background-color: rgba(97, 97, 97, 0.75);
   border-radius: 2em;
@@ -12,7 +12,7 @@
 .tray * {
 }
 .tray image {
-  margin: 0 0.4em;
+  /* margin: 0 0.4em; */
   /* -gtk-dpi: 48; */
   /* icon-size: 4em; */
   /* -gtk-icon-transform: scale(1.2); */
