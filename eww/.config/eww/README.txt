@@ -14,6 +14,7 @@ bar использует следующие утилиты:
         playerctl
         mpc
         mpd
+        для обложек нужен mpris
 
     - volume.yuck:
         wpctl
