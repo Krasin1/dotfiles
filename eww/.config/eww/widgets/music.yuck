@@ -19,19 +19,20 @@
 
 (defpoll CURRENT_SECS 
     :interval "1s" 
-    :run-while music_reveal
+    :run-while song_time_reveal
     "playerctl -p mpd position | awk '{print int($1)}'")
 (defpoll TOTAL_SECS 
     :interval "1s" 
-    :run-while music_reveal
+    :run-while song_time_reveal
     "playerctl -p mpd metadata mpris:length | awk '{print int($1/1000000)}'")
 
 (defwidget music []
     (box 
+        :class "music"
         :orientation "h" 
         :space-evenly false 
-        :halign "end" 
-        :hexpand true
+        ;; :halign "end" 
+        ;; :hexpand true
 
         ;; Обложка
         (box :class "album_art" 
@@ -39,8 +40,8 @@
             :hexpand false 
             :valign "center"
             (eventbox 
-                :onclick "eww update music_reveal=\"${!music_reveal}\"; eww update song_time_reveal=\"false\"" 
-                :onrightclick "eww update song_time_reveal=\"false\";kitty ncmpcpp&"
+                :onclick "eww update music_reveal=\"${!music_reveal}\"; eww update song_time_reveal=false" 
+                :onrightclick "eww update song_time_reveal=false;kitty ncmpcpp&"
                 :cursor "pointer"
                 (box :class "album_art_content" 
                     :style "background-image: url('${COVER == "" ? "images/music.png" : COVER}');"
@@ -107,6 +108,7 @@
                                 :space-evenly false
                                 :class "music_scale"
                                 (label
+                                    :style "min-width: 2.5em;"
                                     :text "${floor(CURRENT_SECS/60)}:${CURRENT_SECS%60}"
                                 )
                                 (eventbox :cursor "pointer"
