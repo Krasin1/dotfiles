@@ -8,7 +8,8 @@
     (box
         :space-evenly false
         :halign "center"
-        :tooltip "CPU Temp: ${CPU_SENSOR}"
+        :tooltip "CPU Temp:
+${CPU_SENSOR}"
         (label
             :class "icons"
             :style "color: #3B82F6"

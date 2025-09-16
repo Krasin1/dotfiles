@@ -16,7 +16,8 @@
         :cursor "pointer"
         :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland nvidia-settings"
         :halign "center"
-        :tooltip "GPU Temperature / nvidia-settings" 
+        :tooltip "GPU Temperature
+nvidia-settings" 
         (box 
             :style "min-width:4em"
             :space-evenly false

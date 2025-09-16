@@ -4,7 +4,8 @@
     (eventbox 
         :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland qdirstat &"
         :cursor "pointer"
-        :tooltip "disk used / qdirstat"
+        :tooltip "Disk used
+qdirstat"
         :halign "center"
         (box 
             :space-evenly false
@@ -27,7 +28,7 @@
         :halign "center"
         :hexpand true
         :style "min-width:4em"
-        :tooltip "disk usage"
+        :tooltip "Disk usage"
         (label
             :hexpand true
             :halign "end"
@@ -48,7 +49,7 @@
         :space-evenly false
         :halign "center"
         :style "min-width:4em"
-        :tooltip "used RAM"
+        :tooltip "Used RAM"
         (label 
             :class "icons"
             :style "font-size: 1.2em; margin-right: 0.3em; color: #ffcc00"
