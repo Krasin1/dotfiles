@@ -6,21 +6,22 @@
     (box 
         :visible {battery_status != "" ? true : false}
         :halign "center"
-        :hexpand true
-        ;; :style "min-width: 5em"
+        :style "min-width: 3.5em"
         (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
             (box :space-evenly false
                 :tooltip {EWW_BATTERY[battery].status}
                 ;; :text "󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰂄󰁹"
                 ;; :text "󰢜󰂆󰂇󰂈󰢝󰂉󰢞󰂊󰂋󰂅"
                 (label 
+                    :halign "end"
+                    :hexpand true
                     :class "icons \
                         ${EWW_BATTERY[battery].capacity <= low_batt 
                         && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''} "
 
                     :style "${EWW_BATTERY[battery].capacity > 60 ? "color: #1ABC9C" : 
                         EWW_BATTERY[battery].capacity > 40 ? "color: #F1C40F" :
-                        EWW_BATTERY[battery].capacity > 20 ? "color: #E67E22" : ''}"
+                        EWW_BATTERY[battery].capacity > 20 ? "color: #E67E22" : ''}; margin-right: 0;"
 
                     :text {EWW_BATTERY[battery].status == "Charging" ? "󰂄" : 
                         EWW_BATTERY[battery].capacity <= 10 ? "󰁺" : 
@@ -35,6 +36,8 @@
                     }
                 )
                 (label 
+                    :halign "end"
+                    :hexpand true
                     :class "${EWW_BATTERY[battery].capacity <= low_batt && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''}"
                     :text "${EWW_BATTERY[battery].capacity}%"
                 )

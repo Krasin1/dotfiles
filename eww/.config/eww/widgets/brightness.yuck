@@ -5,7 +5,7 @@
         :cursor "row-resize"
         :onscroll "if [ {} = \"up\" ]; then brillo -ql ${name == '' ? '' : "-s"} ${name} -A 5; else brillo -ql ${name == '' ? '' : "-s"} ${name} -U 5; fi;"
         :halign "center"
-        :tooltip "Brightness: ${name}"
+        :tooltip "Brightness ${name}"
         (box :orientation "h" 
             :space-evenly false
             :style "min-width:4.1em"

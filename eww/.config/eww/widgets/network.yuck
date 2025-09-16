@@ -7,8 +7,8 @@
     (box 
         :orientation "v"
         :halign "center"
-        :hexpand true
         :tooltip "${interface}"
+        :style "min-width: 5em"
         (box 
             :space-evenly false
             (label
