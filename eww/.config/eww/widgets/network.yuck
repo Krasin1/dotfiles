@@ -1,13 +1,15 @@
+;; you ugly mother fucker
 (defpoll interface 
-    :interval "2s"
-    "nmcli -t -f DEVICE,STATE d | grep ':connected$' | cut -d: -f1 | head -n1"
+    :interval "4s"
+    `ip route get 8.8.8.8 | awk 'NR==1 {print \"[\\"\" $5 \"\\",\\"\" $7 \"\\"]\"}'` 
 )
 
 (defwidget network []
     (box 
         :orientation "v"
         :halign "center"
-        :tooltip "${interface}"
+        :tooltip "${interface[0]}
+${interface[1]}"
         :style "min-width: 5em"
         (box 
             :space-evenly false
@@ -18,7 +20,7 @@
             (label 
                 :halign "start"
                 :style "font-size: 0.82em;"
-                :text " ${formatbytes(ceil(EWW_NET[interface].NET_DOWN), false, "si")}"
+                :text " ${formatbytes(ceil(EWW_NET[interface[0]].NET_DOWN), false, "si")}"
             )
         )
 
@@ -31,7 +33,7 @@
             (label 
                 :halign "start"
                 :style "font-size: 0.82em;"
-                :text " ${formatbytes(ceil(EWW_NET[interface].NET_UP), false, "si")}"
+                :text " ${formatbytes(ceil(EWW_NET[interface[0]].NET_UP), false, "si")}"
             )
         )
     )
