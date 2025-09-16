@@ -1,0 +1,38 @@
+(defpoll interface 
+    :interval "2s"
+    "nmcli -t -f DEVICE,STATE d | grep ':connected$' | cut -d: -f1 | head -n1"
+)
+
+(defwidget network []
+    (box 
+        :orientation "v"
+        :halign "center"
+        :hexpand true
+        :tooltip "${interface}"
+        (box 
+            :space-evenly false
+            (label
+                :style "font-size: 0.82em; color: #d5c8ff;"
+                :text "↓"
+            )
+            (label 
+                :halign "start"
+                :style "font-size: 0.82em;"
+                :text " ${formatbytes(ceil(EWW_NET[interface].NET_DOWN), false, "si")}"
+            )
+        )
+
+        (box 
+            :space-evenly false
+            (label
+                :style "font-size: 0.82em; color: #17a2b8" 
+                :text "↑"
+            )
+            (label 
+                :halign "start"
+                :style "font-size: 0.82em;"
+                :text " ${formatbytes(ceil(EWW_NET[interface].NET_UP), false, "si")}"
+            )
+        )
+    )
+)

@@ -4,14 +4,15 @@
     (eventbox 
         :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland qdirstat &"
         :cursor "pointer"
-        :tooltip "qdirstat"
+        :tooltip "disk used / qdirstat"
         :halign "center"
         (box 
             :space-evenly false
+            :style "min-width:3.5em"
             (label
+                :hexpand true
                 :class "icons"
                 :text "󰉉"
-                ;; :text ""
             )
             (label 
                 :text "${round(EWW_DISK["/"]["used_perc"], 0)}%"
@@ -24,12 +25,19 @@
     (box
         :space-evenly false
         :halign "center"
+        :hexpand true
+        :style "min-width:4em"
+        :tooltip "disk usage"
         (label
+            :hexpand true
+            :halign "end"
             :class "icons"
             :style "color: #239BA7"
             :text ""
         )
         (label 
+            :halign "start"
+            :hexpand true
             :text "${disk_usage}%"
         )
     )
@@ -39,13 +47,14 @@
     (box
         :space-evenly false
         :halign "center"
+        :style "min-width:4em"
+        :tooltip "used RAM"
         (label 
             :class "icons"
             :style "font-size: 1.2em; margin-right: 0.3em; color: #ffcc00"
             :text "")
-            ;; :text "")
         (label
-          :text "${formatbytes(ceil(EWW_RAM["used_mem"]), true, "iec")}"
+            :text "${formatbytes(ceil(EWW_RAM["used_mem"]), true, "iec")}"
         )
     )
 )

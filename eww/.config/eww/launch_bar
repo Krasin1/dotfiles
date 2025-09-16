@@ -22,7 +22,7 @@ sudo killall -s SIGKILL eww
 
 for mon in $(hyprctl monitors -j | jq -r '.[] | .id'); do
     width=$(hyprctl -j monitors | jq -r ".[] | select(.id == ${mon}).width")
-    eww open bar --id "$mon" --screen "$mon" --arg MON_W="$width" --arg BRIGHTNESS_NAME="$(find_ddcci_by_hypr_id $mon)"
+    eww open bar --id "$mon" --screen "$mon" --arg MON_ID="$mon" --arg MON_W="$width" --arg BRIGHTNESS_NAME="$(find_ddcci_by_hypr_id $mon)"
 done
 
 if ! command -v nvidia-smi &> /dev/null ; then

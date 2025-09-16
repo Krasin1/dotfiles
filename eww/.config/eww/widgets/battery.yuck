@@ -1,4 +1,4 @@
-(defpoll battery_status :interval "24h" "sleep 1; eww get EWW_BATTERY")
+(defpoll battery_status :interval "24h" "sleep 3; eww get EWW_BATTERY")
 
 (defvar low_batt 20)
 
@@ -6,6 +6,8 @@
     (box 
         :visible {battery_status != "" ? true : false}
         :halign "center"
+        :hexpand true
+        ;; :style "min-width: 5em"
         (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
             (box :space-evenly false
                 :tooltip {EWW_BATTERY[battery].status}

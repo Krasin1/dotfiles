@@ -1,14 +1,14 @@
 (defpoll CPU_SENSOR :interval "24h"
-  "sleep 1; eww get EWW_TEMPS | jq -r '
+  "sleep 3; eww get EWW_TEMPS | jq -r '
     to_entries
     | map(select(.key | test(\"CORETEMP_PACKAGE|K10TEMP|TCTL|CPU\"; \"i\")))
     | .[0].key'")
 
-;; еще будет температура и нагрузка на gpu
 (defwidget cpu_temp []
     (box
         :space-evenly false
         :halign "center"
+        :tooltip "CPU Temp: ${CPU_SENSOR}"
         (label
             :class "icons"
             :style "color: #3B82F6"
@@ -24,6 +24,7 @@
     (box 
         :space-evenly false
         :halign "center"
+        :tooltip "CPU Load"
         (label 
             :class "icons"
             :style "color: #F87171"

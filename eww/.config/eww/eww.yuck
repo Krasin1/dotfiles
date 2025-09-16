@@ -1,21 +1,19 @@
 (include "widgets.yuck")
 
-(defwidget main_bar [MON_WIDTH BRIGHTNESS_NAME]
+(defwidget main_bar [MON_WIDTH BRIGHTNESS_NAME MON_ID]
     (centerbox :orientation "h" 
         (box
             :class "bar-section" 
-            :halign "fill"
             :space-evenly false 
             :width {ceil(MON_WIDTH * 0.24)}
-            (workspaces)
+            (workspaces :mon_id MON_ID)
             (music)
         )
             
         (box 
             :class "bar-section" 
             :halign "center"
-            ;; :space-evenly false
-            :spacing 10
+            :space-evenly true
             :width {ceil(MON_WIDTH * 0.51)}
             (volume)
             (brightness :name BRIGHTNESS_NAME)
@@ -27,6 +25,7 @@
             (gpu_fan)
             (ram)
             (batt)
+            (network)
         )
         
         (box 
@@ -43,7 +42,7 @@
     )
 )
 
-(defwindow bar [MON_W BRIGHTNESS_NAME]
+(defwindow bar [MON_W BRIGHTNESS_NAME MON_ID]
     :windowtype "dock"
     :geometry (geometry :x "0%"
                       :y "0%"
@@ -53,6 +52,6 @@
     :stacking "bt"
     :exclusive true
     :focusable false
-    (main_bar :MON_WIDTH MON_W :BRIGHTNESS_NAME BRIGHTNESS_NAME)
+    (main_bar :MON_WIDTH MON_W :BRIGHTNESS_NAME BRIGHTNESS_NAME :MON_ID MON_ID)
 )
 

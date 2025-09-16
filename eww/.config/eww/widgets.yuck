@@ -9,5 +9,6 @@
 (include "widgets/gpu.yuck")
 (include "widgets/memory.yuck")
 (include "widgets/power.yuck")
-(include "widgets/hyprland_workspaces.yuck")
+(include "widgets/workspaces.yuck")
+(include "widgets/network.yuck")
 
