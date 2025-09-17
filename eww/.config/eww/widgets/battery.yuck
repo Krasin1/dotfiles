@@ -1,13 +1,16 @@
-(defpoll battery_status :interval "24h" "sleep 3; eww get EWW_BATTERY")
+(defpoll bat_status
+    :interval "24h"
+    'if ls /sys/class/power_supply/* >/dev/null 2>&1; then echo "true"; else echo "false"; fi'
+)
 
 (defvar low_batt 20)
 
 (defwidget batt []
     (box 
-        :visible {battery_status != "" ? true : false}
+        :visible bat_status
         :halign "center"
         :style "min-width: 3.5em"
-        (for battery in {jq(EWW_BATTERY, 'del(.total_avg) | keys')}
+        (for battery in {EWW_BATTERY != "" ? jq(EWW_BATTERY, 'del(.total_avg) | keys') : "[]"}
             (box :space-evenly false
                 :tooltip {EWW_BATTERY[battery].status}
                 ;; :text "󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰂄󰁹"
