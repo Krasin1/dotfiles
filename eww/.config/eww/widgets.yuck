@@ -11,4 +11,4 @@
 (include "widgets/power.yuck")
 (include "widgets/workspaces.yuck")
 (include "widgets/network.yuck")
-
+(include "widgets/meme.yuck")

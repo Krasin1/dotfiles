@@ -1,0 +1,30 @@
+(defwindow meme
+    :monitor 0
+    :stacking "bg"
+    :geometry (geometry 
+        :x "10%" 
+        :y "10%"
+        :width "250px" 
+        :anchor "bottom right"
+    )
+    (activate-linux)
+)
+
+(defwidget activate-linux []
+    (box
+        :orientation "v"
+        :halign "start"
+        :valign "start"
+        (label 
+            :style "color: rgba(250, 250, 250, 0.5); background: none;"
+            :xalign 0 
+            :markup "<span font_size=\"large\">Activate Linux</span>"
+        )
+        (label 
+            :style "color: rgba(250, 250, 250, 0.5); background: none;"
+            :xalign 0 
+            :text "Go to Settings to activate Linux"
+        )
+    )
+)
+
