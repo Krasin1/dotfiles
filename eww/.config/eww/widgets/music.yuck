@@ -26,6 +26,11 @@
     :run-while song_time_reveal
     "playerctl -p mpd metadata mpris:length | awk '{print int($1/1000000)}'")
 
+(defpoll song_time_reveal_fix
+    :interval "24h"
+    "sleep 1; eww update song_time_reveal=false"
+)
+
 (defwidget music []
     (box 
         :class "music"
@@ -67,9 +72,11 @@
                     ;; Без названия - Неизвестен (Название и автор)
                     (eventbox 
                         ;; NOTE : Автозакрытие
+                        ;; HACK: run-while song_time_reveal заставляю работать
                         :onhover "eww update song_time_reveal=true ; \
                             pgrep -f 'eww update song_time_reveal=false' | grep -v $$ | xargs kill ; \
-                            (sleep ${auto_close_time} ; eww update song_time_reveal=false) &"
+                            (sleep ${auto_close_time} ; eww update song_time_reveal=false) &\
+                            ${song_time_reveal_fix}"
                         (revealer 
                             :reveal "${!song_time_reveal}" 
                             :transition "slideup" 
