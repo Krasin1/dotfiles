@@ -1,18 +1,21 @@
-(defvar nvidia_status true)
+(defpoll nvidia_status 
+    :interval "24h" 
+    "command -v nvidia-smi 2>&1 || { sleep 1 && eww update nvidia_status=false >/dev/null 2>&1; }"
+)
 
 (defpoll gpu_temp 
     :interval "3s" 
-    :run-while nvidia_status
+    :run-while {nvidia_status != ""}
     "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits")
 
 (defpoll gpu_fan 
     :interval "3s" 
-    :run-while nvidia_status
+    :run-while {nvidia_status != ""}
     "nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits")
 
 (defwidget gpu_temp []
     (eventbox
-        :visible nvidia_status
+        :visible {nvidia_status != ""}
         :cursor "pointer"
         :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland nvidia-settings"
         :halign "center"
@@ -35,7 +38,7 @@ nvidia-settings"
 
 (defwidget gpu_fan []
     (box 
-        :visible nvidia_status
+        :visible {nvidia_status != ""}
         :space-evenly false
         :halign "center"
         :tooltip "GPU Fan"
