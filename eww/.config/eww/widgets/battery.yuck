@@ -3,46 +3,52 @@
     'if ls /sys/class/power_supply/* >/dev/null 2>&1; then echo "true"; else echo "false"; fi'
 )
 
+(defvar statistics "")
+
 (defvar low_batt 20)
 
 (defwidget batt []
-    (box 
-        :visible bat_status
-        :halign "center"
-        :style "min-width: 3.5em"
-        (for battery in {EWW_BATTERY != "" ? jq(EWW_BATTERY, 'del(.total_avg) | keys') : "[]"}
-            (box :space-evenly false
-                :tooltip {EWW_BATTERY[battery].status}
-                ;; :text "󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰂄󰁹"
-                ;; :text "󰢜󰂆󰂇󰂈󰢝󰂉󰢞󰂊󰂋󰂅"
-                (label 
-                    :halign "end"
-                    :hexpand true
-                    :class "icons \
-                        ${EWW_BATTERY[battery].capacity <= low_batt 
-                        && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''} "
+    (eventbox
+        :onhover "eww update statistics=\"$(upower -b | awk '/time to empty:|capacity:/ {print $0}')\""
+        (box 
+            :visible bat_status
+            :halign "center"
+            :style "min-width: 3.5em"
+            (for battery in {EWW_BATTERY != "" ? jq(EWW_BATTERY, 'del(.total_avg) | keys') : "[]"}
+                (box :space-evenly false
+                    :tooltip "${EWW_BATTERY[battery].status}
+${statistics}"
+                    ;; :text "󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰂄󰁹"
+                    ;; :text "󰢜󰂆󰂇󰂈󰢝󰂉󰢞󰂊󰂋󰂅"
+                    (label 
+                        :halign "end"
+                        :hexpand true
+                        :class "icons \
+                            ${EWW_BATTERY[battery].capacity <= low_batt 
+                            && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''} "
 
-                    :style "${EWW_BATTERY[battery].capacity > 60 ? "color: #1ABC9C" : 
-                        EWW_BATTERY[battery].capacity > 40 ? "color: #F1C40F" :
-                        EWW_BATTERY[battery].capacity > 20 ? "color: #E67E22" : ''}; margin-right: 0;"
+                        :style "${EWW_BATTERY[battery].capacity > 60 ? "color: #1ABC9C" : 
+                            EWW_BATTERY[battery].capacity > 40 ? "color: #F1C40F" :
+                            EWW_BATTERY[battery].capacity > 20 ? "color: #E67E22" : ''}; margin-right: 0;"
 
-                    :text {EWW_BATTERY[battery].status == "Charging" ? "󰂄" : 
-                        EWW_BATTERY[battery].capacity <= 10 ? "󰁺" : 
-                        EWW_BATTERY[battery].capacity <= 20 ? "󰁻" :
-                        EWW_BATTERY[battery].capacity <= 30 ? "󰁼" :
-                        EWW_BATTERY[battery].capacity <= 40 ? "󰁽" :
-                        EWW_BATTERY[battery].capacity <= 50 ? "󰁾" :
-                        EWW_BATTERY[battery].capacity <= 60 ? "󰁿" :
-                        EWW_BATTERY[battery].capacity <= 70 ? "󰂀" :
-                        EWW_BATTERY[battery].capacity <= 80 ? "󰂁" :
-                        EWW_BATTERY[battery].capacity <= 90 ? "󰂂" : "󰁹"
-                    }
-                )
-                (label 
-                    :halign "end"
-                    :hexpand true
-                    :class "${EWW_BATTERY[battery].capacity <= low_batt && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''}"
-                    :text "${EWW_BATTERY[battery].capacity}%"
+                        :text {EWW_BATTERY[battery].status == "Charging" ? "󰂄" : 
+                            EWW_BATTERY[battery].capacity <= 10 ? "󰁺" : 
+                            EWW_BATTERY[battery].capacity <= 20 ? "󰁻" :
+                            EWW_BATTERY[battery].capacity <= 30 ? "󰁼" :
+                            EWW_BATTERY[battery].capacity <= 40 ? "󰁽" :
+                            EWW_BATTERY[battery].capacity <= 50 ? "󰁾" :
+                            EWW_BATTERY[battery].capacity <= 60 ? "󰁿" :
+                            EWW_BATTERY[battery].capacity <= 70 ? "󰂀" :
+                            EWW_BATTERY[battery].capacity <= 80 ? "󰂁" :
+                            EWW_BATTERY[battery].capacity <= 90 ? "󰂂" : "󰁹"
+                        }
+                    )
+                    (label 
+                        :halign "end"
+                        :hexpand true
+                        :class "${EWW_BATTERY[battery].capacity <= low_batt && EWW_BATTERY[battery].status != 'Charging' ? 'blinking-text' : ''}"
+                        :text "${EWW_BATTERY[battery].capacity}%"
+                    )
                 )
             )
         )
