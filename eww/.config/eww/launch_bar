@@ -1,31 +1,38 @@
 #!/bin/bash
 
-# функция для поиска ddcci устройства по id монитора Hyprland
-find_ddcci_by_hypr_id() {
-    local mon_id="$1"
+set -euo pipefail
 
-    local model=$(hyprctl monitors -j | jq -r ".[] | select(.id == ${mon_id}) | .model")
+# Завершаем все старые eww бары
+sudo killall -s SIGKILL eww || true
 
-    for dev in /sys/bus/ddcci/devices/ddcci*; do
-        if [[ -f "$dev/idModel" ]]; then
-            local id_model
-            id_model=$(<"$dev/idModel")
-            if [[ "$model" == *"$id_model"* ]]; then
-                echo "$(basename $dev)"
-                return 0
-            fi
+# Получаем список мониторов
+monitors_json=$(hyprctl monitors -j)
+
+# Проходим по каждому монитору
+while read -r monitor; do
+    mon_id=$(echo "$monitor" | jq -r '.id')
+    mon_name=$(echo "$monitor" | jq -r '.name')
+    mon_model=$(echo "$monitor" | jq -r '.model')
+    model_short=$(echo "$mon_model" | awk '{$1=""; sub(/^ /,""); print}')
+
+    backlight_match=""
+
+    # Ищем backlight для монитора
+    for dev in /sys/class/backlight/*; do
+        [[ -d "$dev" ]] || continue
+        udev_info=$(udevadm info --no-pager -a -p "$dev")
+
+        if echo "$udev_info" | grep -qiE "$mon_name|$mon_model|$model_short"; then
+            backlight_match=$(basename "$dev")
+            break
         fi
     done
-}
 
-sudo killall -s SIGKILL eww
+    # Получаем ширину монитора
+    width=$(echo "$monitors_json" | jq -r ".[] | select(.id == $mon_id) | .width")
 
-for mon in $(hyprctl monitors -j | jq -r '.[] | .id'); do
-    width=$(hyprctl -j monitors | jq -r ".[] | select(.id == ${mon}).width")
-    eww open bar --id "$mon" --screen "$mon" --arg MON_ID="$mon" --arg MON_W="$width" --arg BRIGHTNESS_NAME="$(find_ddcci_by_hypr_id $mon)"
-done
+    # Запускаем eww бар для монитора
+    eww open bar --id "$mon_id" --screen "$mon_id" \
+        --arg MON_ID="$mon_id" --arg MON_W="$width" --arg BACKLIGHT="$backlight_match" \
 
-if ! command -v nvidia-smi &> /dev/null ; then
-    sleep 0.5
-    eww update nvidia_status=false
-fi;
+done <<< "$(echo "$monitors_json" | jq -c '.[] | {id: .id, name: .name, model: .model}')"

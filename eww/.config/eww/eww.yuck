@@ -1,6 +1,6 @@
 (include "widgets.yuck")
 
-(defwidget main_bar [MON_WIDTH BRIGHTNESS_NAME MON_ID]
+(defwidget main_bar [MON_WIDTH MON_ID BACKLIGHT]
     (centerbox :orientation "h" 
         (box
             :class "bar-section" 
@@ -16,7 +16,7 @@
             :space-evenly true
             :width {ceil(MON_WIDTH * 0.51)}
             (volume)
-            (brightness :name BRIGHTNESS_NAME)
+            (brightness :backlight BACKLIGHT)
             (cpu_load)
             (cpu_temp)
             (disk_space)
@@ -42,7 +42,7 @@
     )
 )
 
-(defwindow bar [MON_W BRIGHTNESS_NAME MON_ID]
+(defwindow bar [MON_W MON_ID BACKLIGHT]
     :windowtype "dock"
     :geometry (geometry :x "0%"
                       :y "0%"
@@ -52,6 +52,6 @@
     :stacking "bt"
     :exclusive true
     :focusable false
-    (main_bar :MON_WIDTH MON_W :BRIGHTNESS_NAME BRIGHTNESS_NAME :MON_ID MON_ID)
+    (main_bar :MON_WIDTH MON_W :MON_ID MON_ID :BACKLIGHT BACKLIGHT)
 )
 

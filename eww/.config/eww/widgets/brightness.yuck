@@ -1,11 +1,32 @@
-(defpoll brightness :interval "2s" "brillo -elq -G | jq -R -n 'reduce inputs as $line ({}; . + ($line | split(\"\\t\") | {(.[0]): (.[1] | tonumber | floor)}))'")
+(defpoll brightness_status
+    :interval "24h"
+    'if ls /sys/class/backlight/* >/dev/null 2>&1; then \
+        echo "true";\
+    else \
+        echo "false";\
+        sleep 1 && eww update brightness_status=false;\
+    fi'
+)
 
-(defwidget brightness [name]
+(defpoll brightness 
+    :interval "2s" 
+    :run-while brightness_status
+    "scripts/brightness.sh get"
+)
+
+(defwidget brightness [backlight]
     (eventbox 
-        :cursor "row-resize"
-        :onscroll "if [ {} = \"up\" ]; then brillo -ql ${name == '' ? '' : "-s"} ${name} -A 5; else brillo -ql ${name == '' ? '' : "-s"} ${name} -U 5; fi;"
+        :visible brightness_status
         :halign "center"
-        :tooltip "Brightness ${name}"
+        :cursor "row-resize"
+        :onscroll "scripts/brightness.sh {} ${backlight}"
+        :onclick "scripts/brightness.sh max ${backlight}"
+        :onrightclick "scripts/brightness.sh min ${backlight}"
+
+        :tooltip "Brightness ${backlight}
+LMB: set 100%
+RMB: set 0%"
+
         (box :orientation "h" 
             :space-evenly false
             :style "min-width:4.1em"
@@ -15,7 +36,9 @@
                 :style "color: #FFB86C"
                 :text ""
             )
-            (label :text "${name == "" ? jq(brightness, 'to_entries[0].value') : brightness[name]}%")
+            (label 
+                :text "${brightness[backlight]}%"
+            )
         )
     )
 )
