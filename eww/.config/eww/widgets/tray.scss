@@ -1,41 +1,51 @@
-// System Tray
 .tray {
-  /* margin:0 1em; */
   padding: 0 0.5em;
   color: #FDFDFD;
   background-color: rgba(97, 97, 97, 0.75);
   border-radius: 2em;
   min-height: 2em;
-  /* border: 2px solid red; */
 }
 
-.tray * {
-}
-.tray image {
-  /* margin: 0 0.4em; */
-  /* -gtk-dpi: 48; */
-  /* icon-size: 4em; */
-  /* -gtk-icon-transform: scale(1.2); */
-}
 
 .tray menu {
-  /* padding: 5px;  */
   padding: 0.4em; 
   background-color: rgba(47, 53, 75, 0.95);
 
   >menuitem {
-    /* font-family: JetBrainsMono NF; */
-    /* font-size: 0.1em; */
     padding: 0.2em 0.4em;
     color: #FDFDFD;
+
     &:disabled label {
       color: #585b70; 
     }
 
     &:hover {
       background-color: #8897F4;
-      /* background-color: #1c1e27; */
       color:  #8897F4;
+    }
+
+    radio {
+      min-width: 1em;
+      min-height: 1em;
+    }
+    check {
+      min-width: 1em;
+      min-height: 1em;
+    }
+    radio:checked, check:checked {
+      -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
+      color: #8897F4;
+      padding-right: 0.5em;
+    }
+
+    arrow {
+      min-height: 0.3em;
+      min-width: 0.3em;
+      &:dir(ltr) {
+        -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+        margin-left: 0.4em;
+        margin-right: 0;
+      }
     }
   }
 
