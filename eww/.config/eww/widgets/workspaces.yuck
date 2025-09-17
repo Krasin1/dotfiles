@@ -11,9 +11,13 @@
             (eventbox
                 :cursor "pointer"
                 :onclick "hyprctl dispatch workspace ${id}"
-                (label 
-                    :style "${jq(workspaces, '[.[] | select(.workspace_id == ${id}) | .active]') == "[true]" ? "color: red;" : '' }"
-                    :text id
+                (box 
+                    :space-evenly false
+                    :halign "center"
+                    (label 
+                        :class "${jq(workspaces, '[.[] | select(.workspace_id == ${id}) | .active]') == "[true]" ? "active" : ""}"
+                        :text id
+                    )
                 )
             )
         )
