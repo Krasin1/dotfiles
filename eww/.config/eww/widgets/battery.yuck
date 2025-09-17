@@ -10,8 +10,9 @@
 (defwidget batt []
     (eventbox
         :onhover "eww update statistics=\"$(upower -b | awk '/time to empty:|capacity:/ {print $0}')\""
+        :visible bat_status
+        :active bat_status
         (box 
-            :visible bat_status
             :halign "center"
             :style "min-width: 3.5em"
             (for battery in {EWW_BATTERY != "" ? jq(EWW_BATTERY, 'del(.total_avg) | keys') : "[]"}
