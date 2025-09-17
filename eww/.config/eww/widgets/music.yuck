@@ -44,6 +44,8 @@
             :vexpand false 
             :hexpand false 
             :valign "center"
+            :tooltip "LMB: mpd settings
+RMB: Open ncmpcpp"
             (eventbox 
                 :onclick "eww update music_reveal=\"${!music_reveal}\"; eww update song_time_reveal=false" 
                 :onrightclick "eww update song_time_reveal=false;kitty ncmpcpp&"
