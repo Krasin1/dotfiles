@@ -9,7 +9,7 @@
 
 (defwidget batt []
     (eventbox
-        :onhover "eww update statistics=\"$(upower -b | awk '/time to empty:|capacity:/ {print $0}')\""
+        :onhover "eww update statistics=\"$(upower -b | awk '/time to empty:|capacity:|time to full:/ {print $0}')\""
         :visible bat_status
         :active bat_status
         (box 
