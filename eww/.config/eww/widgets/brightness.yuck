@@ -37,7 +37,7 @@ RMB: set 0%"
                 :text ""
             )
             (label 
-                :text "${brightness[backlight]}%"
+                :text "${backlight != "" ? brightness[backlight] : jq(brightness, ".[]")}%"
             )
         )
     )
