@@ -30,7 +30,7 @@ ${statistics}"
 
                         :style "${EWW_BATTERY[battery].capacity > 60 ? "color: #1ABC9C" : 
                             EWW_BATTERY[battery].capacity > 40 ? "color: #F1C40F" :
-                            EWW_BATTERY[battery].capacity > 20 ? "color: #E67E22" : ''}; margin-right: 0;"
+                            EWW_BATTERY[battery].capacity > low_batt ? "color: #E67E22" : ''}; margin-right: 0;"
 
                         :text {EWW_BATTERY[battery].status == "Charging" ? "󰂄" : 
                             EWW_BATTERY[battery].capacity <= 10 ? "󰁺" : 
