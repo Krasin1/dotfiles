@@ -1,12 +1,25 @@
 #!/bin/bash
 
-set -euo pipefail
+# set -euo pipefail
 
 # Завершаем все старые eww бары
 sudo killall -s SIGKILL eww || true
 
 # Получаем список мониторов
 monitors_json=$(hyprctl monitors -j)
+
+services=$(systemctl list-units "ddcci@i2c-*.service" --all --no-legend --plain | awk '{print $1}' || true)
+for service in $services; do
+    for ((i=0; i<20; i++)) do
+        status_output=$( systemctl status "$service" --no-pager 2>/dev/null || true) 
+        echo "$status_output" | grep -q "Finished ddcci handler" 
+        if [ $? -eq 0 ]; then
+            break
+        fi
+        notify-send "$service $i"
+        sleep 1;
+    done
+done
 
 # Проходим по каждому монитору
 while read -r monitor; do
