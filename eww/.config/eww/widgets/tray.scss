@@ -24,18 +24,29 @@
       color:  #8897F4;
     }
 
+    /* -gtk-icon-source: -gtk-icontheme("object-select-symbolic"); */
     radio {
+      color: #585b70;
       min-width: 1em;
       min-height: 1em;
+      padding-right: 0.5em;
+      -gtk-icon-source: -gtk-icontheme("radio-checked-symbolic");
     }
     check {
+      color: #585b70;
       min-width: 1em;
       min-height: 1em;
-    }
-    radio:checked, check:checked {
-      -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
-      color: #8897F4;
       padding-right: 0.5em;
+      -gtk-icon-source: -gtk-icontheme("checkbox-checked-symbolic");
+    }
+
+    radio:checked {
+      -gtk-icon-source: -gtk-icontheme("radio-checked-symbolic");
+      color: #8897F4;
+    }
+    check:checked {
+      -gtk-icon-source: -gtk-icontheme("checkbox-checked-symbolic");
+      color: #8897F4;
     }
 
     arrow {
