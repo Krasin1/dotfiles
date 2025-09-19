@@ -8,23 +8,16 @@
 
 ;; Music vars
 (deflisten STATUS "playerctl -p mpd status --follow")
-(deflisten SONG   "playerctl -p mpd --follow metadata xesam:title ")
-(deflisten ARTIST "playerctl -p mpd --follow metadata xesam:artist")
-(deflisten COVER "playerctl -p mpd --follow metadata mpris:artUrl ")
-
+(deflisten SONG_INFO 
+    "playerctl -F -p mpd metadata --format '{\"title\": \"{{xesam:title}}\", \"artist\": \"{{xesam:artist}}\", \"artUrl\": \"{{mpris:artUrl}}\", \"duration\": \"{{mpris:length/1000000}}\"}'")
 (deflisten LOOP `playerctl -F -p mpd loop`)
 (deflisten SHUFFLE `playerctl -F -p mpd shuffle`)
-
 (deflisten VOLUME `mpc volume | grep -o '[0-9]*' && mpc idleloop mixer | while read -r event; do [[ "$event" == "mixer" ]] && mpc volume | grep -o '[0-9]*'; done`)
 
 (defpoll CURRENT_SECS 
     :interval "1s" 
     :run-while song_time_reveal
     "playerctl -p mpd position | awk '{print int($1)}'")
-(defpoll TOTAL_SECS 
-    :interval "1s" 
-    :run-while song_time_reveal
-    "playerctl -p mpd metadata mpris:length | awk '{print int($1/1000000)}'")
 
 (defpoll song_time_reveal_fix
     :interval "24h"
@@ -36,8 +29,6 @@
         :class "music"
         :orientation "h" 
         :space-evenly false 
-        ;; :halign "end" 
-        ;; :hexpand true
 
         ;; Обложка
         (box :class "album_art" 
@@ -51,7 +42,7 @@ RMB: Open ncmpcpp"
                 :onrightclick "eww update song_time_reveal=false;kitty ncmpcpp&"
                 :cursor "pointer"
                 (box :class "album_art_content" 
-                    :style "background-image: url('${COVER == "" ? "images/music.png" : COVER}');"
+                    :style "background-image: url('${SONG_INFO["artUrl"] == "" ? "images/music.png" : SONG_INFO["artUrl"]}');"
                     :vexpand "false" 
                     :hexpand "false" 
                     )
@@ -92,14 +83,14 @@ RMB: Open ncmpcpp"
                                     :class "song" 
                                     :halign "start" 
                                     :wrap false 
-                                    :text SONG
+                                    :text {SONG_INFO["title"]}
                                     :limit-width song_length
                                 )
                                 (label 
                                     :class "artist" 
                                     :halign "start" 
                                     :wrap false 
-                                    :text ARTIST
+                                    :text {SONG_INFO["artist"]}
                                     :limit-width artist_length
                                 )
                             )
@@ -122,7 +113,7 @@ RMB: Open ncmpcpp"
                                 )
                                 (eventbox :cursor "pointer"
                                     (scale  :min 0 
-                                            :max TOTAL_SECS 
+                                            :max {SONG_INFO["duration"]} 
                                             :value CURRENT_SECS
                                             :onchange "playerctl -p mpd position {}")
                                     )
