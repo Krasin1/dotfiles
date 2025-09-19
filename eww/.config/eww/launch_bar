@@ -48,9 +48,4 @@ while read -r monitor; do
     eww open bar --id "$mon_id" --screen "$mon_id" \
         --arg MON_ID="$mon_id" --arg MON_W="$width" --arg BACKLIGHT="$backlight_match" \
 
-    if [ "$1" == "meme" ]; then
-        eww open meme --id "1$mon_id" --screen "$mon_id"
-    fi
-
-
 done <<< "$(echo "$monitors_json" | jq -c '.[] | {id: .id, name: .name, model: .model}')"

@@ -1,9 +1,35 @@
-(defwidget power []
+(defvar power_revealer false)
+(defvar is_meme false)
+
+(defwidget power [mon_id mon_w]
     (eventbox
         :halign "start"
-        ;; :hexpand true
-        :onclick ""
         :cursor "pointer"
+        :tooltip "LMB: Power menu
+RMB: Meme"
+        :onrightclick 
+            "if [[ \"${is_meme}\" == \"false\" ]]; then \
+                eww open meme --id 1${mon_id} --screen ${mon_id}; \
+                eww update is_meme=true; \
+            else \
+                eww update is_meme=false; \
+                eww close 1${mon_id}; \
+            fi"
+        :onclick 
+            "if [[ \"${power_revealer}\" == \"false\" ]]; then \
+                eww open power_buttons --id 99 --screen ${mon_id} --arg MON_WIDTH=${mon_w};\
+                eww update power_revealer=true; \
+                sh -c 'sleep 10 && \
+                    if [[ $(eww get power_revealer) == \"true\" ]]; then \
+                        eww update power_revealer=false; \
+                        sleep 0.5; \
+                        eww close 99; \
+                    fi;' &\ 
+            else \
+                eww update power_revealer=false; \
+                pkill -f 'eww get power_revealer'& \
+                (sleep 0.5; eww close 99;) & \
+            fi;"
         (label 
             :style "margin-left: 0.5em; color: #E74C3C"
             :class "icons"
@@ -11,3 +37,74 @@
         )
     )
 )
+
+(defwidget power_button [icon text command]
+    (eventbox 
+        :cursor "pointer"
+        :onclick "eww update power_revealer=false; \
+            (sleep 0.5; eww close 99; ${command}) &"
+        (box 
+            :class "power-button"
+            :orientation "v"
+            :space-evenly false
+            (label 
+                :class "power-icon"
+                :text icon
+            )
+            (label 
+                :class "power-label"
+                :text text
+            )
+        )
+    )
+)
+
+(defwindow power_buttons [MON_WIDTH]
+    :geometry (geometry :x "0.5%"
+                      :y "1%"
+                      :width {ceil(MON_WIDTH * 0.24)}
+                      :height "0%"
+                      :anchor "top right")
+    :stacking "fg"
+    :exclusive false
+    :focusable false
+    
+    (revealer 
+        :reveal power_revealer
+        (box 
+            :orientation "h"
+            :style "margin: 0 2em;"
+            (power_button 
+                :icon "󰍃" 
+                :text "Logout" 
+                :command "hyprctl dispatch exit"
+            )
+            (power_button 
+                :icon "󰐥" 
+                :text "Power off" 
+                :command "sudo systemctl poweroff"
+            )
+            (power_button 
+                :icon "󰜉" 
+                :text "Reboot" 
+                :command "sudo systemctl reboot"
+            )
+            (power_button 
+                :icon "󰏦" 
+                :text "Suspend" 
+                :command "sudo systemctl suspend"
+            )
+            (power_button 
+                :icon "󰤁" 
+                :text "Hibernate" 
+                :command "sudo systemctl hibernate"
+            )
+            (power_button 
+                :icon "󰍁" 
+                :text "Lock" 
+                :command ""
+            )
+        )
+    )
+)
+
