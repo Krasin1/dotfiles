@@ -1,13 +1,14 @@
 (defvar is_open false)
 
-(defwidget clock [mon_id]
+(defwidget clock [mon_id mon_w]
     (button :onclick 
         "if [[ \"${is_open}\" == \"false\" ]]; then \
-            ${EWW_CMD} open calendar --id 2${mon_id} --screen ${mon_id} ;\
+            ${EWW_CMD} open calendar --id 98 --screen ${mon_id} --arg MON_WIDTH=${mon_w} ;\
             eww update is_open=true; \
         else \
-            eww close 2${mon_id}; \
             eww update is_open=false;
+            sleep 0.5;
+            eww close 98; \
         fi;"
         :halign "start"
         :space-evenly false
@@ -26,16 +27,21 @@
     )
 )
 
-(defwindow calendar []
-    :geometry (geometry :x "10%"
+(defwindow calendar [MON_WIDTH]
+    :geometry (geometry :x "0.5%"
                       :y "0%"
-                      :width "10%"
+                      :width {ceil(MON_WIDTH * 0.24)}
                       :height "0%"
                       :anchor "top right")
     :stacking "fg"
     :exclusive false
     :focusable false
-    (box :class "cal-box"
-        (calendar :class "cal")
+    (revealer
+        :reveal is_open
+        (box :class "cal-box"
+            :halign "fill"
+            :valign "fill"
+            (calendar :class "cal")
+        )
     )
 )

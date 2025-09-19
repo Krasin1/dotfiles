@@ -35,7 +35,7 @@
             :width {ceil(MON_WIDTH * 0.24)}
             :spacing 10
             (power)
-            (clock :mon_id MON_ID)
+            (clock :mon_id MON_ID :mon_w MON_WIDTH)
             (lang)
             (systemtray)
         )
