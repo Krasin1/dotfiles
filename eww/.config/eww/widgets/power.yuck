@@ -38,7 +38,7 @@ RMB: Meme"
     )
 )
 
-(defwidget power_button [icon text command]
+(defwidget power_button [icon text command icon-color]
     (eventbox 
         :cursor "pointer"
         :onclick "eww update power_revealer=false; \
@@ -49,6 +49,7 @@ RMB: Meme"
             :space-evenly false
             (label 
                 :class "power-icon"
+                :style "color: ${icon-color}"
                 :text icon
             )
             (label 
@@ -68,7 +69,6 @@ RMB: Meme"
     :stacking "fg"
     :exclusive false
     :focusable false
-    
     (revealer 
         :reveal power_revealer
         (box 
@@ -78,33 +78,39 @@ RMB: Meme"
                 :icon "󰍃" 
                 :text "Logout" 
                 :command "hyprctl dispatch exit"
+                :icon-color "#F39C12"
             )
             (power_button 
                 :icon "󰐥" 
                 :text "Power off" 
                 :command "sudo systemctl poweroff"
+                :icon-color "#E74C3C"
             )
             (power_button 
                 :icon "󰜉" 
                 :text "Reboot" 
                 :command "sudo systemctl reboot"
+                :icon-color "#3498DB"
             )
             (power_button 
                 :icon "󰏦" 
                 :text "Suspend" 
                 :command "sudo systemctl suspend"
+                :icon-color "#2ECC71" 
             )
             (power_button 
                 :icon "󰤁" 
                 :text "Hibernate" 
                 :command "sudo systemctl hibernate"
+                :icon-color "#9B59B6"
             )
             (power_button 
                 :icon "󰍁" 
                 :text "Lock" 
                 :command ""
+                :icon-color "#1ABC9C"
             )
         )
     )
 )
-
+    
