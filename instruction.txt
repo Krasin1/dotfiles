@@ -47,7 +47,7 @@ xorg-xinit
 
 bspwm sxhkd polybar picom  // dmenu
 
-dunst rofi flameshot udiskie fbreader simple-mtpfs(можно без simple?: gvfs-mtp,jmtpfs??)
+dunst rofi udiskie fbreader simple-mtpfs(можно без simple?: gvfs-mtp,jmtpfs??)
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
@@ -57,7 +57,10 @@ paru -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick uebe
 
 zathura zathura-pdf-poppler chromium
 
-arcolinux-logout betterlockscreen screengrab
+arcolinux-logout betterlockscreen 
+
+grimblast-git swappy -- wayland
+flameshot -- x11
 
 polkit polkit-gnome
 -- add to autostart /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -68,6 +71,8 @@ polkit polkit-gnome
 android-studio libbcd
 
 libc++
+
+    xdg-mime default nemo.desktop inode/directory
 
 -- lxappearance-gtk3
     qogir-gtk-theme qogir-icon-theme 
