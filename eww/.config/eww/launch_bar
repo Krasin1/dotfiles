@@ -16,7 +16,7 @@ for service in $services; do
         if [ $? -eq 0 ]; then
             break
         fi
-        notify-send "$service $i"
+        notify-send "Eww bar" "Waiting for ddcci to start\n$service  $i \/ 20" -r 666
         sleep 1;
     done
 done

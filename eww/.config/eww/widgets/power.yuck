@@ -28,7 +28,7 @@ RMB: Meme"
             else \
                 eww update power_revealer=false; \
                 pkill -f 'eww get power_revealer'& \
-                (sleep 0.5; eww close 99;) & \
+                sh -c 'sleep 0.5; eww close 99;' ;  \
             fi;"
         (label 
             :style "margin-left: 0.5em; color: #E74C3C"
@@ -63,7 +63,7 @@ RMB: Meme"
 (defwindow power_buttons [MON_WIDTH]
     :geometry (geometry :x "0.5%"
                       :y "1%"
-                      :width {ceil(MON_WIDTH * 0.24)}
+                      :width {ceil(MON_WIDTH * 0.2375)}
                       :height "0%"
                       :anchor "top right")
     :stacking "fg"
