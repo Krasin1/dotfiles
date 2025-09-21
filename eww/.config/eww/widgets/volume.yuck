@@ -5,8 +5,8 @@
 (defwidget volume []
     (eventbox
         :cursor "pointer"
-        :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
-        :onscroll "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%$([ '{}' = 'up' ] && echo + || echo -) -l 1"
+        :onclick "~/dotfiles/scripts/volume mute"
+        :onscroll "~/dotfiles/scripts/volume {}"
         :onrightclick "pavucontrol&"
         :tooltip "Volume
 pavucontrol"

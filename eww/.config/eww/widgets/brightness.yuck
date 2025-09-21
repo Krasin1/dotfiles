@@ -11,7 +11,7 @@
 (defpoll brightness 
     :interval "2s" 
     :run-while brightness_status
-    "scripts/brightness.sh get"
+    "~/dotfiles/scripts/brightness.sh get"
 )
 
 (defwidget brightness [backlight]
@@ -19,9 +19,9 @@
         :visible brightness_status
         :halign "center"
         :cursor "row-resize"
-        :onscroll "scripts/brightness.sh {} ${backlight}"
-        :onclick "scripts/brightness.sh max ${backlight}"
-        :onrightclick "scripts/brightness.sh min ${backlight}"
+        :onscroll "~/dotfiles/scripts/brightness.sh {} ${backlight}"
+        :onclick "~/dotfiles/scripts/brightness.sh max ${backlight}"
+        :onrightclick "~/dotfiles/scripts/brightness.sh min ${backlight}"
 
         :tooltip "Brightness ${backlight}
 LMB: set 100%
