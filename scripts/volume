@@ -3,18 +3,17 @@
 DIR="$HOME/.config/dunst/icons"
 
 function get_volume() {
-    amixer get Master | grep '%' | head -n 1 | awk -F'[' '{print $2}' | awk -F'%' '{print $1}'
+    wpctl get-volume @DEFAULT_SINK@ | awk '{print int($2 * 100) }'
 }
 
 function is_mute() {
-    # amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off
-    amixer get Master | grep off
+    wpctl get-volume @DEFAULT_SINK@ | grep "[MUTED]"
 }
 
 function send_notification() {
     if is_mute; then
         icon_name="$DIR/notification-audio-volume-muted.svg"
-        dunstify "Muted  " -i $icon_name -a "VolBar" -t 500 -r 5555 -u low -h string:synchronous:audio-volume
+        dunstify "                  Muted" -i $icon_name -a "VolBar" -t 500 -r 5555 -u low -h string:synchronous:audio-volume
     # fi
     else
         volume=$(get_volume)
@@ -27,26 +26,25 @@ function send_notification() {
         else
             icon_name="$DIR/notification-audio-volume-high.svg"
         fi
-        dunstify "$volume%  " -i $icon_name -a "VolBar" -t 1000 -r 5555 -u low -h int:value:$(($volume))
+        dunstify "                    $volume%" -i $icon_name -a "VolBar" -t 1000 -r 5555 -u low -h int:value:$(($volume))
     fi
 }
 
 case $1 in
     up)
         # Unmute
-        amixer set Master on >/dev/null
+        wpctl set-mute @DEFAULT_SINK@ 0
 
-        amixer set Master 5%+ >/dev/null
+        wpctl set-volume @DEFAULT_SINK@ 5%+ -l 1
         ;;
     down)
         # Unmute
-        amixer set Master on >/dev/null
+        wpctl set-mute @DEFAULT_SINK@ 0
 
-        amixer set Master 5%- >/dev/null
+        wpctl set-volume @DEFAULT_SINK@ 5%- -l 1
         ;;
     mute)
-        # Toggle mute
-        amixer set Master 1+ toggle >/dev/null
+        wpctl set-mute @DEFAULT_SINK@ toggle
         ;;
 esac
 send_notification
