@@ -1,7 +1,7 @@
 configuration{
     modi: "window,drun,run,ssh,combi";
     font: "Cascadia Code 13";
-    combi-modi: "window,drun,run,ssh";
+    combi-modi: "run,drun,ssh";
     show-icons: true;
 }
 @theme "/usr/share/rofi/themes/DarkBlue.rasi"
