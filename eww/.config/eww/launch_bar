@@ -3,7 +3,7 @@
 # set -euo pipefail
 
 # Завершаем все старые eww бары
-eww kill
+sudo killall -s SIGKILL eww || true
 
 # Получаем список мониторов
 monitors_json=$(hyprctl monitors -j)
