@@ -59,6 +59,8 @@ zathura zathura-pdf-poppler chromium
 
 arcolinux-logout betterlockscreen 
 
+hiddify
+
 grimblast-git swappy -- wayland
 flameshot -- x11
 
