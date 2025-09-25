@@ -51,6 +51,8 @@ dunst rofi udiskie fbreader simple-mtpfs(можно без simple?: gvfs-mtp,jmt
 
 xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
 
+cliphist wl-clip
+
 zsh kitty neovim lsd lolcat btop neofetch nemo p7zip stow engrampa(rar archive)
 
 paru -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick ueberzugpp -- ? python-pynvim  
