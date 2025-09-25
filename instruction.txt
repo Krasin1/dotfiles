@@ -49,7 +49,10 @@ bspwm sxhkd polybar picom  // dmenu
 
 dunst rofi udiskie fbreader simple-mtpfs(можно без simple?: gvfs-mtp,jmtpfs??)
 
-xclip openrazer nitrogen dex(автозагрузка в .config/autostart)
+xclip openrazer dex(автозагрузка в .config/autostart)
+
+nitrogen -- x11
+swaybg -- wayland
 
 cliphist wl-clip
 
