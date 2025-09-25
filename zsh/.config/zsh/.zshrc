@@ -67,6 +67,18 @@ setopt auto_cd extended_glob no_match
 setopt prompt_subst
 stty stop undef		# Disable ctrl-s to freeze terminal.
 
+# from kitty config
+#::  remap Ctrl+L to both scroll the current screen contents into the
+#::  scrollback buffer and clear the screen, instead of just clearing
+#::  the screen.
+ctrl_l() {
+    builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+    builtin zle .reset-prompt
+    builtin zle -R
+}
+zle -N ctrl_l
+bindkey '^l' ctrl_l
+
 # Aliases
 alias ls='lsd'
 alias cat='lolcat'
