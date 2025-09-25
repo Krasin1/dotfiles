@@ -1,0 +1,21 @@
+#!/bin/bash
+
+DIR="/usr/share/icons/Papirus-Dark/48x48/status/"
+
+function is_mute() {
+    wpctl status | grep -A 5 "Sources" | grep -q "MUTED"
+}
+
+wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+if is_mute; then
+    dunstify -i "$DIR/microphone-sensitivity-muted.svg" \
+    "                Microphone" \
+    "           Muted" \
+    -a "VolBar" -t 1000 -r 5555 -u low
+else
+    dunstify -i "$DIR/microphone-sensitivity-high.svg" \
+    "                Microphone" \
+    "          Unmuted" \
+    -a "VolBar" -t 1000 -r 5555 -u low
+fi

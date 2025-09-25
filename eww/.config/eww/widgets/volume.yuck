@@ -2,30 +2,45 @@
 (deflisten volume
   "wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume: //g' | tr -d '.'; pactl subscribe | grep --line-buffered 'sink' | while read -r line; do wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume: //g' | tr -d '.'; done;")
 
+(defpoll mic_mute
+    :interval "2s"
+    "wpctl status | grep -A 5 'Sources' | grep 'MUTED' || echo '' "
+)
+
 (defwidget volume []
-    (eventbox
-        :cursor "pointer"
-        :onclick "~/dotfiles/scripts/volume mute"
-        :onscroll "~/dotfiles/scripts/volume {}"
-        :onrightclick "pavucontrol&"
-        :tooltip "Volume
-pavucontrol"
+    (box :space-evenly false
         :halign "center"
-        (box :orientation "h" 
-            :space-evenly false
-            :valign "fill"
-            :style "min-width:3.5em"
+        (eventbox
+            :onclick "~/dotfiles/scripts/mic_mute"
             (label 
                 :class "icons"
-                :hexpand true
-                :style "${matches(volume, "\\[MUTED\\]") ? "color: red;" : "color: #7ADAA5"}"
-                :text "${matches(volume, "\\[MUTED\\]") ? "󰖁" : "󰕾"}" 
+                :style "color: red;"
+                :text "${mic_mute != "" ? "󰍭" :""}"
             )
-            (label
-                :hexpand true
-                :halign "start"
-                :style "${matches(volume, "\\[MUTED\\]") ? "color: red;" : ""}"
-                :text {replace(volume, "^0|\\[MUTED\\]|\\s", '')}
+        )
+        (eventbox
+            :cursor "pointer"
+            :onclick "~/dotfiles/scripts/volume mute"
+            :onscroll "~/dotfiles/scripts/volume {}"
+            :onrightclick "pavucontrol&"
+            :tooltip "Volume
+    pavucontrol"
+            (box :orientation "h"
+                :space-evenly false
+                :valign "fill"
+                :style "min-width:3.5em"
+                (label
+                    :class "icons"
+                    :hexpand true
+                    :style "${matches(volume, "\\[MUTED\\]") ? "color: red;" : "color: #7ADAA5"}"
+                    :text "${matches(volume, "\\[MUTED\\]") ? "󰖁" : "󰕾"}"
+                )
+                (label
+                    :hexpand true
+                    :halign "start"
+                    :style "${matches(volume, "\\[MUTED\\]") ? "color: red;" : ""}"
+                    :text {replace(volume, "^0|\\[MUTED\\]|\\s", '')}
+                )
             )
         )
     )
