@@ -110,7 +110,7 @@ return {
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			require("lspconfig").lua_ls.setup({
+			vim.lsp.config('lua_ls', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 				settings = {
@@ -137,27 +137,27 @@ return {
 					},
 				},
 			})
-			require("lspconfig").pyright.setup({
+			vim.lsp.config('pyright', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").clangd.setup({
+			vim.lsp.config('clangd', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").rust_analyzer.setup({
+			vim.lsp.config('rust_analyzer', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").jdtls.setup({
+			vim.lsp.config('jdtls', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").ts_ls.setup({
+			vim.lsp.config('ts_ls', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			require("lspconfig").bashls.setup({
+			vim.lsp.config('bashls', {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
