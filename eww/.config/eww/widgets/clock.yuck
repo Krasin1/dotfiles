@@ -3,11 +3,13 @@
 (defwidget clock [mon_name mon_w]
     (button :onclick 
         "if [[ \"${is_open}\" == \"false\" ]]; then \
-            eww open calendar --id 98 --screen ${mon_name} --arg MON_WIDTH=${mon_w} ;\
-            eww update is_open=true; \
+            if ! ps aux | grep -v grep | grep -q 'sleep 0.3; eww close 98'; then \
+                eww open calendar --id 98 --screen ${mon_name} --arg MON_WIDTH=${mon_w} ;\
+                eww update is_open=true; \
+            fi; \
         else \
             eww update is_open=false;\
-            (sleep 0.5; eww close 98) & \
+            sh -c 'sleep 0.3; eww close 98'; \
         fi;"
         :halign "start"
         :space-evenly false

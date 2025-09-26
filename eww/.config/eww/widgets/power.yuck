@@ -17,18 +17,20 @@ RMB: Meme"
             fi"
         :onclick 
             "if [[ \"${power_revealer}\" == \"false\" ]]; then \
-                eww open power_buttons --id 99 --screen ${mon_name} --arg MON_WIDTH=${mon_w};\
-                eww update power_revealer=true; \
-                sh -c 'sleep 10 && \
-                    if [[ $(eww get power_revealer) == \"true\" ]]; then \
-                        eww update power_revealer=false; \
-                        sleep 0.5; \
-                        eww close 99; \
-                    fi;' &\ 
+                if ! ps aux | grep -v grep | grep -q 'sleep 0.3; eww close 99'; then \
+                    eww open power_buttons --id 99 --screen ${mon_name} --arg MON_WIDTH=${mon_w};\
+                    eww update power_revealer=true; \
+                    sh -c 'sleep 10 && \
+                        if [[ $(eww get power_revealer) == \"true\" ]]; then \
+                            eww update power_revealer=false; \
+                            sleep 0.3; \
+                            eww close 99; \
+                        fi;' &\ 
+                fi;\
             else \
                 eww update power_revealer=false; \
                 pkill -f 'eww get power_revealer'& \
-                sh -c 'sleep 0.5; eww close 99;' ;  \
+                sh -c 'sleep 0.3; eww close 99;' ;  \
             fi;"
         (label 
             :style "margin-left: 0.5em; color: #E74C3C"
@@ -42,7 +44,7 @@ RMB: Meme"
     (eventbox 
         :cursor "pointer"
         :onclick "eww update power_revealer=false; \
-            (sleep 0.5; eww close 99; ${command}) &"
+            (sleep 0.3; eww close 99; ${command}) &"
         (box 
             :class "power-button"
             :orientation "v"
