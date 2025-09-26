@@ -1,7 +1,7 @@
 (defvar power_revealer false)
 (defvar is_meme false)
 
-(defwidget power [mon_id mon_w]
+(defwidget power [mon_name mon_w]
     (eventbox
         :halign "start"
         :cursor "pointer"
@@ -9,15 +9,15 @@
 RMB: Meme"
         :onrightclick 
             "if [[ \"${is_meme}\" == \"false\" ]]; then \
-                eww open meme --id 1${mon_id} --screen ${mon_id}; \
+                eww open meme --id 1${mon_name} --screen ${mon_name}; \
                 eww update is_meme=true; \
             else \
                 eww update is_meme=false; \
-                eww close 1${mon_id}; \
+                eww close 1${mon_name}; \
             fi"
         :onclick 
             "if [[ \"${power_revealer}\" == \"false\" ]]; then \
-                eww open power_buttons --id 99 --screen ${mon_id} --arg MON_WIDTH=${mon_w};\
+                eww open power_buttons --id 99 --screen ${mon_name} --arg MON_WIDTH=${mon_w};\
                 eww update power_revealer=true; \
                 sh -c 'sleep 10 && \
                     if [[ $(eww get power_revealer) == \"true\" ]]; then \

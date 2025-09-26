@@ -1,13 +1,13 @@
 (deflisten workspaces "scripts/workspaces.py")
 
-(defwidget workspaces [mon_id]
+(defwidget workspaces [mon_name]
     (box 
         :class "workspaces"
         ;; :style "margin: 0 1em;"
         :orientation "h"
         :halign "fill"
         :hexpand true
-        (for id in {jq(workspaces, '[.[] | select(.monitor_id == ${mon_id}) | .workspace_id]')}
+        (for id in {jq(workspaces, '[.[] | select(.monitor_name == "${mon_name}") | .workspace_id]')}
             (eventbox
                 :cursor "pointer"
                 :onclick "hyprctl dispatch workspace ${id}"

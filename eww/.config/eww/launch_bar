@@ -45,7 +45,14 @@ while read -r monitor; do
     width=$(echo "$monitors_json" | jq -r ".[] | select(.id == $mon_id) | .width")
 
     # Запускаем eww бар для монитора
-    eww open bar --id "$mon_id" --screen "$mon_id" \
-        --arg MON_ID="$mon_id" --arg MON_W="$width" --arg BACKLIGHT="$backlight_match" \
+    eww open bar \
+        --id "$mon_id" \
+        --screen "$mon_name" \
+        --arg MON_W="$width" \
+        --arg MON_NAME="$mon_name" \
+        --arg BACKLIGHT="$backlight_match" \
 
 done <<< "$(echo "$monitors_json" | jq -c '.[] | {id: .id, name: .name, model: .model}')"
+
+# Автоматический запуск на ново подключенных мониторах
+~/.config/eww/scripts/monitor.sh &

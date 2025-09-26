@@ -15,19 +15,19 @@ def run_hyprctl(cmd):
     return json.loads(result.stdout)
 
 def get_workspaces_with_monitors():
-    """Возвращает список {workspace_id, monitor_id, active}"""
+    """Возвращает список {workspace_id, monitor_name, active}"""
     monitors = run_hyprctl("monitors")
     workspaces = run_hyprctl("workspaces")
 
-    # Карта monitor_name → monitor_id и активный workspace
-    monitor_map = {mon["name"]: mon["id"] for mon in monitors}
+    # Карта monitor_name → monitor_name (просто для согласованности)
+    monitor_names = {mon["name"]: mon["name"] for mon in monitors}
     active_map = {mon["name"]: mon["activeWorkspace"]["id"] for mon in monitors}
 
     result = []
     for ws in workspaces:
         result.append({
             "workspace_id": ws["id"],
-            "monitor_id": monitor_map.get(ws["monitor"], None),
+            "monitor_name": monitor_names.get(ws["monitor"], None),
             "active": active_map.get(ws["monitor"], None) == ws["id"]
         })
 
@@ -58,7 +58,7 @@ def main():
     print_workspaces()
     for ws in get_workspaces_with_monitors():
         if ws["active"]:
-            last_active_map[ws["monitor_id"]] = ws["workspace_id"]
+            last_active_map[ws["monitor_name"]] = ws["workspace_id"]
 
     buf = b""
     while True:
@@ -76,12 +76,11 @@ def main():
                 workspaces = get_workspaces_with_monitors()
                 for ws in workspaces:
                     if ws["active"]:
-                        if last_active_map.get(ws["monitor_id"]) != ws["workspace_id"]:
-                            last_active_map[ws["monitor_id"]] = ws["workspace_id"]
+                        if last_active_map.get(ws["monitor_name"]) != ws["workspace_id"]:
+                            last_active_map[ws["monitor_name"]] = ws["workspace_id"]
                             updated = True
                 if updated:
                     print(json.dumps(workspaces, ensure_ascii=False), flush=True)
 
 if __name__ == "__main__":
     main()
-
