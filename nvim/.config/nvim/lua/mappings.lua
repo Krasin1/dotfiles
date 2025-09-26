@@ -71,18 +71,5 @@ map("n", "<Leader>fh", tel .. "help_tags()<cr>", { desc = "Find Help", silent = 
 map("n", "<leader>bt", "<cmd>DapToggleBreakpoint<cr>", {})
 map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
 
--- floaterm
-map("n", "<F1>", ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
-map("t", "<F1>", "<C-\\><C-n>:FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
-
-map("n", "<F2>", ":FloatermPrev<cr>", { desc = "Terminal Previous", silent = true, noremap = true })
-map("t", "<F2>", "<C-\\><C-n>:FloatermPrev<cr>", { desc = "Terminal Previous", silent = true, noremap = true })
-
-map("n", "<F3>", ":FloatermNext<cr>", { desc = "Terminal Next", silent = true, noremap = true })
-map("t", "<F3>", "<C-\\><C-n>:FloatermNext<cr>", { desc = "Terminal Next", silent = true, noremap = true })
-
-map("n", "<F4>", ":FloatermNew<cr>", { desc = "Terminal New", silent = true, noremap = true })
-map("t", "<F4>", "<C-\\><C-n>:FloatermNew<cr>", { desc = "Terminal New", silent = true, noremap = true })
-
-map("n", "<Leader>tt", ":FloatermToggle<cr>", { desc = "Terminal Toggle", silent = true, noremap = true })
-map("n", "<Leader>tp", ":FloatermNew python<cr>", { desc = "Terminal Python", silent = true, noremap = true })
+-- enter normal mode from terminal
+map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true })
