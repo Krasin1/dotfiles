@@ -9,3 +9,5 @@ mpd/.config/mpd/mpd.db
 mpd/.config/mpd/mpdstate
 mpd/.config/mpd/socket*
 *.m3u
+
+ncmpcpp/.config/ncmpcpp/lyrics
