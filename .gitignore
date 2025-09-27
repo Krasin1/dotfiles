@@ -5,9 +5,12 @@ nvim/.config/nvim/lazy-lock.json
 ranger/.config/ranger/plugins/devicons2/__pycache__
 ranger/.config/ranger/plugins/__pycache__
 
+mpd/.config/mpd/log
 mpd/.config/mpd/mpd.db
 mpd/.config/mpd/mpdstate
 mpd/.config/mpd/socket*
 *.m3u
 
 ncmpcpp/.config/ncmpcpp/lyrics
+ncmpcpp/.config/ncmpcpp/error.log
+
