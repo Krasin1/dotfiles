@@ -91,7 +91,8 @@ stow zsh nvim kitty clangd clang-format config_cfgs dunst eww git rofi wallpaper
 paru -S \
     amd-ucode xf86-video-amdgpu vulkan-radeon \
     brillo \
-    bluez bluez-utils \
+    bluez bluez-utils blueman \
+    network-manager-applet \
     clang gdb \
     ttf-cascadia-code ttf-font-awesome ttf-material-design-icons-desktop-git \
     papirus-icon-theme qogir-gtk-theme qogir-icon-theme \
@@ -124,7 +125,7 @@ ddcci-driver-linux-dkms ddcutil
     sudo systemctl daemon-reload
     // if needed manually : echo 'ddcci 0x37' | sudo tee /sys/bus/i2c/devices/i2c-*/new_device 
 
-bluez bluez-utils
+bluez bluez-utils blueman
     sudo systemctl enable bluetooth.service
 
 
