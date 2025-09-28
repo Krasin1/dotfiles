@@ -1,4 +1,5 @@
-$USER_NAME="xxx"
+USER_NAME="xxx"
+
 // WIFI
 ip addr show -> interface name (wlan0)
 iwctl
