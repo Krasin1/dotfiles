@@ -35,13 +35,13 @@ case $1 in
         # Unmute
         wpctl set-mute @DEFAULT_SINK@ 0
 
-        wpctl set-volume @DEFAULT_SINK@ 5%+ -l 1
+        wpctl set-volume @DEFAULT_SINK@ 5%+ -l 1.5
         ;;
     down)
         # Unmute
         wpctl set-mute @DEFAULT_SINK@ 0
 
-        wpctl set-volume @DEFAULT_SINK@ 5%- -l 1
+        wpctl set-volume @DEFAULT_SINK@ 5%- -l 1.5
         ;;
     mute)
         wpctl set-mute @DEFAULT_SINK@ toggle
