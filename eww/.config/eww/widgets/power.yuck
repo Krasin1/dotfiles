@@ -6,7 +6,9 @@
         :halign "start"
         :cursor "pointer"
         :tooltip "LMB: Power menu
+MMB: rofi
 RMB: Meme"
+        :onmiddleclick "pkill -x rofi; rofi -show combi &"
         :onrightclick 
             "if [[ \"${is_meme}\" == \"false\" ]]; then \
                 eww open meme --id 1${mon_name} --screen ${mon_name}; \
