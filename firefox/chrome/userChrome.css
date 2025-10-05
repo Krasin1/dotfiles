@@ -1,0 +1,44 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* only needed once */
+
+/* ROOT - VARS */
+*|*:root {
+ --tab-min-height:      25px !important; /* adjust */
+ --tab-min-width:       60px !important; /* adjust */
+}
+
+/* TABS: height */
+.tabbrowser-tab {
+  min-height: var(--tab-min-height) !important;
+  max-height: var(--tab-min-height) !important;
+}
+
+/* Add numbers to Firefox tabs */
+#tabbrowser-tabs {
+    counter-reset: tab-number;
+}
+
+#tabbrowser-tabs .tabbrowser-tab:not([pinned]) .tab-content::before {
+    counter-increment: tab-number;
+    content: counter(tab-number);
+    margin-inline-end: 5px; /* Adjust spacing as needed */
+    margin-inline-start: -10px;
+    /* font-weight: bold; /* Optional: make the number bold */ */
+    /* color: #888; /* Optional: change the color */ */
+}
+
+
+/* Изменение высоты навигационной панели */
+#nav-bar {
+    min-height: 25px !important;  /* нужная высота в px */
+    max-height: 25px !important;
+}
+
+/* Чтобы адресная строка не ужималась */
+#urlbar-container, #urlbar {
+    min-height: 25px !important;
+}
+
+* 
+{
+    font-family: Cascadia Code, monospace !important;
+}
