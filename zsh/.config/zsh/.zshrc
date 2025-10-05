@@ -108,6 +108,8 @@ alias i='paru -S'
 alias d='paru -Rns'
 alias q='paru -Qs'
 
+alias mirrors="sudo reflector --verbose -c 'Russia,' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
+
 # alias for yazi (file manager)
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
