@@ -6,5 +6,5 @@ Conflicts=shutdown.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c 'while ! lsmod | grep -q ddcci_backlight; do sleep 0.5; done; echo Trying to attach ddcci to %i && success=0 && i=0 && id=$(echo %i | cut -d "-" -f 2) && while ((success < 1)) && ((i++ < 2)); do /usr/bin/ddcutil getvcp 10 -b $id && { success=1 && echo ddcci 0x37 > /sys/bus/i2c/devices/%i/new_device && echo "ddcci attached to %i"; } || sleep 2; done'
+ExecStart=/bin/bash -c 'while ! lsmod | grep -q ddcci_backlight; do sleep 0.5; done; sleep 1; echo Trying to attach ddcci to %i && success=0 && i=0 && id=$(echo %i | cut -d "-" -f 2) && while ((success < 1)) && ((i++ < 2)); do /usr/bin/ddcutil getvcp 10 -b $id && { success=1 && echo ddcci 0x37 > /sys/bus/i2c/devices/%i/new_device && echo "ddcci attached to %i"; } || sleep 2; done'
 Restart=no
