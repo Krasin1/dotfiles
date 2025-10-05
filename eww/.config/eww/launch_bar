@@ -50,7 +50,12 @@ while read -r monitor; do
         --screen "$mon_name" \
         --arg MON_W="$width" \
         --arg MON_NAME="$mon_name" \
-        --arg BACKLIGHT="$backlight_match" \
+        --arg BACKLIGHT="$backlight_match" 
+
+    eww open right_click \
+        --id "10$mon_id" \
+        --screen "$mon_name" \
+        --arg MON_NAME="$mon_name"
 
 done <<< "$(echo "$monitors_json" | jq -c '.[] | {id: .id, name: .name, model: .model}')"
 

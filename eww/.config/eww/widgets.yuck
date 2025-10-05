@@ -12,3 +12,4 @@
 (include "widgets/workspaces.yuck")
 (include "widgets/network.yuck")
 (include "widgets/meme.yuck")
+(include "widgets/right_click.yuck")
