@@ -1,14 +1,15 @@
 # Мои dotfiles для Arch Linux
 
-1) WM - Hyprland
-2) Terminal - Kitty
-3) Editor - Nvim
-4) Bar - Eww widgets
+|Компонент|Приложение|
+|-|-|
+|WM|Hyprland|
+|Terminal|Kitty|
+|Editor|Nvim|
+|Bar|Eww widgets|
 
 Универсальные: как для пк с несколькими мониторами, так и для ноутбука
 
-
-### Как устанавливать?
+## Как устанавливать?
 
 Во время ручной установки надо установить:
 
@@ -23,7 +24,9 @@ malware.sh
 ```
 В этом же файле описано как дойти от запуска iso образа, до момета ```arch-chroot /mnt``` (своими ручками надо попилить диск и смонтировать разделы с windows)
 
-<font color="red">**Внимание!**</font> Устанавливайте на свой страх и риск :)
-#
+> [!CAUTION]
+> Устанавливайте на свой страх и риск :)
+
+## Картинки
 ![pic](picture/screenshot1.png)
 ![pic](picture/screenshot2.png)
