@@ -93,7 +93,18 @@ alias vgpp='g++ -std=c++23 -Wall -Wextra -Wpedantic -Wconversion -fmodules-ts -f
 alias vgc='gcc -std=c2x -Wall -Wextra -Wpedantic -Wconversion -fsanitize=address,leak,undefined'
 alias vcc='clang -std=c2x -Wall -Wextra -Wpedantic -Wconversion -fsanitize=address,leak,undefined'
 
-alias tk='cat $HOME/Token.txt | xclip -sel clip'
+tk() {
+    if command -v wl-copy &> /dev/null && [ -n "$WAYLAND_DISPLAY" ]; then
+        cat "$HOME/Token.txt" | wl-copy
+    elif command -v xclip &> /dev/null ; then
+        cat "$HOME/Token.txt" | xclip -sel clip
+    else
+        echo "Error: Either wl-copy nor xclip found"
+        return 1
+    fi
+    echo "Token copied to clipboard"
+}
+
 alias gs='git status'
 alias gl='git log'
 alias gd='git diff'
