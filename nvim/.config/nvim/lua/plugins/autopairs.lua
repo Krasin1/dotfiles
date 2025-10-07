@@ -1,16 +1,52 @@
 return {
+	-- {
+	--     "m4xshen/autoclose.nvim",
+	--     config = function()
+	--         require("autoclose").setup({
+	--             keys = {
+	--                 ["<"] = { escape = false, close = true, pair = "<>" }
+	--             },
+	--             options = {
+	--                 pair_spaces = true
+	--             }
+	--         })
+	--     end
+	-- },
 	{
-		"windwp/nvim-autopairs",
-		dependencies = {
-			"hrsh7th/nvim-cmp",
+		"saghen/blink.pairs",
+		version = "*", -- (recommended) only required with prebuilt binaries
+		dependencies = "saghen/blink.download",
+
+		--- @module 'blink.pairs'
+		--- @type blink.pairs.Config
+		opts = {
+			mappings = {
+				-- you can call require("blink.pairs.mappings").enable()
+				-- and require("blink.pairs.mappings").disable()
+				-- to enable/disable mappings at runtime
+				enabled = true,
+				-- or disable with `vim.g.pairs = false` (global) and `vim.b.pairs = false` (per-buffer)
+				-- and/or with `vim.g.blink_pairs = false` and `vim.b.blink_pairs = false`
+				pairs = { ['<'] = '>' },
+			},
+			highlights = {
+				enabled = true,
+				-- requires require('vim._extui').enable({}), otherwise has no effect
+				groups = {
+					"BlinkPairsOrange",
+					"BlinkPairsPurple",
+					"BlinkPairsBlue",
+				},
+
+				-- highlights matching pairs under the cursor
+				matchparen = {
+					enabled = true,
+					-- known issue where typing won't update matchparen highlight, disabled by default
+					group = "BlinkPairsMatchParen",
+				},
+			},
+			debug = false,
 		},
-		event = "InsertEnter",
-		config = function()
-			require("nvim-autopairs").setup()
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			local cmp = require("cmp")
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-		end,
 	},
 	{
 		"windwp/nvim-ts-autotag",
