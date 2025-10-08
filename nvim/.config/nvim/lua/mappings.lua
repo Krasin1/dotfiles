@@ -73,3 +73,5 @@ map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
 
 -- enter normal mode from terminal
 map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, { desc = "Open Diagnostics in Float", silent = true, noremap = true })
