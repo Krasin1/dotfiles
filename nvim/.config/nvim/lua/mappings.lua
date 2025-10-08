@@ -60,13 +60,6 @@ map("n", "<leader>k", h .. "ui').nav_file(2)<cr>", { desc = "Harpoon 2", silent 
 map("n", "<leader>l", h .. "ui').nav_file(3)<cr>", { desc = "Harpoon 3", silent = true, noremap = true })
 map("n", "<leader>;", h .. "ui').nav_file(4)<cr>", { desc = "Harpoon 4", silent = true, noremap = true })
 
--- telescope
-local tel = ":lua require('telescope.builtin')."
-map("n", "<Leader>ff", tel .. "find_files()<cr>", { desc = "Find files", silent = true, noremap = true })
-map("n", "<Leader>fg", tel .. "live_grep()<cr>", { desc = "Find Grep", silent = true, noremap = true })
-map("n", "<Leader>fb", tel .. "buffers()<cr>", { desc = "Find Buffers", silent = true, noremap = true })
-map("n", "<Leader>fh", tel .. "help_tags()<cr>", { desc = "Find Help", silent = true, noremap = true })
-
 -- debug
 map("n", "<leader>bt", "<cmd>DapToggleBreakpoint<cr>", {})
 map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
