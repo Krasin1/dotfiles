@@ -15,36 +15,10 @@ return {
 					require("nvim-treesitter").install(lang):await(function()
 						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-						vim.treesitter.start()
+						pcall(vim.treesitter.start, 0)
 					end)
 				end
 			end,
 		})
 	end,
 }
-
--- return {
--- 	{
--- 		"nvim-treesitter/nvim-treesitter",
--- 		dependencies = {
--- 			"RRethy/nvim-treesitter-endwise",
--- 		},
---         branch = 'main',
--- 		build = ":TSUpdate",
--- 		config = function()
--- 			require("nvim-treesitter.configs").setup({
--- 				ensure_installed = "all",
--- 				highlight = {
--- 					enable = true,
--- 					additional_vim_regex_highlighting = false,
--- 				},
--- 				indent = {
--- 					enable = true,
--- 				},
--- 				endwise = {
--- 					enable = true,
--- 				},
--- 			})
--- 		end,
--- 	},
--- }
