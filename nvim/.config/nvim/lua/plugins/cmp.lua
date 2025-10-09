@@ -1,133 +1,135 @@
 return {
-	-- {
-	-- 	"Exafunction/codeium.nvim",
-	-- 	event = "InsertEnter",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"hrsh7th/nvim-cmp",
-	-- 	},
-	-- 	config = function()
-	-- 		require("codeium").setup({})
-	-- 	end,
-	-- },
-	-- {
-	-- 	"L3MON4D3/LuaSnip",
-	-- 	dependencies = {
-	-- 		"saadparwaiz1/cmp_luasnip",
-	-- 		"rafamadriz/friendly-snippets",
-	-- 	},
-	-- },
-	-- {
-	-- 	"hrsh7th/nvim-cmp",
-	-- 	dependencies = {
-	-- 		"hrsh7th/cmp-nvim-lsp",
-	-- 		"hrsh7th/cmp-buffer",
-	-- 		"hrsh7th/cmp-path",
-	-- 		"FelipeLema/cmp-async-path",
-	-- 		"onsails/lspkind.nvim",
-	-- 		"hrsh7th/cmp-cmdline",
-	-- 	},
-	-- 	config = function()
-	-- 		local lspkind = require("lspkind")
-	-- 		local cmp = require("cmp")
-	-- 		require("luasnip.loaders.from_vscode").lazy_load()
-	--
-	-- 		cmp.setup({
-	-- 			mapping = {
-	-- 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
-	-- 				["<C-f>"] = cmp.mapping.scroll_docs(4),
-	-- 				["<C-Space>"] = function()
-	-- 					if cmp.visible() then
-	-- 						cmp.close()
-	-- 					else
-	-- 						cmp.complete({})
-	-- 					end
-	-- 				end,
-	-- 				--[[ ["<C-Space>"] = cmp.mapping.complete(), ]]
-	-- 				--[[ ["<C-e>"] = cmp.mapping.close(), ]]
-	-- 				["<CR>"] = cmp.mapping.confirm({
-	-- 					behavior = cmp.ConfirmBehavior.Replace,
-	-- 					select = true,
-	-- 				}),
-	-- 				["<Tab>"] = function(fallback)
-	-- 					if cmp.visible() then
-	-- 						cmp.select_next_item()
-	-- 					else
-	-- 						fallback()
-	-- 					end
-	-- 				end,
-	-- 				["<S-Tab>"] = function(fallback)
-	-- 					if cmp.visible() then
-	-- 						cmp.select_prev_item()
-	-- 					else
-	-- 						fallback()
-	-- 					end
-	-- 				end,
-	-- 			},
-	-- 			window = {
-	-- 				completion = cmp.config.window.bordered(),
-	-- 				documentation = cmp.config.window.bordered(),
-	-- 			},
-	-- 			sources = {
-	-- 				{ name = "codeium" },
-	-- 				{ name = "nvim_lsp" },
-	-- 				{ name = "luasnip" },
-	-- 				{ name = "buffer" },
-	-- 				{ name = "async_path" },
-	-- 			},
-	-- 			snippet = {
-	-- 				expand = function(args)
-	-- 					require("luasnip").lsp_expand(args.body)
-	-- 				end,
-	-- 			},
-	-- 			formatting = {
-	-- 				format = lspkind.cmp_format({
-	-- 					menu = {
-	-- 						codeium = "[AI]",
-	-- 						luasnip = "[Snip]",
-	-- 						nvim_lsp = "[LSP]",
-	-- 						buffer = "[Buf]",
-	-- 						async_path = "[Path]",
-	-- 					},
-	-- 					symbol_map = { Codeium = "" },
-	-- 				}),
-	-- 			},
-	-- 			experimental = {
-	-- 				native_menu = false,
-	-- 				ghost_text = true,
-	-- 			},
-	-- 		})
-	-- 		-- `/` cmdline setup.
-	-- 		cmp.setup.cmdline({ "/", "?" }, {
-	-- 			mapping = cmp.mapping.preset.cmdline(),
-	-- 			sources = {
-	-- 				{ name = "buffer" },
-	-- 			},
-	-- 			formatting = {
-	-- 				format = lspkind.cmp_format({
-	-- 					menu = {
-	-- 						buffer = "[Buf]",
-	-- 					},
-	-- 				}),
-	-- 			},
-	-- 		})
-	-- 		-- `:` cmdline setup.
-	-- 		cmp.setup.cmdline(":", {
-	-- 			mapping = cmp.mapping.preset.cmdline(),
-	-- 			sources = cmp.config.sources({
-	-- 				{ name = "async_path" },
-	-- 			}, {
-	-- 				{ name = "cmdline" },
-	-- 			}),
-	-- 			formatting = {
-	-- 				format = lspkind.cmp_format({
-	-- 					menu = {
-	-- 						async_path = "[Path]",
-	-- 						cmdline = "[Cmd]",
-	-- 					},
-	-- 				}),
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
+    {
+		"saghen/blink.cmp",
+		dependencies = {
+			{ "xzbdmw/colorful-menu.nvim", opts = {} },
+			{ "Exafunction/codeium.nvim", opts = { enable_cmp_source = false } },
+		},
+
+		event = { "InsertEnter", "CmdlineEnter" },
+		version = "1.*",
+		opts = {
+			keymap = {
+
+				preset = "enter",
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<A-space>"] = { "cancel", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
+
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+
+				["<A-k>"] = { "select_prev", "fallback" },
+				["<A-j>"] = { "select_next", "fallback" },
+
+				["<C-j>"] = { "snippet_forward", "scroll_documentation_down", "fallback" },
+				["<C-k>"] = { "snippet_backward", "scroll_documentation_up", "fallback" },
+
+				["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
+			},
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+			completion = {
+				list = {
+					selection = {
+						preselect = false,
+						auto_insert = true,
+					},
+				},
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 200,
+					window = {
+						border = "bold",
+					},
+				},
+				menu = {
+					max_height = 13,
+					border = "bold",
+					scrollbar = false,
+					draw = {
+						treesitter = { "lsp" },
+						columns = {
+							{ "kind_icon", "label", gap = 2 },
+							{ "kind", "source_id", gap = 1 },
+						},
+						components = {
+							label = {
+								text = function(ctx)
+									return require("colorful-menu").blink_components_text(ctx)
+								end,
+								highlight = function(ctx)
+									return require("colorful-menu").blink_components_highlight(ctx)
+								end,
+							},
+							source_id = {
+								width = { max = 30 },
+								text = function(ctx)
+									local source_map = {
+										lsp = "[LSP]",
+										snippets = "[Snip]",
+										buffer = "[Buf]",
+										path = "[Path]",
+										codeium = "[AI]",
+                                        cmdline = "[Cmd]",
+									}
+									return source_map[ctx.source_id] or string.format("[%s]", ctx.source_id)
+								end,
+								highlight = "BlinkCmpLabel",
+							},
+						},
+					},
+				},
+				ghost_text = {
+					enabled = false,
+				},
+			},
+			snippets = { preset = "luasnip" },
+			sources = {
+				default = { "codeium", "lsp", "path", "snippets", "buffer" },
+				providers = {
+					codeium = { name = "Codeium", module = "codeium.blink", async = true },
+					path = { opts = { show_hidden_files_by_default = true } },
+				},
+			},
+			signature = {
+				enabled = true,
+			},
+			cmdline = {
+				keymap = {
+					preset = "inherit",
+					["<CR>"] = {},
+				},
+				enabled = true,
+				sources = { "buffer", "cmdline", "path" },
+				completion = {
+					menu = { auto_show = true },
+					list = {
+						selection = {
+							preselect = false,
+							auto_insert = true,
+						},
+					},
+				},
+			},
+			fuzzy = { implementation = "rust" },
+		},
+		opts_extend = { "sources.default" },
+	},
+	{
+		"L3MON4D3/LuaSnip",
+		event = { "InsertEnter", "CmdlineEnter" },
+		version = "2.*",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
+		config = function()
+			require("luasnip").setup({ enable_autosnippets = true })
+			require("luasnip.loaders.from_vscode").lazy_load()
+			-- require("luasnip.loaders.from_lua").load({
+			-- paths = { "./lua/grimmvim/plugins/lsp_completion/snippets" },
+			-- })
+		end,
+	},
 }
