@@ -51,14 +51,8 @@ def main():
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.connect(socket_path)
 
-    # Отслеживаем последний активный workspace по мониторам
-    last_active_map = {}
-
     # Сразу выводим текущее состояние
     print_workspaces()
-    for ws in get_workspaces_with_monitors():
-        if ws["active"]:
-            last_active_map[ws["monitor_name"]] = ws["workspace_id"]
 
     buf = b""
     while True:
@@ -70,17 +64,10 @@ def main():
             line, buf = buf.split(b"\n", 1)
             line = line.decode("utf-8", errors="ignore")
 
-            # События, которые могут изменить активный workspace
-            if line.startswith(("workspace", "createworkspace", "destroyworkspace", "focusedmon")):
-                updated = False
-                workspaces = get_workspaces_with_monitors()
-                for ws in workspaces:
-                    if ws["active"]:
-                        if last_active_map.get(ws["monitor_name"]) != ws["workspace_id"]:
-                            last_active_map[ws["monitor_name"]] = ws["workspace_id"]
-                            updated = True
-                if updated:
-                    print(json.dumps(workspaces, ensure_ascii=False), flush=True)
+            # Обрабатываем события, которые могут изменить список workspace'ов
+            if line.startswith(("workspace", "createworkspace", "destroyworkspace", 
+                              "focusedmon", "movewindow")):
+                print_workspaces()
 
 if __name__ == "__main__":
     main()
