@@ -67,4 +67,92 @@ map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
 -- enter normal mode from terminal
 map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true })
 
-vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, { desc = "Open Diagnostics in Float", silent = true, noremap = true })
+vim.keymap.set("n", "gl", function()
+	vim.diagnostic.open_float()
+end, { silent = true, noremap = true, desc = "Open Diagnostics in Float" })
+
+map("n", "<leader>rn", ":lua vim.lsp.buf.rename", { silent = true, noremap = true, desc = "LSP: [R]e[n]ame" })
+--
+map(
+	"n",
+	"gca",
+	":lua require('fzf-lua').lsp_code_actions()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [C]ode [A]ction" }
+)
+map(
+	"x",
+	"gca",
+	":lua require('fzf-lua').lsp_code_actions()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [C]ode [A]ction" }
+)
+-- Find references for the word under your cursor.
+map(
+	"n",
+	"gr",
+	":lua require('fzf-lua').lsp_references()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [R]eferences" }
+)
+-- Jump to the implementation of the word under your cursor.
+map(
+	"n",
+	"gi",
+	":lua require('fzf-lua').lsp_implementations()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [I]mplementation" }
+)
+-- Jump to the definition of the word under your cursor.
+--  This is where a variable was first declared, or where a function is defined, etc.
+--  To jump back, press <C-t>.
+map(
+	"n",
+	"gd",
+	":lua require('fzf-lua').lsp_definitions()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [D]efinition" }
+)
+--
+map(
+	"n",
+	"gD",
+	":lua require('fzf-lua').lsp_declarations()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [D]eclaration" }
+)
+-- Fuzzy find all the symbols in your current document.
+map(
+	"n",
+	"gO",
+	":lua require('fzf-lua').lsp_document_symbols()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: Open Document Symbols" }
+)
+-- Fuzzy find all the symbols in your current workspace.
+--  Similar to document symbols, except searches over your entire project.
+map(
+	"n",
+	"gW",
+	":lua require('fzf-lua').lsp_live_workspace_symbols()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: Open Workspace Symbols" }
+)
+-- Jump to the type of the word under your cursor.
+--  Useful when you're not sure what type a variable is and you want to see
+--  the definition of its *type*, not where it was *defined*.
+map(
+	"n",
+	"gtd",
+	":lua require('fzf-lua').lsp_typedefs()<cr>",
+	{ silent = true, noremap = true, desc = "LSP: [G]oto [T]ype [D]efinition" }
+)
+
+-- The following code creates a keymap to toggle inlay hints in your code
+local function toggle_inlay_hints()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+	vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+end
+
+-- Маппинг
+vim.keymap.set(
+	"n",
+	"<leader>th",
+	toggle_inlay_hints,
+	{ silent = true, noremap = true, desc = "[T]oggle inlay [H]ints" }
+)
+-- map("n", "<leader>th", ":lua function() local bufnr = vim.api.nvim_get_current_buf() local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) vim.lsp.inlay_hint.enable(not enabled, bufnr) end <cr>", { silent = true, noremap = true, desc = "LSP: [T]oggle Inlay [H]ints"})
+-- map("n", "<leader>th", ":lua (function() local bufnr = vim.api.nvim_get_current_buf() local enabled = vim.lsp.inlay_hint.is_enabled(bufnr) vim.lsp.inlay_hint.enable(not enabled, bufnr) end)()<cr>", { silent = true, noremap = true, desc = "LSP: [T]oggle Inlay [H]ints"})
