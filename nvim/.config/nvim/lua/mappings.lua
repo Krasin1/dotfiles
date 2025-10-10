@@ -71,7 +71,7 @@ vim.keymap.set("n", "gl", function()
 	vim.diagnostic.open_float()
 end, { silent = true, noremap = true, desc = "Open Diagnostics in Float" })
 
-map("n", "<leader>rn", ":lua vim.lsp.buf.rename", { silent = true, noremap = true, desc = "LSP: [R]e[n]ame" })
+map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<cr>", { silent = true, noremap = true, desc = "LSP: [R]e[n]ame" })
 --
 map(
 	"n",
