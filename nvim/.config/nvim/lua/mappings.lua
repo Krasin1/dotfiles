@@ -44,7 +44,7 @@ map("n", "<C-l>", "<C-w>l", { silent = true, noremap = true })
 
 -- Harpoon
 local h = ":lua require('harpoon."
-map("n", "<leader>a", h .. "mark').add_file()<cr>", { desc = "Add file to harpoon", silent = true, noremap = true })
+map("n", "<leader>ha", h .. "mark').add_file()<cr>", { desc = "Add file to harpoon", silent = true, noremap = true })
 map(
 	"n",
 	"<leader>d",
@@ -75,15 +75,15 @@ map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<cr>", { silent = true, noremap
 --
 map(
 	"n",
-	"gca",
+	"<leader>a",
 	":lua require('fzf-lua').lsp_code_actions()<cr>",
-	{ silent = true, noremap = true, desc = "LSP: [G]oto [C]ode [A]ction" }
+	{ silent = true, noremap = true, desc = "LSP: Code [A]ction" }
 )
 map(
 	"x",
-	"gca",
+	"<leader>a",
 	":lua require('fzf-lua').lsp_code_actions()<cr>",
-	{ silent = true, noremap = true, desc = "LSP: [G]oto [C]ode [A]ction" }
+	{ silent = true, noremap = true, desc = "LSP: Code [A]ction" }
 )
 -- Find references for the word under your cursor.
 map(
