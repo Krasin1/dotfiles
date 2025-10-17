@@ -64,6 +64,25 @@ map("n", "<leader>;", h .. "ui').nav_file(4)<cr>", { desc = "Harpoon 4", silent 
 map("n", "<leader>bt", "<cmd>DapToggleBreakpoint<cr>", {})
 map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
 
+-- Toggle between cp1251 and the original encoding
+local original_encoding = nil
+vim.keymap.set("n", "<leader>ee", function()
+  local enc = vim.bo.fileencoding
+  if enc == "cp1251" then
+    if original_encoding then
+      vim.cmd("e ++enc=" .. original_encoding)
+      print("🔤 Encoding: " .. original_encoding)
+    else
+      vim.cmd("e ++enc=utf-8")
+      print("🔤 Encoding: utf-8 (no previous encoding saved)")
+    end
+  else
+    original_encoding = enc
+    vim.cmd("e ++enc=cp1251")
+    print("🔤 Encoding: cp1251 (saved " .. enc .. ")")
+  end
+end, { desc = "Toggle CP1251 and previous encoding" })
+
 -- enter normal mode from terminal
 map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true })
 
