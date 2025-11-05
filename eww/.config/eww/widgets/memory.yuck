@@ -2,7 +2,7 @@
 
 (defwidget disk_space []
     (eventbox 
-        :onclick "sudo -E env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland qdirstat &"
+        :onclick "zsh -ic 'sudo-x qdirstat'&"
         :cursor "pointer"
         :tooltip "Disk used
 qdirstat"

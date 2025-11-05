@@ -121,6 +121,42 @@ alias q='paru -Qs'
 
 alias mirrors="sudo reflector --verbose -c 'Russia,' -a 6 --sort rate --save /etc/pacman.d/mirrorlist"
 
+# sudo-gui: запускает GUI-приложение с sudo, временно разрешая root доступ к XWayland
+# пример: sudo-gui qdirstat или sudo-gui gparted
+sudo-x() {
+    if [[ $# -eq 0 ]]; then
+        echo "Использование: sudo-x <команда> [аргументы...]"
+        return 1
+    fi
+
+    if ! command -v xhost >/dev/null 2>&1; then
+        echo "Ошибка: xhost не найден. Установи пакет 'xorg-xhost'."
+        return 1
+    fi
+
+    # Разрешаем root доступ к текущему X сеансу
+    xhost +SI:localuser:root >/dev/null 2>&1 || {
+        echo "Не удалось выполнить xhost +SI:localuser:root"
+        return 1
+    }
+    # Убираем разрешение при выходе (включая Ctrl+C)
+    trap 'xhost -SI:localuser:root >/dev/null 2>&1' EXIT INT TERM
+
+    # Запускаем команду через sudo -E (чтобы сохранить DISPLAY)
+    sudo -E "$@"
+    local rc=$?
+
+    # Откатываем разрешение сразу после выполнения
+    trap - EXIT INT TERM
+    xhost -SI:localuser:root >/dev/null 2>&1
+
+    return $rc
+}
+# Используем существующее автодополнение sudo
+_sudo-x() { _sudo "$@" }
+# Привязываем функцию к sudo-gui
+compdef _sudo-x sudo-x
+
 # alias for yazi (file manager)
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
