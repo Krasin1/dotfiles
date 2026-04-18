@@ -3,3 +3,5 @@ inode/directory=nemo.desktop
 x-scheme-handler/discord=vesktop.desktop
 text/plain=nvim.desktop
 x-scheme-handler/terminal=kitty.desktop
+application/x-wine-extension-ini=nvim.desktop
+image/png=nsxiv.desktop

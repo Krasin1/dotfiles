@@ -83,7 +83,40 @@ vim.keymap.set("n", "<leader>ee", function()
   end
 end, { desc = "Toggle CP1251 and previous encoding" })
 
--- enter normal mode from terminal
+-- Alternative version with explicit state tracking
+local encoding_cycle = {
+    "cp1251",
+    "cp866",
+    "original"
+}
+local original_encoding = nil
+local current_cycle_index = 0
+
+vim.keymap.set("n", "<leader>ee", function()
+    local current_enc = vim.bo.fileencoding
+    
+    -- Initialize on first use
+    if current_cycle_index == 0 then
+        original_encoding = current_enc
+        current_cycle_index = 1
+    else
+        current_cycle_index = (current_cycle_index % #encoding_cycle) + 1
+    end
+    
+    local target_enc = encoding_cycle[current_cycle_index]
+    if target_enc == "original" then
+        target_enc = original_encoding or "utf-8"
+    end
+    
+    vim.cmd("e ++enc=" .. target_enc)
+    
+    local display_enc = target_enc
+    if target_enc == original_encoding then
+        display_enc = display_enc .. " (original)"
+    end
+    print("🔤 Encoding: " .. display_enc)
+end, { desc = "Cycle encodings: original -> CP1251 -> CP866" })-- enter normal mode from terminal
+
 map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "gl", function()
