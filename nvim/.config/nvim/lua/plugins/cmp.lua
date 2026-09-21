@@ -3,7 +3,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			{ "xzbdmw/colorful-menu.nvim", opts = {} },
-			{ "Exafunction/codeium.nvim", opts = { enable_cmp_source = false } },
+			-- { "Exafunction/codeium.nvim", opts = { enable_cmp_source = false } },
 		},
 
 		event = { "InsertEnter", "CmdlineEnter" },
@@ -71,7 +71,7 @@ return {
 										snippets = "[Snip]",
 										buffer = "[Buf]",
 										path = "[Path]",
-										codeium = "[AI]",
+										-- codeium = "[AI]",
                                         cmdline = "[Cmd]",
 									}
 									return source_map[ctx.source_id] or string.format("[%s]", ctx.source_id)
@@ -87,9 +87,10 @@ return {
 			},
 			snippets = { preset = "luasnip" },
 			sources = {
-				default = { "codeium", "lsp", "path", "snippets", "buffer" },
+				-- default = { "codeium", "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "snippets", "buffer" },
 				providers = {
-					codeium = { name = "Codeium", module = "codeium.blink", async = true },
+					-- codeium = { name = "Codeium", module = "codeium.blink", async = true },
 					path = { opts = { show_hidden_files_by_default = true } },
 				},
 			},
