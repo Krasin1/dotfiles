@@ -15,7 +15,7 @@
 
 ```
 pacstrap -K /mnt base base-devel linux linux-firmware sof-firmware linux-headers neovim \
-   git grub dosfstools efibootmgr os-prober mtools networkmanager rustup zsh
+   git openssh grub dosfstools efibootmgr os-prober mtools networkmanager rustup zsh
 ```
 
 После ```arch-chroot /mnt``` надо склонировать этот репозирорий в домашнюю директорию рута и запустить 

@@ -21,7 +21,7 @@ mkdir -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
 swapon /dev/sda2
 
-pacstrap -K /mnt base base-devel linux linux-firmware sof-firmware linux-headers neovim git grub dosfstools efibootmgr os-prober mtools networkmanager rustup zsh
+pacstrap -K /mnt base base-devel linux linux-firmware sof-firmware linux-headers neovim git openssh grub dosfstools efibootmgr os-prober mtools networkmanager rustup zsh
 
 // WINDOWS DRIVE
 mkdir -p /mnt/media/windows1
@@ -262,9 +262,10 @@ libc++
 -- ssh keys for git
     ssh-keygen -t ed25519 -C "bdunaeb@yandex.ru" -f ~/.ssh/git_ssh
     maybe chmod 700 ~/.ssh
-    systemctl --user enable --now ssh-agent.service
+    # ssh-agent включается автоматически (first_login.sh -> systemctl --user enable --now ssh-agent)
     env = SSH_AUTH_SOCK, $XDG_RUNTIME_DIR/ssh-agent.socket
-    ssh-add ~/.ssh/git_ssh
+    # ключи попадают в агент сами: stow-пакет ssh = ~/.ssh/config (AddKeysToAgent yes)
+    # проверить: ssh-add -l; вручную: ssh-add -t 8h ~/.ssh/git_ssh ~/.ssh/git_lab_ssh
 
 -- libvirt
     paru -S swtpm qemu qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
