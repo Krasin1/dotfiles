@@ -31,6 +31,9 @@ return {
 				nerd_font_variant = "mono",
 			},
 			completion = {
+				trigger = {
+					prefetch_on_insert = false,
+				},
 				list = {
 					selection = {
 						preselect = false,
@@ -88,9 +91,16 @@ return {
 			snippets = { preset = "luasnip" },
 			sources = {
 				-- default = { "codeium", "lsp", "path", "snippets", "buffer" },
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "minuet", "lsp", "path", "snippets", "buffer" },
 				providers = {
 					-- codeium = { name = "Codeium", module = "codeium.blink", async = true },
+					minuet = {
+						name = "Minuet",
+						module = "minuet.blink",
+						async = true,
+						timeout_ms = 3000,
+						score_offset = 50,
+					},
 					path = { opts = { show_hidden_files_by_default = true } },
 				},
 			},
@@ -134,3 +144,4 @@ return {
 		end,
 	},
 }
+

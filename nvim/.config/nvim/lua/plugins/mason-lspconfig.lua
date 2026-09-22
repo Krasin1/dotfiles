@@ -53,8 +53,19 @@ return {
 					"typescript",
 					"typescriptreact",
 					"typescript.tsx",
+                    "vue",
 				},
 				init_options = {
+                    plugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            -- location = require('mason-registry').get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server',
+                            -- location = "", -- Set this to the plugin path if not automatically found
+                            location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                            languages = { "vue" },
+                            configNamespace = 'typescript',
+                        }
+                    },
 					preferences = {
 						disableSuggestions = true,
 					},
@@ -108,6 +119,15 @@ return {
 					},
 				},
 			},
+			-- clangd
+			clangd = {
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--clang-tidy-checks=-*,-clang-analyzer-*,performance-*,bugprone-*,qt-*,clazy-*",
+				},
+			},
 		}
 
 		-- enable lsps
@@ -117,3 +137,4 @@ return {
 		end
 	end,
 }
+

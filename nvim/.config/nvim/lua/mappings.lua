@@ -125,18 +125,27 @@ end, { silent = true, noremap = true, desc = "Open Diagnostics in Float" })
 
 map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<cr>", { silent = true, noremap = true, desc = "LSP: [R]e[n]ame" })
 --
-map(
-	"n",
-	"<leader>a",
-	":lua require('fzf-lua').lsp_code_actions()<cr>",
-	{ silent = true, noremap = true, desc = "LSP: Code [A]ction" }
-)
-map(
-	"x",
-	"<leader>a",
-	":lua require('fzf-lua').lsp_code_actions()<cr>",
-	{ silent = true, noremap = true, desc = "LSP: Code [A]ction" }
-)
+vim.keymap.set("n", "<leader>a", function()
+	local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+	local text = vim.api.nvim_buf_get_lines(0, lnum, lnum + 1, false)[1] or ""
+	local orig = vim.lsp.buf.code_action
+	vim.lsp.buf.code_action = function(opts)
+		opts = opts or {}
+		opts.range = {
+			start = { lnum + 1, 0 },
+			["end"] = { lnum + 1, #text - 1 },
+		}
+		return orig(opts)
+	end
+	local ok, err = pcall(require("fzf-lua").lsp_code_actions)
+	vim.lsp.buf.code_action = orig
+	if not ok then
+		error(err)
+	end
+end, { desc = "LSP: Code [A]ction (whole line)", silent = true, noremap = true })
+vim.keymap.set("x", "<leader>a", function()
+	require("fzf-lua").lsp_code_actions({ silent = true })
+end, { desc = "LSP: Code [A]ction", silent = true, noremap = true })
 -- Find references for the word under your cursor.
 map(
 	"n",
