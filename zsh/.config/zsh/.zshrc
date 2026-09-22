@@ -194,4 +194,4 @@ fastfetch
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 
 # opencode
-export PATH=/home/sysop/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
