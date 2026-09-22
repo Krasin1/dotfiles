@@ -166,7 +166,32 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+op() {
+    echo "SSH starting..."
+    # Запускаем SSH туннель в фоне
+    ssh -f -N -L 1234:127.0.0.1:1234 -p 41922 -i ~/.ssh/home_pc xxx@naobumluboi.duckdns.org
+    SSH_PID=$!
+    
+    echo "SSH tunnel started (PID: $SSH_PID)"
+    
+    # Запускаем программу opencode и ждём её завершения
+    command opencode "$@"
+    OPENCODE_EXIT=$?
+    
+    # Когда opencode закрылся — убиваем SSH туннель
+    kill $SSH_PID 2>/dev/null
+    echo "SSH tunnel closed"
+    
+    return $OPENCODE_EXIT
+}
+
 export VISUAL=nvim
 export EDITOR=nvim
 
-neofetch
+fastfetch
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+
+# opencode
+export PATH=/home/sysop/.opencode/bin:$PATH
