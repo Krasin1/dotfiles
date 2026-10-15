@@ -286,3 +286,22 @@ libc++
         service:
             virtlo-fs service automatic start
         add hardware -> filesystem virtiofs
+
+-- dns over tls
+    nmcli connection modify "Wired connection 1" ipv4.ignore-auto-dns yes
+    nmcli connection modify "Wired connection 1" ipv4.dns "1.1.1.1 1.0.0.1"
+
+    nmcli connection down "Wired connection 1"
+    nmcli connection up "Wired connection 1"
+
+    /etc/systemd/resolved.conf.d/dns_servers.conf:
+        [Resolve]
+        DNS=1.1.1.1 1.0.0.1
+        DNSOverTLS=yes
+        Domains=~.
+        Cache=yes
+
+    sudo systemctl enable --now systemd-resolved 
+    resolvectl status  
+
+
