@@ -305,4 +305,5 @@ libc++
     sudo systemctl enable --now systemd-resolved 
     resolvectl status  
 
-
+-- sync files
+syncthing
