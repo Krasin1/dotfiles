@@ -36,12 +36,6 @@ map("v", ">", ">gv", { silent = true, noremap = true })
 map("v", "J", ":m '>+1<CR>gv=gv", { silent = true, noremap = true })
 map("v", "K", ":m '<-2<CR>gv=gv", { silent = true, noremap = true })
 
--- Better window navigation
-map("n", "<C-h>", "<C-w>h", { silent = true, noremap = true })
-map("n", "<C-j>", "<C-w>j", { silent = true, noremap = true })
-map("n", "<C-k>", "<C-w>k", { silent = true, noremap = true })
-map("n", "<C-l>", "<C-w>l", { silent = true, noremap = true })
-
 -- Harpoon
 local h = ":lua require('harpoon."
 map("n", "<leader>ha", h .. "mark').add_file()<cr>", { desc = "Add file to harpoon", silent = true, noremap = true })

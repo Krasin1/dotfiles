@@ -14,3 +14,5 @@ mpd/.config/mpd/socket*
 ncmpcpp/.config/ncmpcpp/lyrics
 ncmpcpp/.config/ncmpcpp/error.log
 
+tmux/tpm
+tmux/plugins
