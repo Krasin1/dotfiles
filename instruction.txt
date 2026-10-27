@@ -266,6 +266,7 @@ libc++
     env = SSH_AUTH_SOCK, $XDG_RUNTIME_DIR/ssh-agent.socket
     # ключи попадают в агент сами: stow-пакет ssh = ~/.ssh/config (AddKeysToAgent yes)
     # проверить: ssh-add -l; вручную: ssh-add -t 8h ~/.ssh/git_ssh ~/.ssh/git_lab_ssh
+    keychain 
 
 -- libvirt
     paru -S swtpm qemu qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
