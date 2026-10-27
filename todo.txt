@@ -5,6 +5,7 @@ markdown-preview.nvim
 which-key
 возможно harpoon
 mini.ai 
+fff.nvim - может можно установить в систему а не через mason
 
 [arch]
 dunst - уведомления
@@ -16,3 +17,4 @@ ranger - либо разобраться с файлами по умолчани
 когда-нибудь undervolt видюхи
 xdotool
 mtp - подключить android 
+

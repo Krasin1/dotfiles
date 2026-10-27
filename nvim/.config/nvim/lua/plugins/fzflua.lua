@@ -16,16 +16,16 @@ return {
         }
     },
     keys = {
-        {
-            "<leader>ff",
-            function() require('fzf-lua').files() end,
-            desc = "Find files"
-        },
-        {
-            "<leader>fg",
-            function() require('fzf-lua').live_grep() end,
-            desc = "Find Grep"
-        },
+        -- {
+        --     "<leader>ff",
+        --     function() require('fzf-lua').files() end,
+        --     desc = "Find files"
+        -- },
+        -- {
+        --     "<leader>fg",
+        --     function() require('fzf-lua').live_grep() end,
+        --     desc = "Find Grep"
+        -- },
         {
             "<leader>fb",
             function() require('fzf-lua').buffers() end,
