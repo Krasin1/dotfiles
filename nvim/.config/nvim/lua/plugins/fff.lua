@@ -6,6 +6,7 @@ return {
 		require("fff.download").download_or_build_binary()
 	end,
 	opts = {
+		prompt = "> ",
 		debug = {
 			enabled = false,
 			show_scores = true,
