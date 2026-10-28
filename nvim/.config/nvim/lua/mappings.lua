@@ -16,6 +16,10 @@ map("n", "<M-k>", ":resize +2<cr>", { desc = "Increase window height", silent = 
 map("n", "<M-h>", ":vertical resize +2<cr>", { desc = "Increase window width", silent = true, noremap = true })
 map("n", "<M-l>", ":vertical resize -2<cr>", { desc = "Decrease window width", silent = true, noremap = true })
 
+-- Alt + j/k to scroll command-line history
+map("c", "<M-j>", "<C-n>", { desc = "Next command history entry", silent = true, noremap = true })
+map("c", "<M-k>", "<C-p>", { desc = "Previous command history entry", silent = true, noremap = true })
+
 -- TAB in general mode will move to text buffer
 map("n", "<TAB>n", ":bn<CR>", { desc = "Next buffer", silent = true, noremap = true })
 map("n", "<TAB>p", ":bp<CR>", { desc = "Previous buffer", silent = true, noremap = true })

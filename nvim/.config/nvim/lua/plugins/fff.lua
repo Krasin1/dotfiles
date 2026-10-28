@@ -11,6 +11,11 @@ return {
 			enabled = false,
 			show_scores = true,
 		},
+		keymaps = {
+			-- fff deep-merges arrays by index, so the defaults must be repeated
+			move_up = { "<Up>", "<C-p>", "<A-k>" },
+			move_down = { "<Down>", "<C-n>", "<A-j>" },
+		},
 	},
 	lazy = false, -- the plugin lazy-initialises itself
 	keys = {
