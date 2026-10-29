@@ -22,6 +22,9 @@ return {
 		config = function()
 			local dapui = require("dapui")
 			local dap = require("dap")
+
+            dapui.setup()
+
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()
 			end
@@ -61,7 +64,7 @@ return {
 			-- }
 			dap.adapters.gdb = {
 				type = "executable",
-				command = "gdb",
+				command = "/usr/local/bin/gdb",
 				args = { "-i", "dap" },
 			}
 			dap.configurations.cpp = {
