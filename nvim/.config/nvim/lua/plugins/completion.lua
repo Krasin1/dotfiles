@@ -98,7 +98,9 @@ return {
 						name = "Minuet",
 						module = "minuet.blink",
 						async = true,
-						timeout_ms = 3000,
+						-- Slightly above minuet's request_timeout (6s), so a
+						-- response arriving at the curl deadline is not dropped.
+						timeout_ms = 7000,
 						score_offset = 50,
 					},
 					path = { opts = { show_hidden_files_by_default = true } },
