@@ -42,7 +42,7 @@ return {
 			require("mini.align").setup({
                 mappings = {
                     start = '',
-                    start_with_preview = '<leader>fa'
+                    start_with_preview = '<leader>ta'
                 },
             })
 		end,
