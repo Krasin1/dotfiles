@@ -20,9 +20,9 @@ map("n", "<M-l>", ":vertical resize -2<cr>", { desc = "Decrease window width", s
 map("c", "<M-j>", "<C-n>", { desc = "Next command history entry", silent = true, noremap = true })
 map("c", "<M-k>", "<C-p>", { desc = "Previous command history entry", silent = true, noremap = true })
 
--- TAB in general mode will move to text buffer
-map("n", "<TAB>n", ":bn<CR>", { desc = "Next buffer", silent = true, noremap = true })
-map("n", "<TAB>p", ":bp<CR>", { desc = "Previous buffer", silent = true, noremap = true })
+-- move between buffer and close
+map("n", "<C-l>", ":bn<CR>", { desc = "Next buffer", silent = true, noremap = true })
+map("n", "<C-h>", ":bp<CR>", { desc = "Previous buffer", silent = true, noremap = true })
 map("n", "<TAB>q", ":bd!<CR>", { desc = "Close buffer", silent = true, noremap = true })
 
 -- Alternate way to save
@@ -49,7 +49,6 @@ map(
 	h .. "ui').toggle_quick_menu()<cr>",
 	{ desc = "Open harpoon mark", silent = true, noremap = true }
 )
-
 map("n", "<leader>hn", h .. "ui').nav_next()<cr>", { desc = "Next harpoon file", silent = true, noremap = true })
 map("n", "<leader>hp", h .. "ui').nav_prev()<cr>", { desc = "Prev harpoon file", silent = true, noremap = true })
 
@@ -65,57 +64,57 @@ map("n", "<leader>bc", "<cmd>DapContinue<cr>", {})
 -- Toggle between cp1251 and the original encoding
 local original_encoding = nil
 vim.keymap.set("n", "<leader>ee", function()
-  local enc = vim.bo.fileencoding
-  if enc == "cp1251" then
-    if original_encoding then
-      vim.cmd("e ++enc=" .. original_encoding)
-      print("🔤 Encoding: " .. original_encoding)
-    else
-      vim.cmd("e ++enc=utf-8")
-      print("🔤 Encoding: utf-8 (no previous encoding saved)")
-    end
-  else
-    original_encoding = enc
-    vim.cmd("e ++enc=cp1251")
-    print("🔤 Encoding: cp1251 (saved " .. enc .. ")")
-  end
+	local enc = vim.bo.fileencoding
+	if enc == "cp1251" then
+		if original_encoding then
+			vim.cmd("e ++enc=" .. original_encoding)
+			print("🔤 Encoding: " .. original_encoding)
+		else
+			vim.cmd("e ++enc=utf-8")
+			print("🔤 Encoding: utf-8 (no previous encoding saved)")
+		end
+	else
+		original_encoding = enc
+		vim.cmd("e ++enc=cp1251")
+		print("🔤 Encoding: cp1251 (saved " .. enc .. ")")
+	end
 end, { desc = "Toggle CP1251 and previous encoding" })
 
 -- Alternative version with explicit state tracking
 local encoding_cycle = {
-    "cp1251",
-    "cp866",
-    "original"
+	"cp1251",
+	"cp866",
+	"original",
 }
 local original_encoding = nil
 local current_cycle_index = 0
 
 vim.keymap.set("n", "<leader>ee", function()
-    local current_enc = vim.bo.fileencoding
-    
-    -- Initialize on first use
-    if current_cycle_index == 0 then
-        original_encoding = current_enc
-        current_cycle_index = 1
-    else
-        current_cycle_index = (current_cycle_index % #encoding_cycle) + 1
-    end
-    
-    local target_enc = encoding_cycle[current_cycle_index]
-    if target_enc == "original" then
-        target_enc = original_encoding or "utf-8"
-    end
-    
-    vim.cmd("e ++enc=" .. target_enc)
-    
-    local display_enc = target_enc
-    if target_enc == original_encoding then
-        display_enc = display_enc .. " (original)"
-    end
-    print("🔤 Encoding: " .. display_enc)
-end, { desc = "Cycle encodings: original -> CP1251 -> CP866" })-- enter normal mode from terminal
+	local current_enc = vim.bo.fileencoding
 
-map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true })
+	-- Initialize on first use
+	if current_cycle_index == 0 then
+		original_encoding = current_enc
+		current_cycle_index = 1
+	else
+		current_cycle_index = (current_cycle_index % #encoding_cycle) + 1
+	end
+
+	local target_enc = encoding_cycle[current_cycle_index]
+	if target_enc == "original" then
+		target_enc = original_encoding or "utf-8"
+	end
+
+	vim.cmd("e ++enc=" .. target_enc)
+
+	local display_enc = target_enc
+	if target_enc == original_encoding then
+		display_enc = display_enc .. " (original)"
+	end
+	print("🔤 Encoding: " .. display_enc)
+end, { desc = "Cycle encodings: original -> CP1251 -> CP866" }) -- enter normal mode from terminal
+
+map("t", "<C-Backspace>", "<C-\\><C-n>", { noremap = true, silent = true }) -- TODO: maybe remove ?
 
 vim.keymap.set("n", "gl", function()
 	vim.diagnostic.open_float()
