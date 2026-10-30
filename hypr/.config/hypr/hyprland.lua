@@ -1,7 +1,7 @@
 -- ╔══════════════════════════════════════════════════════════════╗
 -- ║  Hyprland configuration (Lua)                                ║
 -- ║  Hyprland 0.57+ no longer reads legacy *.conf files.         ║
--- ║  The old .conf files are kept only as a reference.           ║
+-- ║  The old .conf files were migrated to Lua and removed.       ║
 -- ╚══════════════════════════════════════════════════════════════╝
 --
 -- See https://wiki.hypr.land/configuring/
