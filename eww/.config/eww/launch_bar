@@ -2,44 +2,25 @@
 
 # set -euo pipefail
 
-# Завершаем все старые eww бары
-sudo killall -s SIGKILL eww || true
+# Завершаем старые eww бары (eww работает от текущего пользователя,
+# sudo тут не нужен и может залипнуть на запросе пароля)
+eww kill >/dev/null 2>&1 || true
 
 # Получаем список мониторов
 monitors_json=$(hyprctl monitors -j)
 
-services=$(systemctl list-units "ddcci@i2c-*.service" --all --no-legend --plain | awk '{print $1}' || true)
-for service in $services; do
-    for ((i=0; i<20; i++)) do
-        status_output=$( systemctl status "$service" --no-pager 2>/dev/null || true) 
-        echo "$status_output" | grep -q "Finished ddcci handler" 
-        if [ $? -eq 0 ]; then
-            break
-        fi
-        notify-send "Eww bar" "Waiting for ddcci to start\n$service  $i \/ 20" -r 666
-        sleep 1;
-    done
-done
+# Hyprland уже включил выходы, но ddcci@.service мог сдаться, пока монитор
+# спал. Повторяем udev-add для i2c-адаптеров — правило заново запустит юнит.
+# Для уже подключённых ddcci юнит выходит мгновенно.
+sudo -n udevadm trigger --subsystem-match=i2c --action=add >/dev/null 2>&1 || true
+
+# Не блокируем запуск бара: виджет яркости сам подхватит backlight,
+# как только он появится (scripts/backlight-map.sh).
 
 # Проходим по каждому монитору
 while read -r monitor; do
     mon_id=$(echo "$monitor" | jq -r '.id')
     mon_name=$(echo "$monitor" | jq -r '.name')
-    mon_model=$(echo "$monitor" | jq -r '.model')
-    model_short=$(echo "$mon_model" | awk '{$1=""; sub(/^ /,""); print}')
-
-    backlight_match=""
-
-    # Ищем backlight для монитора
-    for dev in /sys/class/backlight/*; do
-        [[ -d "$dev" ]] || continue
-        udev_info=$(udevadm info --no-pager -a -p "$dev")
-
-        if echo "$udev_info" | grep -qiE "$mon_name|$mon_model|$model_short"; then
-            backlight_match=$(basename "$dev")
-            break
-        fi
-    done
 
     # Получаем ширину монитора
     width=$(echo "$monitors_json" | jq -r ".[] | select(.id == $mon_id) | .width")
@@ -49,15 +30,14 @@ while read -r monitor; do
         --id "$mon_id" \
         --screen "$mon_name" \
         --arg MON_W="$width" \
-        --arg MON_NAME="$mon_name" \
-        --arg BACKLIGHT="$backlight_match" 
+        --arg MON_NAME="$mon_name"
 
     eww open right_click \
         --id "10$mon_id" \
         --screen "$mon_name" \
         --arg MON_NAME="$mon_name"
 
-done <<< "$(echo "$monitors_json" | jq -c '.[] | {id: .id, name: .name, model: .model}')"
+done <<< "$(echo "$monitors_json" | jq -c '.[] | {id: .id, name: .name}')"
 
 # Автоматический запуск на ново подключенных мониторах
 ~/.config/eww/scripts/monitor.sh &

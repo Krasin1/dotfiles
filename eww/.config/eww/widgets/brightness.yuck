@@ -1,29 +1,28 @@
-(defpoll brightness_status
-    :interval "24h"
-    'if ls /sys/class/backlight/* >/dev/null 2>&1; then \
-        echo "true";\
-    else \
-        echo "false";\
-        sleep 1 && eww update brightness_status=false;\
-    fi'
+;; Карта { "DP-1": "ddcci4", "DP-2": "ddcutil:5" }.
+;; Бар не получает backend при запуске: если ddcci прицепится позже
+;; (или монитор доступен только через ddcutil), виджет подхватит его сам.
+(defpoll backlight_map
+    :interval "5s"
+    :initial "{}"
+    "~/dotfiles/scripts/backlight-map.sh"
 )
 
-(defpoll brightness 
-    :interval "2s" 
-    :run-while brightness_status
+(defpoll brightness
+    :interval "5s"
+    :initial "{}"
     "~/dotfiles/scripts/brightness.sh get"
 )
 
-(defwidget brightness [backlight]
+(defwidget brightness [mon_name]
     (eventbox 
-        :visible brightness_status
+        :visible {(backlight_map?.[mon_name] ?: "") != ""}
         :halign "center"
         :cursor "row-resize"
-        :onscroll "~/dotfiles/scripts/brightness.sh {} ${backlight}"
-        :onclick "~/dotfiles/scripts/brightness.sh max ${backlight}"
-        :onrightclick "~/dotfiles/scripts/brightness.sh min ${backlight}"
+        :onscroll "~/dotfiles/scripts/brightness.sh {} ${backlight_map?.[mon_name]} ${mon_name}"
+        :onclick "~/dotfiles/scripts/brightness.sh max ${backlight_map?.[mon_name]} ${mon_name}"
+        :onrightclick "~/dotfiles/scripts/brightness.sh min ${backlight_map?.[mon_name]} ${mon_name}"
 
-        :tooltip "Brightness ${backlight}
+        :tooltip "Brightness ${mon_name}
 LMB: set 100%
 RMB: set 0%"
 
@@ -37,7 +36,7 @@ RMB: set 0%"
                 :text ""
             )
             (label 
-                :text "${backlight != "" ? brightness[backlight] : jq(brightness, ".[]")}%"
+                :text "${brightness?.[(backlight_map?.[mon_name] ?: "")] ?: 0}%"
             )
         )
     )

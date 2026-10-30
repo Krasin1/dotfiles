@@ -1,5 +1,7 @@
-SUBSYSTEM=="i2c-dev", ACTION=="add",\
-	ATTR{name}=="NVIDIA i2c adapter*",\
-	TAG+="ddcci",\
+# Любые i2c-адаптеры, принадлежащие видеокарте (PCI class 0x03xxxx):
+# NVIDIA, AMD, Intel. SMBus и клиентские устройства (N-0037) не попадают.
+# Конкретная модель монитора не важна — ddcci сам проверит DDC/CI.
+SUBSYSTEM=="i2c", ACTION=="add", KERNEL=="i2c-[0-9]*",\
+	ATTRS{class}=="0x03*",\
 	TAG+="systemd",\
 	ENV{SYSTEMD_WANTS}+="ddcci@$kernel.service"
