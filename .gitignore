@@ -5,6 +5,9 @@ nvim/.config/nvim/lazy-lock.json
 ranger/.config/ranger/plugins/devicons2/__pycache__
 ranger/.config/ranger/plugins/__pycache__
 
+hypr/.config/hypr/monitors.*
+hypr/.config/hypr/*.conf
+
 mpd/.config/mpd/log
 mpd/.config/mpd/mpd.db
 mpd/.config/mpd/mpdstate
