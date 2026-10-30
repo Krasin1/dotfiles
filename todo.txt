@@ -6,6 +6,7 @@ which-key
 возможно harpoon
 mini.ai 
 fff.nvim - может можно установить в систему а не через mason
+.clang-tidy сделать файлик
 
 [arch]
 dunst - уведомления

@@ -10,8 +10,8 @@ return {
         },
         keymap = {
             fzf = {
-                [ "Tab" ] = "down",
-                [ "shift-Tab" ] = "up",
+                [ "alt-j" ] = "down",
+                [ "alt-k" ] = "up",
             }
         }
     },
