@@ -12,7 +12,12 @@ local hyprDir    = configHome .. "/hypr"
 local scrPath    = home .. "/.local/share/bin"
 
 local function include(name)
-    dofile(hyprDir .. "/" .. name .. ".lua")
+    local path = hyprDir .. "/" .. name .. ".lua"
+    local f = io.open(path, "r");
+    if f ~= nil then
+        f:close()
+        dofile(path)
+    end
 end
 
 -- █▀▄▀█ █▀█ █▄░█ █ ▀█▀ █▀█ █▀█
