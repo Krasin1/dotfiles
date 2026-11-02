@@ -29,6 +29,7 @@ include("monitors")
 include("nvidia")
 include("keybindings")
 include("windowrules")
+include("workspaces")
 
 -- █░░ ▄▀█ █░█ █▀█ █▀█ ▀█▀ █▀
 -- █▄▄ █▀█ █▄█ █▀▄ █▀▄ ░█░ ▄█

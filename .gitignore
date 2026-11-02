@@ -6,6 +6,7 @@ ranger/.config/ranger/plugins/devicons2/__pycache__
 ranger/.config/ranger/plugins/__pycache__
 
 hypr/.config/hypr/monitors.*
+hypr/.config/hypr/workspaces.*
 hypr/.config/hypr/*.conf
 
 mpd/.config/mpd/log
