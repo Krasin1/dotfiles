@@ -15,3 +15,6 @@ require("settings")
 require("mappings")
 require("lazy").setup("plugins")
 require("lsp_features")
+
+-- Flash the window briefly when switching buffers or splits, like tmux-pop does for panes.
+require("buffer_flash").setup()
