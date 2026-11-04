@@ -51,6 +51,25 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd(scrPath .. "/batterynotify.sh") -- battery notification
 
     hl.dispatch(hl.dsp.focus({ workspace = 1 })) -- set the first workspace at start
+
+    -- hyprland.start can fire before all outputs are registered: workspace 1 is
+    -- then created on the first monitor and only later moved to its own monitor
+    -- by the workspace rule. Follow it once, then stop listening.
+    local followWorkspace
+    followWorkspace = hl.on("workspace.move_to_monitor", function(workspace, _)
+        if workspace.name ~= "1" then
+            return
+        end
+        hl.timer(function()
+            hl.dispatch(hl.dsp.focus({ workspace = 1 }))
+        end, { timeout = 100, type = "oneshot" })
+        followWorkspace:remove()
+    end)
+
+    -- safety net: never keep following workspace moves after startup settles
+    hl.timer(function()
+        followWorkspace:remove()
+    end, { timeout = 5000, type = "oneshot" })
     hl.exec_cmd(home .. "/.config/eww/launch_bar") -- eww bar
     hl.exec_cmd("/opt/v2rayn-bin/v2rayN")
 
