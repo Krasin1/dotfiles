@@ -12,8 +12,8 @@ return {
 			keymap = {
 
 				preset = "enter",
-				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-				["<A-space>"] = { "cancel", "fallback" },
+				["<A-space>"] = { "show", "cancel" },
+				["<C-space>"] = false,
 				["<CR>"] = { "accept", "fallback" },
 
 				["<S-Tab>"] = { "select_prev", "fallback" },
