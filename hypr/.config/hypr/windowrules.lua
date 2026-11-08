@@ -132,6 +132,20 @@ end
 -- My adds
 --
 
+-- ueberzugpp (превью картинок в Yazi).
+-- Без float окно оверлея тайлится рядом с терминалом, из-за чего Alacritty
+-- меняет размер, а Yazi бесконечно пересоздаёт превью. no_focus — чтобы
+-- оверлей не забирал фокус у терминала.
+hl.window_rule({
+    name  = "ueberzugpp-overlay",
+    match = { class = "^ueberzugpp_.*$" },
+    float = true,
+    no_focus = true,
+    no_anim = true,
+    border_size = 0,
+    rounding = 0,
+})
+
 -- Ignore maximize requests from apps. You'll probably like this.
 hl.window_rule({
     name           = "suppress-maximize-events",
