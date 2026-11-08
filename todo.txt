@@ -7,10 +7,11 @@ which-key
 mini.ai 
 fff.nvim - может можно установить в систему а не через mason
 .clang-tidy сделать файлик
+парные скобки подсвечивать цветами всякими
 
 [arch]
 dunst - уведомления
-kitty 
+quickshell - заменить eww и dunst и еще может что
 rofi - замена dmenu
 разобраться с pipewire
 ranger - либо разобраться с файлами по умолчанию либо перейти на lf
@@ -19,3 +20,4 @@ ranger - либо разобраться с файлами по умолчани
 xdotool
 mtp - подключить android 
 
+libayatana-appindicator for rustdesk check ????
