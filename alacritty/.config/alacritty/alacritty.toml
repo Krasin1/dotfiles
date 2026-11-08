@@ -19,10 +19,10 @@ multiplier = 3
 [font]
 builtin_box_drawing = true
 size = 14.0
-normal.family = "CaskaydiaMono NFM"
-bold.family = "CaskaydiaMono NFM"
-italic.family = "CaskaydiaMono NFM"
-bold_italic.family = "CaskaydiaMono NFM"
+normal.family      = "CaskaydiaMono NFP"
+bold.family        = "CaskaydiaMono NFP"
+italic.family      = "CaskaydiaMono NFP"
+bold_italic.family = "CaskaydiaMono NFP"
 
 
 [keyboard]
